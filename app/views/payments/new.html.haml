@@ -1,0 +1,16 @@
+= bootstrap_form_for(@payment) do |f|
+  - if @payment.claim && @payment.claim.persisted?
+    %strong= Claim.human_attribute_name('file_uid') + ': '
+    = @payment.claim.file_uid
+    = f.hidden_field(:claim_id)
+  - else
+    = f.fields_for(:claim, @payment.claim || Claim.new) do |fields|
+      = render 'claims/form', form: fields, claim: fields.object
+  .row
+    .col
+      = f.fields_for(:offender, @payment.offender || Offender.new) do |fields|
+        = render 'egov_utils/people/form', form: fields, person: fields.object
+    .col
+      = render 'payments/form', form: f, payment: @payment
+  .form-actions
+    = f.submit

@@ -23,9 +23,11 @@ PATH
     egov_utils (0.1.0)
       audited (~> 4.4)
       bcrypt (~> 3.1.11)
+      cancancan (~> 2.0)
       i18n-js (~> 3.0)
       net-ldap (~> 0.16)
       rails (~> 5.1)
+      request_store_rails (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -74,16 +76,19 @@ GEM
     arel (8.0.0)
     audited (4.5.0)
       activerecord (>= 4.0, < 5.2)
-    autoprefixer-rails (7.1.2.4)
+    autoprefixer-rails (7.1.2.6)
       execjs
     bcrypt (3.1.11)
     bindex (0.5.0)
-    bootstrap (4.0.0.alpha6)
+    bootstrap (4.0.0.beta)
       autoprefixer-rails (>= 6.0.3)
+      popper_js (~> 1.11.1)
       sass (>= 3.4.19)
     bootstrap_form (2.7.0)
     builder (3.2.3)
-    byebug (9.0.6)
+    byebug (9.1.0)
+    cancancan (2.0.0)
+    coderay (1.1.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -150,7 +155,14 @@ GEM
       mini_portile2 (~> 2.2.0)
     nori (2.6.0)
     pg (0.21.0)
-    puma (3.9.1)
+    popper_js (1.11.1)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
+    puma (3.10.0)
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -186,6 +198,8 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     ref (2.0.0)
+    request_store_rails (1.0.3)
+      concurrent-ruby (~> 1.0)
     rspec-core (3.6.0)
       rspec-support (~> 3.6.0)
     rspec-expectations (3.6.0)
@@ -194,7 +208,7 @@ GEM
     rspec-mocks (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
-    rspec-rails (3.6.0)
+    rspec-rails (3.6.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -223,6 +237,7 @@ GEM
       nokogiri (>= 1.4.0)
       nori (~> 2.4)
       wasabi (~> 3.4)
+    slop (3.6.0)
     socksify (1.7.1)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -240,7 +255,7 @@ GEM
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
-    thor (0.19.4)
+    thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
     turbolinks (5.0.1)
@@ -267,7 +282,7 @@ PLATFORMS
 
 DEPENDENCIES
   azahara_schema!
-  bootstrap (~> 4.0.0.alpha6)
+  bootstrap (~> 4.0.0.beta)
   bootstrap3-datetimepicker-rails!
   bootstrap_form
   byebug
@@ -284,6 +299,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   momentjs-rails (>= 2.9.0)
   pg
+  pry-rails
   puma (~> 3.7)
   rails (~> 5.1.3)
   rails-assets-tether (>= 1.3.3)!

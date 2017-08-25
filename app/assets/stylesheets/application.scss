@@ -10,6 +10,16 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+@import '//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+$brand-primary: #2196f3;
+@import 'themes/sako_variables';
+
+@import 'bootstrap';
+@import 'themes/sako';
+@import 'bootstrap-datetimepicker';
+@import 'azahara_schema/schema_options';

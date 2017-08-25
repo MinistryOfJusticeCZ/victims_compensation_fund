@@ -1,0 +1,18 @@
+= bootstrap_form_for(@appeal) do |f|
+  - if  @appeal.claim && @appeal.claim.persisted?
+    %strong= Claim.human_attribute_name('file_uid') + ': '
+    = @appeal.claim.file_uid
+    = f.hidden_field(:claim_id)
+  - else
+    = f.fields_for(:claim, @appeal.claim || Claim.new) do |fields|
+      = render 'claims/form', form: fields, claim: fields.object
+  .row
+    .victim.col
+      %h5= Victim.model_name.human
+      = f.fields_for(:victim, @appeal.victim || Victim.new) do |fields|
+        = render 'egov_utils/people/form', form: fields, person: fields.object
+    .appeal-attributes.col
+      %h5= Appeal.model_name.human
+      = render 'appeals/form', form: f, appeal: @appeal
+  .form-actions
+    = f.submit

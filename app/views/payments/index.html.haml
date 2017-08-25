@@ -1,0 +1,6 @@
+#payments
+  = render 'azahara_schema/index_form', schema: @schema
+  #payments_grid
+
+:javascript
+  #{raw render 'common/grid', grid_id: 'payments_grid', schema: @schema}

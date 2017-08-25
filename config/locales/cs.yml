@@ -1,0 +1,45 @@
+---
+cs:
+  app_name: Fond obětí trestných činností
+  app_abbrev: Fond OTČ
+
+  label_new_payment: Přidat platbu
+  label_new_appeal: Přidat žádost
+
+  models: &my_models
+    appeal:
+      one: Žádost
+      other: Žádosti
+    payment:
+      one: Platba
+      other: Platby
+    victim:
+      one: Oběť
+
+  model_attributes: &my_attributes
+    appeal:
+      file_uid: Spisová značka
+      payment_type: Platba
+      bank_account: Číslo účtu
+      payment_types:
+        account: Převodem
+        foldout: Složenka
+    claim:
+      file_uid: Spisová značka případu
+    payment:
+      payment_uid: Variabilní symbol
+      value: Částka
+
+
+  models_errors: &my_model_errors
+    profile:
+      too_many_authors: Příliš mnoho autorů
+
+  activerecord:
+    models:
+      <<: *my_models
+    attributes:
+      <<: *my_attributes
+    errors:
+      models:
+        <<: *my_model_errors

@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : t(:app_name)
+    %meta{:name => "description", :content => content_for?(:description) ? yield(:description) : t(:app_description)}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    = csrf_meta_tags
+  %body
+    -#%header
+    = render 'layouts/navigation'
+    %main#container{:role => "main"}
+      .container
+        = render 'layouts/egov_utils/messages'
+        = yield
+    %footer
+      .container
+        .row
+          /.col-sm-12
+          /  .subtitle
+          /    Tato evidence je dobrovolným a pouze informativním seznamem vedeným Ministerstvem spravedlnosti, které neručí za správnost a úplnost údajů v této evidenci uvedených. Do evidence se na vlastní žádost zapisují osoby, které mohou, v souladu s § 390a odst. 1 písm. a) zákona č. 182/2006 Sb., o úpadku a způsobech jeho řešení (insolvenční zákon), ve znění pozdějších předpisů, sepsat a za dlužníka podat návrh na povolení oddlužení. Těmto osobám náleží, podle § 390a odst. 3 insolvenčního zákona, odměna, jejíž maximální výše činí 4 000 Kč bez DPH a v případě společného oddlužení manželů 6 000 Kč bez DPH.
+
+          .col-sm-12.contacts
+            /%h6= t(:label_contact)
+            = link_to t('ministery_justice_name'), "http://www.justice.cz", target: "_blank"
+            %br
+            +420 221 997 111
+            %br
+            = mail_to('posta@msp.justice.cz')
+            .social-network-links
+              / link_to(image_tag('pelikan.png', size: '30x30'), 'https://twitter.com/rpelik?lang=cs')
+              = link_to('https://www.facebook.com/ministerstvospravedlnosti/') do
+                %i.fa.fa-facebook.fa-2x
+              = link_to('https://twitter.com/spravedlnostcz?lang=cs') do
+                %i.fa.fa-twitter.fa-2x
+          .col-sm-6.notice
+            Webové stránky jsou v souladu s
+            = link_to 'vyhláškou č. 64/2008 Sb', "http://www.mvcr.cz/clanek/vyhlaska-c-64-2008-sb-o-forme-uverejnovani-informaci-souvisejicich-s-vykonem-verejne-spravy-prostrednictvim-webovych-stranek-pro-osoby-se-zdravotnim-postizenim-vyhlaska-o-pristupnosti-10.aspx", title: "Vyhláška č. 64/2008 Sb"
+            o přístupnosti.
+          .col-sm-6.copyright
+            &copy; 2017-
+            = Date.today.year
+            = t('ministery_justice_name')

@@ -1,0 +1,24 @@
+-# navigation styled for Bootstrap 3.0
+.container
+  %nav.navbar.navbar-expand-md.navbar-light
+    %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "exCollapsingNavbar2", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    = link_to main_app.root_path, class: 'navbar-brand' do
+      /= image_tag('logo.svg', size: '40x40')
+    #exCollapsingNavbar2.collapse.navbar-collapse
+      %ul.nav.navbar-nav.mr-auto.main-menu
+        %li.nav-item.main-item= link_to t(:app_abbrev), main_app.root_path, class: 'nav-link'
+      - if current_user.logged?
+        %ul.nav.navbar-nav
+          /%li.nav-item
+          /  = link_to 'rejstrik_pyco', '', class: 'nav-link'
+          %li.nav-item.dropdown.user-drop
+            = link_to 'javascript:void(0)', id: 'navbarUserDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
+              %i.fa.fa-user-circle.fa-lg
+              = current_user.fullname
+            .dropdown-menu{'aria-labelledby' => 'navbarUserDropdownLink'}
+              = link_to t('label_profile'), egov_utils.user_path(current_user), class: 'dropdown-item'
+              = link_to t('label_logout'), egov_utils.signout_path, class: 'dropdown-item', method: :delete
+      - elsif internal_network?
+        %ul.nav.navbar-nav
+          %li.nav-item= link_to t('label_login'), egov_utils.signin_path
