@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', group: :development
 
 gem 'haml'
 
