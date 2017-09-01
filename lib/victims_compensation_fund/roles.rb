@@ -23,7 +23,7 @@ class CourtEmployeeRole < DefaultOTCRole
 
   add 'court'
 
-  def define_abilities(abilit, user)
+  def define_abilities(ability, user)
     super
     ability.can :manage, Payment
     ability.can :create, Claim
@@ -36,7 +36,7 @@ class CompensationDepartmentRole < DefaultOTCRole
 
   add 'compensator'
 
-  def define_abilities(abilit, user)
+  def define_abilities(ability, user)
     super
     ability.can :manage, Appeal
     ability.can :manage, Claim
