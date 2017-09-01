@@ -16,4 +16,21 @@ class ClaimsController < ApplicationController
   def show
   end
 
+  def new
+  end
+
+  def create
+    if @claim.save
+      redirect_to @claim, notice: t(:notice_saved, entity: @claim.model_name.human)
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+    def create_params
+      params.require(:claim).permit(:court_uid, :file_uid)
+    end
+
 end
