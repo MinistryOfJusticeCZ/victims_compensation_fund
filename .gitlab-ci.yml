@@ -4,6 +4,7 @@ variables:
   POSTGRES_DB: test_db
   POSTGRES_USER: runner
   POSTGRES_PASSWORD: ""
+  LANG: en_US.UTF-8
 
 before_script:
   - export LANG=en_US.UTF-8

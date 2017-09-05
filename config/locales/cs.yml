@@ -15,6 +15,9 @@ cs:
       other: Platby
     victim:
       one: Oběť
+    claim:
+      one: Nárok
+      other: Nároky
 
   model_attributes: &my_attributes
     appeal:

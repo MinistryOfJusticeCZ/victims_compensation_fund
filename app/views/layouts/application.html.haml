@@ -12,8 +12,15 @@
     = render 'layouts/navigation'
     %main#container{:role => "main"}
       .container
-        = render 'layouts/egov_utils/messages'
-        = yield
+        .row
+          %nav.col-sm-3.col-md-2.d-none.d-sm-block.sidebar
+            - if current_user.has_role? 'court'
+              %ul.nav.nav-pills.flex-column
+                - if can? :create, Payment
+                  %li.nav-item= link_to(t('common_labels.new_record', model: Payment.model_name.human), new_payment_path, class: 'nav-link')
+          .col-sm-9.col-md-10.col-12
+            = render 'layouts/egov_utils/messages'
+            = yield
     %footer
       .container
         .row
