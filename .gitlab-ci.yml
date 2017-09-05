@@ -48,12 +48,14 @@ test:2.3:
 deploy_staging:
   stage: deploy
   script:
-    - 'which ssh-agent || apk add --update openssh'
+    - apt-get update
+    - 'which ssh-agent || apt-get install openssh-client'
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh && chmod 700 ~/.ssh
     - echo "$PRODUCTION_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
     - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
     - ssh-add ~/.ssh/id_rsa
+    - 'which git || apt-get install git'
     - gem install capistrano-rails
     - cap staging deploy
   environment:
