@@ -41,11 +41,12 @@ server "172.31.247.241", user: ENV['PRODUCTION_USER_NAME'], roles: %w{app db web
 #
 # Global options
 # --------------
- set :ssh_options, {
-   keys: %w(~/.ssh/id_rsa),
-   forward_agent: false,
-   auth_methods: %w(publickey)
- }
+set :ssh_options, {
+  keys: %w(~/.ssh/id_rsa),
+  forward_agent: false,
+  auth_methods: %w(publickey)
+}
+
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
