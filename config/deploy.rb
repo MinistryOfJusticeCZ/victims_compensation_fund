@@ -34,3 +34,5 @@ set :deploy_to, "/srv/#{fetch(:application)}"
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+after "deploy", "deploy:symlink_config_files"
