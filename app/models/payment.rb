@@ -7,12 +7,14 @@ class Payment < ApplicationRecord
   accepts_nested_attributes_for :claim
   accepts_nested_attributes_for :offender
 
-  before_create :generate_uid
+  after_create :generate_uid
+
+  validates :value, numericality: true
 
   private
 
     def generate_uid
-      self.payment_uid = "#{Date.today.strftime("%Y%m")}#{id.to_s.rjust(4, "0")}"
+      self.update_column(:payment_uid, "#{Time.now.strftime("%y")}#{id.to_s.rjust(8, "0")}")
     end
 
 end

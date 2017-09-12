@@ -11,33 +11,21 @@
     -#%header
     = render 'layouts/navigation'
     %main#container{:role => "main"}
-      .container
-        .row
-          %nav.col-sm-3.col-md-2.d-none.d-sm-block.sidebar
-            - if current_user.has_role? 'court'
-              %ul.nav.nav-pills.flex-column
-                - if can? :create, Payment
-                  %li.nav-item= link_to(t('common_labels.new_record', model: Payment.model_name.human), new_payment_path, class: 'nav-link')
-          .col-sm-9.col-md-10.col-12
-            = render 'layouts/egov_utils/messages'
-            = yield
-    %footer
-      .container
-        .row
-          /.col-sm-12
-          /  .subtitle
-          /    Tato evidence je dobrovolným a pouze informativním seznamem vedeným Ministerstvem spravedlnosti, které neručí za správnost a úplnost údajů v této evidenci uvedených. Do evidence se na vlastní žádost zapisují osoby, které mohou, v souladu s § 390a odst. 1 písm. a) zákona č. 182/2006 Sb., o úpadku a způsobech jeho řešení (insolvenční zákon), ve znění pozdějších předpisů, sepsat a za dlužníka podat návrh na povolení oddlužení. Těmto osobám náleží, podle § 390a odst. 3 insolvenčního zákona, odměna, jejíž maximální výše činí 4 000 Kč bez DPH a v případě společného oddlužení manželů 6 000 Kč bez DPH.
-
-          .col-sm-12.contacts
-            /%h6= t(:label_contact)
-            = link_to t('ministery_justice_name'), "http://www.justice.cz", target: "_blank"
-            %br
-            +420 221 997 111
-          .col-sm-6.notice
-            Webové stránky jsou v souladu s
-            = link_to 'vyhláškou č. 64/2008 Sb', "http://www.mvcr.cz/clanek/vyhlaska-c-64-2008-sb-o-forme-uverejnovani-informaci-souvisejicich-s-vykonem-verejne-spravy-prostrednictvim-webovych-stranek-pro-osoby-se-zdravotnim-postizenim-vyhlaska-o-pristupnosti-10.aspx", title: "Vyhláška č. 64/2008 Sb"
-            o přístupnosti.
-          .col-sm-6.copyright
-            &copy; 2017-
-            = Date.today.year
-            = t('ministery_justice_name')
+      #sidebar.sidebar-fixed
+        %nav
+          - if current_user.has_role? 'court'
+            %ul.nav.nav-pills.flex-column
+              - if can? :create, Payment
+                %li.nav-item= link_to(t('common_labels.new_record', model: Payment.model_name.human), main_app.new_payment_path, class: 'nav-link')
+        .notice
+          Webové stránky jsou v souladu s
+          = link_to 'vyhláškou č. 64/2008 Sb', "http://www.mvcr.cz/clanek/vyhlaska-c-64-2008-sb-o-forme-uverejnovani-informaci-souvisejicich-s-vykonem-verejne-spravy-prostrednictvim-webovych-stranek-pro-osoby-se-zdravotnim-postizenim-vyhlaska-o-pristupnosti-10.aspx", title: "Vyhláška č. 64/2008 Sb"
+          o přístupnosti.
+        .copyright
+          &copy; 2017-
+          = Date.today.year
+          = t('ministery_justice_name')
+      #content
+        .container-fluid
+          = render 'layouts/egov_utils/messages'
+          = yield

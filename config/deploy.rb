@@ -21,7 +21,7 @@ set :deploy_to, "/srv/#{fetch(:application)}"
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_files, "config/database.yml", "config/secrets.yml", "config/unicorn.rb", "config/config.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -36,4 +36,4 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-after "deploy:symlink:linked_dirs", "deploy:symlink_config_files"
+# after "deploy:symlink:linked_dirs", "deploy:symlink_config_files"

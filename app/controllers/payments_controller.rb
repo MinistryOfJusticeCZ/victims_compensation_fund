@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
     authorize!(:create, Claim) if @payment.claim.new_record?
     @payment.author = current_user
     if @payment.save
-      redirect_to @payment.claim, notice: t(:notice_saved, entity: @payment.model_name.human)
+      redirect_to @payment.claim, notice: t('common_labels.notice_saved', model: @payment.model_name.human)
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class PaymentsController < ApplicationController
   private
 
     def create_params
-      params.require(:payment).permit(:value, :claim_id, claim_attributes: [:court_uid, :file_uid], offender_attributes: [:firstname, :lastname, :birth_date])
+      params.require(:payment).permit(:value, :claim_id, :offender_id, claim_attributes: [:court_uid, :file_uid], offender_attributes: [:firstname, :lastname, :birth_date])
     end
 
 end

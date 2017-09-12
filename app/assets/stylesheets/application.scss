@@ -25,6 +25,28 @@ $brand-primary: #2196f3;
 @import 'azahara_schema/schema_options';
 
 
-nav.sidebar {
+$sidebar-width: 300px;
+
+#container {
+  height: 100%;
+}
+
+#sidebar {
   background-color: #f3f3f3;
+  width: $sidebar-width;
+
+  .notice, .copyright {
+    margin-top: .5rem;
+    font-size: 75%;
+    color: $gray;
+  }
+}
+.sidebar-fixed {
+  position: fixed;
+  height: 100%;
+}
+
+#content {
+  margin-left: $sidebar-width;
+  min-height: 100%;
 }
