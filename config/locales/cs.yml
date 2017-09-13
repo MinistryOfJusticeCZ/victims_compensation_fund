@@ -27,11 +27,13 @@ cs:
       payment_types:
         account: Převodem
         foldout: Složenka
+      victim-fullname: Jméno oběti
     claim:
       file_uid: Spisová značka případu
     payment:
       payment_uid: Variabilní symbol
       value: Částka
+      offender-fullname: Jméno pachatele
 
 
   models_errors: &my_model_errors

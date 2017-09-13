@@ -6,9 +6,15 @@ GIT
       momentjs-rails (>= 2.8.1)
 
 PATH
+  remote: ../azahara_schema
+  specs:
+    azahara_schema (0.1.0)
+      rails (~> 5.0)
+
+PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.1.1)
+    egov_utils (0.1.2)
       audited (~> 4.4)
       bcrypt (~> 3.1.11)
       bootstrap (~> 4.0.0.beta)
@@ -72,8 +78,6 @@ GEM
       activerecord (>= 4.0, < 5.2)
     autoprefixer-rails (7.1.4)
       execjs
-    azahara_schema (0.1.0)
-      rails (~> 5.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap (4.0.0.beta)
@@ -301,7 +305,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  azahara_schema (~> 0.1.0)
+  azahara_schema!
   bootstrap (~> 4.0.0.beta)
   bootstrap3-datetimepicker-rails!
   bootstrap_form

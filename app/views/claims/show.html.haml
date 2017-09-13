@@ -5,27 +5,12 @@
 - if can? :read, Appeal
   .appeals
     %h4= Appeal.model_name.human(count: :other)
-    - if can? :create, Appeal.new(claim_id: @claim.id)
-      = link_to t('label_new_appeal'), new_claim_appeal_path(@claim)
-    - @claim.appeals.each do |appeal|
-      .attribute
-        .label= Appeal.human_attribute_name('file_uid')
-        .value= appeal.file_uid
-      .attribute
-        .label= Victim.model_name.human
-        .value= appeal.victim.fullname
+    #appeals_grid
 - if can? :read, Payment
   .payments
     %h4= Payment.model_name.human(count: :other)
-    - if can? :create, Payment.new(claim_id: @claim.id)
-      = link_to t('label_new_payment'), new_claim_payment_path(@claim)
-    - @claim.payments.each do |payment|
-      .attribute
-        .label= Offender.model_name.human
-        .value= payment.offender.fullname
-      .attribute
-        .label= Payment.human_attribute_name('payment_uid')
-        .value= payment.payment_uid
-      .attribute
-        .label= Payment.human_attribute_name('value')
-        .value= payment.value
+    #payments_grid
+
+:javascript
+  #{raw render 'common/grid', grid_id: 'appeals_grid', schema: @appeals_schema, create_attributes: {claim_id: @claim.id}}
+  #{raw render 'common/grid', grid_id: 'payments_grid', schema: @payments_schema, create_attributes: {claim_id: @claim.id}}
