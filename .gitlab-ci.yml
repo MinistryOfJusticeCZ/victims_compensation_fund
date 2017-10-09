@@ -15,10 +15,18 @@ stages:
 
 test:2.3:
   before_script:
+    - export http_proxy=http://194.213.41.2:8080
+    - export no_proxy="git.servis.justice.cz"
     - export LANG=en_US.UTF-8
     - export LANGUAGE=en_US.UTF-8
     - export LC_ALL=en_US.UTF-8
     - export RUBYOPT="-KU -E utf-8:utf-8"
+    - export BUNDLE_GEMFILE="Gemfile_devel"
+  cache:
+    untracked: true
+    key: "$CI_BUILD_REF_NAME"
+    paths:
+      - cache/bundler/
   services:
     - postgres
   script:
@@ -27,20 +35,20 @@ test:2.3:
     - REPO_DIR=libraries/egon_gate
     - rm -fr $REPO_DIR
     - git clone $REPO_URL $REPO_DIR
-    - "sed -i \"s|gem 'egon_gate', path: '.*'|gem 'egon_gate', path: '$REPO_DIR'|g\" Gemfile"
+    - "sed -i \"s|gem 'egon_gate', path: '.*'|gem 'egon_gate', path: '$REPO_DIR'|g\" Gemfile_devel"
     - REPO_URL="$BASE_URL/libraries/azahara_schema.git"
     - REPO_DIR=libraries/azahara_schema
     - rm -fr $REPO_DIR
     - git clone $REPO_URL $REPO_DIR
-    - "sed -i \"s|gem 'azahara_schema', path: '.*'|gem 'azahara_schema', path: '$REPO_DIR'|g\" Gemfile"
+    - "sed -i \"s|gem 'azahara_schema', path: '.*'|gem 'azahara_schema', path: '$REPO_DIR'|g\" Gemfile_devel"
     - git config --global http.proxy 194.213.41.2:8080
     - REPO_URL="$BASE_URL/libraries/egov_utils-rails.git"
     - REPO_DIR=libraries/egov_utils
     - rm -fr $REPO_DIR
     - git clone $REPO_URL $REPO_DIR
-    - "sed -i \"s|gem 'egov_utils', path: '.*'|gem 'egov_utils', path: '$REPO_DIR'|g\" Gemfile"
+    - "sed -i \"s|gem 'egov_utils', path: '.*'|gem 'egov_utils', path: '$REPO_DIR'|g\" Gemfile_devel"
     - git config --global http.proxy 194.213.41.2:8080
-    - http_proxy=194.213.41.2:8080 RAILS_ENV=test bundle install
+    - http_proxy=194.213.41.2:8080 RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
     - cp config/database.yml.gitlabci config/database.yml
     - rake db:migrate RAILS_ENV=test
     - rspec
