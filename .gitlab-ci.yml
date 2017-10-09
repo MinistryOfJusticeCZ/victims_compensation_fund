@@ -47,6 +47,9 @@ test:2.3:
 
 deploy_staging:
   stage: deploy
+  tags:
+    - lab
+    - docker
   script:
     - 'which ssh-agent || ( apt-get update && apt-get install openssh-client )'
     - eval $(ssh-agent -s)
