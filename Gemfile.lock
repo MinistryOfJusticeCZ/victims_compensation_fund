@@ -8,23 +8,26 @@ GIT
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.1.0)
+    azahara_schema (0.1.1)
       rails (~> 5.0)
 
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.1.2)
+    egov_utils (0.1.6)
       audited (~> 4.4)
+      azahara_schema (~> 0.1.0)
       bcrypt (~> 3.1.11)
       bootstrap (~> 4.0.0.beta)
       bootstrap_form (~> 2.7.0)
       cancancan (~> 2.0)
       font-awesome-sass (~> 4.7)
+      haml (~> 5.0)
       i18n-js (~> 3.0)
       momentjs-rails (>= 2.9.0)
       net-ldap (~> 0.16)
       rails (~> 5.1)
+      rails-i18n (~> 5.0)
       request_store_rails (~> 1.0)
 
 GEM
