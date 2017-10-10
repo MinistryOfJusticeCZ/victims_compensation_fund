@@ -4,7 +4,7 @@ class AppealsController < ApplicationController
   load_and_authorize_resource :appeal, :through => :claim, :shallow => true
 
   def index
-    @schema = AppealSchema.new(columns: ['victim-fullname'], outputs: ['grid'])
+    @schema = AppealSchema.new(columns: ['file_uid', 'victim-fullname', 'payment_type'], outputs: ['grid'])
     @schema.from_params(params)
     respond_to do |format|
       format.html

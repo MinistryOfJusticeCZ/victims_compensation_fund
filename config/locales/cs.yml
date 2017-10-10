@@ -3,6 +3,7 @@ cs:
   app_name: Fond obětí trestných činností
   app_abbrev: Fond OTČ
 
+  label_list: Výpis
   label_new_payment: Přidat platbu
   label_new_appeal: Přidat žádost
 
@@ -18,6 +19,9 @@ cs:
     claim:
       one: Nárok
       other: Nároky
+    offender:
+      one: Pachatel
+      other: Pachatelé
 
   model_attributes: &my_attributes
     appeal:
@@ -33,7 +37,12 @@ cs:
     payment:
       payment_uid: Variabilní symbol
       value: Částka
+      offender_id: Pachatel
       offender-fullname: Jméno pachatele
+    offender:
+      firstname: Jméno
+      lastname: Příjmení
+      birth_date: Datum narození
 
 
   models_errors: &my_model_errors
