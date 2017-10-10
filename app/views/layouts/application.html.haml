@@ -11,21 +11,18 @@
     -#%header
     = render 'layouts/navigation'
     %main#container{:role => "main"}
-      #sidebar.sidebar-fixed
-        %nav
-          - if current_user.has_role? 'court'
-            %ul.nav.nav-pills.flex-column
-              - if can? :create, Payment
-                %li.nav-item= link_to(t('common_labels.new_record', model: Payment.model_name.human), main_app.new_payment_path, class: 'nav-link')
-        .notice
-          Webové stránky jsou v souladu s
-          = link_to 'vyhláškou č. 64/2008 Sb', "http://www.mvcr.cz/clanek/vyhlaska-c-64-2008-sb-o-forme-uverejnovani-informaci-souvisejicich-s-vykonem-verejne-spravy-prostrednictvim-webovych-stranek-pro-osoby-se-zdravotnim-postizenim-vyhlaska-o-pristupnosti-10.aspx", title: "Vyhláška č. 64/2008 Sb"
-          o přístupnosti.
-        .copyright
-          &copy; 2017-
-          = Date.today.year
-          = t('ministery_justice_name')
       #content
         .container-fluid
           = render 'layouts/egov_utils/messages'
           = yield
+    %footer
+      .container
+        .row
+          .col-12.col-md-6.notice
+            Webové stránky jsou v souladu s
+            = link_to 'vyhláškou č. 64/2008 Sb', "http://www.mvcr.cz/clanek/vyhlaska-c-64-2008-sb-o-forme-uverejnovani-informaci-souvisejicich-s-vykonem-verejne-spravy-prostrednictvim-webovych-stranek-pro-osoby-se-zdravotnim-postizenim-vyhlaska-o-pristupnosti-10.aspx", title: "Vyhláška č. 64/2008 Sb"
+            o přístupnosti.
+          .col-12.col-md-6.copyright
+            &copy; 2017-
+            = Date.today.year
+            = t('ministery_justice_name')

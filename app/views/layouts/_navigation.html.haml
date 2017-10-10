@@ -8,6 +8,9 @@
     #exCollapsingNavbar2.collapse.navbar-collapse
       %ul.nav.navbar-nav.mr-auto.main-menu
         %li.nav-item.main-item= link_to t(:app_abbrev), main_app.root_path, class: 'nav-link'
+      %ul.nav.navbar-nav
+        - if can? :create, Payment
+          %li.nav-item= link_to(t('common_labels.new_record', model: Payment.model_name.human), main_app.new_payment_path, class: 'nav-link')
       - if current_user.logged?
         %ul.nav.navbar-nav
           /%li.nav-item
