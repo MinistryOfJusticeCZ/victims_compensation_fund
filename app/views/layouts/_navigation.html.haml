@@ -9,8 +9,24 @@
       %ul.nav.navbar-nav.mr-auto.main-menu
         %li.nav-item.main-item= link_to t(:app_abbrev), main_app.root_path, class: 'nav-link'
       %ul.nav.navbar-nav
-        - if can? :create, Payment
-          %li.nav-item= link_to(t('common_labels.new_record', model: Payment.model_name.human), main_app.new_payment_path, class: 'nav-link')
+        - if can?(:create, Payment) || can?(:read, Payment)
+          %li.nav-item.dropdown
+            = link_to 'javascript:void(0)', id: 'navbarPaymentDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
+              = Payment.model_name.human(count: :other)
+            .dropdown-menu{'aria-labelledby' => 'navbarPaymentDropdownLink'}
+              - if can? :create, Payment
+                = link_to t('new'), main_app.new_payment_path, class: 'dropdown-item'
+              - if can? :read, Payment
+                = link_to t('list'), main_app.payments_path, class: 'dropdown-item'
+        - if can?(:create, Appeal) || can?(:read, Appeal)
+          %li.nav-item.dropdown
+            = link_to 'javascript:void(0)', id: 'navbarAppealDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
+              = Appeal.model_name.human(count: :other)
+            .dropdown-menu{'aria-labelledby' => 'navbarAppealDropdownLink'}
+              - if can? :create, Appeal
+                = link_to t('new'), main_app.new_appeal_path, class: 'dropdown-item'
+              - if can? :read, Appeal
+                = link_to t('list'), main_app.appeals_path, class: 'dropdown-item'
       - if current_user.logged?
         %ul.nav.navbar-nav
           /%li.nav-item
