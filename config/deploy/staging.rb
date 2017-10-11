@@ -28,7 +28,7 @@ server "172.31.225.21", user: ENV['PRODUCTION_USER_NAME'], roles: %w{app db web}
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-
+set :unicorn_config_path, File.join(current_path, "config", "unicorn.rb")
 
 # Configuration
 # =============
