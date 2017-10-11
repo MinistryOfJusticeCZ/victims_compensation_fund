@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   load_and_authorize_resource :payment, :through => :claim, :shallow => true
 
   def index
-    @schema = PaymentSchema.new(columns: ['offender-fullname', 'value'], outputs: ['grid'])
+    @schema = PaymentSchema.new(outputs: ['grid'])
     @schema.from_params(params)
     respond_to do |format|
       format.html

@@ -10,9 +10,12 @@
       = render 'claims/form', form: fields, claim: fields.object
   .row
     #offender-form.col
+      - unless @payment.claim && @payment.claim.persisted?
+        %h5= Offender.model_name.human
       = f.fields_for(:offender, @payment.offender || Offender.new) do |fields|
         = render 'egov_utils/people/form', form: fields, person: fields.object
     .col
+      %h5= Payment.model_name.human
       = render 'payments/form', form: f, payment: @payment
   .form-actions
     = f.submit
