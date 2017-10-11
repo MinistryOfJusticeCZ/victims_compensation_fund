@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 group :development do
   gem 'capistrano-rails'
-  gem 'capistrano-unicorn', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 gem 'haml'

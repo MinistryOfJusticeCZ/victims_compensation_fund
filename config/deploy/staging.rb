@@ -1,4 +1,9 @@
-after 'deploy:restart', 'unicorn:restart'
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'unicorn:restart'
+  end
+end
 
 # server-based syntax
 # ======================
