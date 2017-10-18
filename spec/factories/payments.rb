@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :payment do
-    payment_uid "MyString"
-    value 1.5
     status 1
+    value 1.5
+    currency_code 'czk'
   end
 end

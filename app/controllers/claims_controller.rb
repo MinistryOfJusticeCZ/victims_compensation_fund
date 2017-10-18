@@ -14,8 +14,8 @@ class ClaimsController < ApplicationController
   end
 
   def show
-    @payments_schema = PaymentSchema.new(columns: ['offender-fullname', 'payment_uid', 'value'], outputs: ['grid'])
-    @payments_schema.add_filter('claim_id', '=', @claim.id)
+    @redemptions_schema = RedemptionSchema.new(columns: ['debt-offender-fullname', 'payment-payment_uid', 'payment-value'], outputs: ['grid'])
+    @redemptions_schema.add_filter('debt-claim_id', '=', @claim.id)
     @appeals_schema = AppealSchema.new(columns: ['file_uid', 'victim-fullname', 'payment_type'], outputs: ['grid'])
     @appeals_schema.add_filter('claim_id', '=', @claim.id)
   end

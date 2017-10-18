@@ -12,12 +12,12 @@
         - if can?(:create, Payment) || can?(:read, Payment)
           %li.nav-item.dropdown
             = link_to 'javascript:void(0)', id: 'navbarPaymentDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
-              = Payment.model_name.human(count: :other)
+              = Redemption.model_name.human(count: :other)
             .dropdown-menu{'aria-labelledby' => 'navbarPaymentDropdownLink'}
               - if can? :create, Payment
-                = link_to t('label_new'), main_app.new_payment_path, class: 'dropdown-item'
+                = link_to t('label_new'), main_app.new_redemption_path, class: 'dropdown-item'
               - if can? :read, Payment
-                = link_to t('label_list'), main_app.payments_path, class: 'dropdown-item'
+                = link_to t('label_list'), main_app.redemptions_path, class: 'dropdown-item'
         - if can?(:create, Appeal) || can?(:read, Appeal)
           %li.nav-item.dropdown
             = link_to 'javascript:void(0)', id: 'navbarAppealDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do

@@ -1,0 +1,30 @@
+- if debt.claim && debt.claim.persisted?
+  %strong= Claim.human_attribute_name('file_uid') + ': '
+  = debt.claim.file_uid
+  = form.hidden_field(:claim_id)
+  .offenders.form-group
+    = form.select(:offender_id, debt.claim.debts.reject(&:new_record?).collect(&:offender).uniq.collect{|offender| [offender.fullname + ' (' + l(offender.birth_date.to_date) + ')', offender.id] }, {include_blank: t('label_new')}, id: 'offender-select')
+- else
+  = form.fields_for(:claim, debt.claim || Claim.new) do |fields|
+    = render 'claims/form', form: fields, claim: fields.object
+
+#offender-form
+  - unless debt.claim && debt.claim.persisted?
+    %h5= Offender.model_name.human
+  = form.fields_for(:offender, debt.offender || Offender.new) do |fields|
+    = render 'egov_utils/people/form', form: fields, person: fields.object
+
+- if debt.claim && debt.claim.persisted?
+  :javascript
+    $(function(){
+
+      var $offender_select = $('#offender-select');
+
+      $('#offender-form').toggle($offender_select.val() == '');
+      $('#offender-form :input').prop('disabled', $('#offender-select').val() != '');
+
+      $('#offender-select').on('change', function(evt) {
+          $('#offender-form').toggle($(this).val() == '');
+          $('#offender-form :input').prop('disabled', $(this).val() != '');
+      });
+    });

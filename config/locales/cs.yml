@@ -11,6 +11,9 @@ cs:
     appeal:
       one: Žádost
       other: Žádosti
+    redemption:
+      one: Vybraná částka
+      other: Vybrané částky
     payment:
       one: Platba
       other: Platby
@@ -37,6 +40,7 @@ cs:
     payment:
       payment_uid: Variabilní symbol
       value: Částka
+      currency_code: Měna
       offender_id: Pachatel
       offender-fullname: Jméno pachatele
     offender:

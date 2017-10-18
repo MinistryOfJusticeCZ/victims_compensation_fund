@@ -1,8 +1,8 @@
-class PaymentSchema < AzaharaSchema::ModelSchema
+class RedemptionSchema < AzaharaSchema::ModelSchema
 
 
   def default_columns
-    cols = ['offender-fullname', 'value']
+    cols = ['debt-offender-fullname', 'payment-value']
     cols << 'author-fullname' if EgovUtils::User.current.has_role?('compensator')
     cols
   end

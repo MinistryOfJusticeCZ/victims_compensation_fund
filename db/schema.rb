@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824111701) do
+ActiveRecord::Schema.define(version: 20171018150426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20170824111701) do
     t.datetime "binding_effect"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "debts", force: :cascade do |t|
+    t.bigint "claim_id"
+    t.bigint "offender_id"
+    t.decimal "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["claim_id"], name: "index_debts_on_claim_id"
+    t.index ["offender_id"], name: "index_debts_on_offender_id"
   end
 
   create_table "egov_utils_addresses", id: :serial, force: :cascade do |t|
@@ -108,23 +118,47 @@ ActiveRecord::Schema.define(version: 20170824111701) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.bigint "claim_id"
-    t.bigint "offender_id"
-    t.bigint "author_id"
     t.integer "status"
     t.string "payment_uid"
-    t.float "value"
+    t.decimal "value", precision: 15, scale: 3
+    t.integer "direction"
+    t.integer "currency_code"
+    t.decimal "currency_value", precision: 15, scale: 3
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_payments_on_author_id"
-    t.index ["claim_id"], name: "index_payments_on_claim_id"
-    t.index ["offender_id"], name: "index_payments_on_offender_id"
+  end
+
+  create_table "redemptions", force: :cascade do |t|
+    t.bigint "payment_id"
+    t.bigint "debt_id"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_redemptions_on_author_id"
+    t.index ["debt_id"], name: "index_redemptions_on_debt_id"
+    t.index ["payment_id"], name: "index_redemptions_on_payment_id"
+  end
+
+  create_table "satisfactions", force: :cascade do |t|
+    t.bigint "payment_id"
+    t.bigint "appeal_id"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appeal_id"], name: "index_satisfactions_on_appeal_id"
+    t.index ["author_id"], name: "index_satisfactions_on_author_id"
+    t.index ["payment_id"], name: "index_satisfactions_on_payment_id"
   end
 
   add_foreign_key "appeals", "claims"
   add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
-  add_foreign_key "payments", "claims"
-  add_foreign_key "payments", "egov_utils_people", column: "offender_id"
-  add_foreign_key "payments", "egov_utils_users", column: "author_id"
+  add_foreign_key "debts", "claims"
+  add_foreign_key "debts", "egov_utils_people", column: "offender_id"
+  add_foreign_key "redemptions", "debts"
+  add_foreign_key "redemptions", "egov_utils_users", column: "author_id"
+  add_foreign_key "redemptions", "payments"
+  add_foreign_key "satisfactions", "appeals"
+  add_foreign_key "satisfactions", "egov_utils_users", column: "author_id"
+  add_foreign_key "satisfactions", "payments"
 end

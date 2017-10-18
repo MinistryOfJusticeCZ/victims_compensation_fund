@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   root to: 'claims#index'
 
-  resources :payments
+  resources :redemptions
   resources :appeals
   resources :claims do
-    resources :payments, only: [:new, :create]
+    resources :redemptions, only: [:new, :create]
     resources :appeals, only: [:new, :create]
   end
 

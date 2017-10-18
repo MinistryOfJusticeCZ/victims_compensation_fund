@@ -1,0 +1,11 @@
+= bootstrap_form_for(@redemption) do |f|
+  .row
+    .col
+      = f.fields_for(:debt, @redemption.debt || Debt.new) do |fields|
+        = render 'debts/form', form: fields, debt: fields.object
+    .col
+      %h5= Payment.model_name.human
+      = f.fields_for(:payment, @redemption.payment || Payment.new) do |fields|
+        = render 'payments/form', form: fields, payment: fields.object
+  .form-actions
+    = f.submit

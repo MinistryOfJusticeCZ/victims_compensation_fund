@@ -72,11 +72,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'egon_gate', '~> 0.1.0' #, path: '../egon_gate'
-# gem 'azahara_schema', path: '../azahara_schema'
-gem 'azahara_schema', '~> 0.1.0' #, path: '../azahara_schema'
 # gem 'egov_utils', path: '../egov_utils'
-gem 'egov_utils', '~> 0.1.0' #, path: '../egov_utils'
+gem 'egov_utils', '~> 0.1.8' #, path: '../egov_utils'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
 
