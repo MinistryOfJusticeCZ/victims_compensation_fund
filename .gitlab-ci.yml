@@ -72,4 +72,3 @@ deploy_staging:
     name: staging
   only:
     - master
-  when: manual

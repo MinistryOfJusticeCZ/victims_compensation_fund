@@ -13,6 +13,12 @@ class Payment < ApplicationRecord
 
   private
 
+    def first_id_in_year
+      Rails.cache.fetch("payment/#{Date.today.year}/first_id") do
+        Payment.where(Payment.arel_table[:created_at].gteq( Date.new(Date.today.year, 1, 1) )).order(:created_at).select(:id).first.try(:id).to_i
+      end
+    end
+
     def calculate_value
       self.currency_value = self.value
       if currency_code.to_s != 'czk'
@@ -25,7 +31,7 @@ class Payment < ApplicationRecord
     end
 
     def generate_uid
-      self.update_column(:payment_uid, "#{Time.now.strftime("%y")}#{id.to_s.rjust(8, "0")}")
+      self.update_column(:payment_uid, "#{Time.now.strftime("%y")}#{(id-first_id_in_year+1).to_s.rjust(8, "0")}")
     end
 
 end
