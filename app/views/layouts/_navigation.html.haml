@@ -9,14 +9,14 @@
       %ul.nav.navbar-nav.mr-auto.main-menu
         %li.nav-item.main-item= link_to t(:app_abbrev), main_app.root_path, class: 'nav-link'
       %ul.nav.navbar-nav
-        - if can?(:create, Payment) || can?(:read, Payment)
+        - if can?(:create, Redemption) || can?(:read, Redemption)
           %li.nav-item.dropdown
             = link_to 'javascript:void(0)', id: 'navbarPaymentDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
               = Redemption.model_name.human(count: :other)
             .dropdown-menu{'aria-labelledby' => 'navbarPaymentDropdownLink'}
-              - if can? :create, Payment
+              - if can? :create, Redemption
                 = link_to t('label_new'), main_app.new_redemption_path, class: 'dropdown-item'
-              - if can? :read, Payment
+              - if can? :read, Redemption
                 = link_to t('label_list'), main_app.redemptions_path, class: 'dropdown-item'
         - if can?(:create, Appeal) || can?(:read, Appeal)
           %li.nav-item.dropdown

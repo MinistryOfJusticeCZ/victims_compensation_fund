@@ -1,0 +1,8 @@
+= bootstrap_form_for(@satisfaction) do |f|
+  = f.hidden_field(:appeal_id)
+
+  = f.fields_for(:payment, @satisfaction.payment || Payment.new) do |fields|
+    = render 'payments/form', form: fields, payment: fields.object, show_currency: false
+
+  .form-actions
+    = f.submit

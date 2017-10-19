@@ -6,4 +6,12 @@ class Redemption < ApplicationRecord
 
   accepts_nested_attributes_for :payment
   accepts_nested_attributes_for :debt
+
+  before_create :set_payment_direction
+
+  private
+
+    def set_payment_direction
+      self.payment.direction = 'incoming'
+    end
 end

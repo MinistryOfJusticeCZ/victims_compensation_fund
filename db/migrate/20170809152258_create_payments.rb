@@ -5,7 +5,7 @@ class CreatePayments < ActiveRecord::Migration[5.1]
       t.string :payment_uid
       t.decimal :value, precision: 15, scale: 3
       t.integer :direction
-      t.integer :currency_code, limit: 4
+      t.integer :currency_code, limit: 4, default: 1
       t.decimal :currency_value, precision: 15, scale: 3
 
       t.timestamps

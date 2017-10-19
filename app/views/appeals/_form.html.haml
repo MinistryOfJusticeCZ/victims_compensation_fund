@@ -1,3 +1,4 @@
 = form.text_field(:file_uid)
 = form.select :payment_type, appeal.class.payment_types.collect{|val, _| [t("activerecord.attributes.#{appeal.class.model_name.i18n_key}.payment_types.#{val}"), val]}
-= form.text_field(:bank_account)
+/= form.text_field(:bank_account)
+= form.text_field(:amount)

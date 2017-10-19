@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018150426) do
+ActiveRecord::Schema.define(version: 20171019132139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171018150426) do
     t.integer "payment_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "amount", precision: 15, scale: 3
     t.index ["assigned_to_id"], name: "index_appeals_on_assigned_to_id"
     t.index ["claim_id"], name: "index_appeals_on_claim_id"
     t.index ["victim_id"], name: "index_appeals_on_victim_id"

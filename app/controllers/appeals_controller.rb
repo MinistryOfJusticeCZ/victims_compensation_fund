@@ -14,6 +14,10 @@ class AppealsController < ApplicationController
     end
   end
 
+  def show
+    @satisfaction_schema = SatisfactionSchema.new(columns: ['payment-value', 'created_at'], outputs: ['grid'])
+  end
+
   def new
   end
 

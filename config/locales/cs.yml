@@ -25,18 +25,24 @@ cs:
     offender:
       one: Pachatel
       other: Pachatelé
+    debt:
+      one: Trest
+      other: Tresty
 
   model_attributes: &my_attributes
     appeal:
       file_uid: Spisová značka
       payment_type: Platba
       bank_account: Číslo účtu
+      amount: Požadovaná (přiřknutá) částka
       payment_types:
         account: Převodem
         foldout: Složenka
       victim-fullname: Jméno oběti
     claim:
       file_uid: Spisová značka případu
+    debt:
+      value: Celková výše trestu
     payment:
       payment_uid: Variabilní symbol
       value: Částka
@@ -46,6 +52,8 @@ cs:
     offender:
       firstname: Jméno
       lastname: Příjmení
+      birth_date: Datum narození
+    victim:
       birth_date: Datum narození
 
 

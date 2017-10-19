@@ -1,2 +1,5 @@
 = form.text_field(:value)
-= form.select :currency_code, payment.class.currency_codes.collect{|val, _| [t("activerecord.attributes.#{payment.class.model_name.i18n_key}.currency_code.#{val}"), val]}
+- if local_assigns.fetch(:show_currency, true)
+  = form.select :currency_code, payment.class.currency_codes.collect{|val, _| [t("activerecord.attributes.#{payment.class.model_name.i18n_key}.currency_code.#{val}"), val]}
+- else
+  = form.hidden_field(:currency_code)

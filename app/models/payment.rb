@@ -4,14 +4,24 @@ class Payment < ApplicationRecord
   has_many :redemptions
 
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
+  enum direction: { incoming: 1, outcoming: 16 }
 
-  validates :value, numericality: true
+  validates :value, numericality: true, allow_nil: { unless: :in_czk? }
 
-  before_validation :calculate_value, if: :value_recalculation_needed?
+  before_validation :set_default_currency
+  before_validation :set_currency_value, if: :value_changed?
   after_create :generate_uid
 
 
   private
+
+    def set_default_currency
+      self.currency_code ||= 'czk'
+    end
+
+    def in_czk?
+      currency_code.to_s == 'czk'
+    end
 
     def first_id_in_year
       Rails.cache.fetch("payment/#{Date.today.year}/first_id") do
@@ -19,15 +29,11 @@ class Payment < ApplicationRecord
       end
     end
 
-    def calculate_value
-      self.currency_value = self.value
-      if currency_code.to_s != 'czk'
-        self.value = self.currency_value * 25.2
+    def set_currency_value
+      if !in_czk?
+        self.currency_value = self.value
+        self.value = nil
       end
-    end
-
-    def value_recalculation_needed?
-      value_changed?
     end
 
     def generate_uid

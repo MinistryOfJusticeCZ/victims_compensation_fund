@@ -1,0 +1,14 @@
+.attribute
+  .label= Victim.model_name.human
+  .value= @appeal.victim.fullname
+.attribute
+  .label= Victim.human_attribute_name('birth_date')
+  .value= @appeal.victim.birth_date
+.attribute
+  .label= Appeal.human_attribute_name('amount')
+  .value= @appeal.amount
+
+#satisfaction_grid
+
+:javascript
+  #{raw render 'common/grid', grid_id: 'satisfaction_grid', schema: @satisfaction_schema, create_attributes: {appeal_id: @appeal.id}}

@@ -4,4 +4,6 @@ class Debt < ApplicationRecord
 
   accepts_nested_attributes_for :claim
   accepts_nested_attributes_for :offender
+
+  validates :value, numericality: true, allow_nil: true
 end
