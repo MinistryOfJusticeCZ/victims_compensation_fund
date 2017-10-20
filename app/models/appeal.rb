@@ -12,4 +12,11 @@ class Appeal < ApplicationRecord
 
   validates :amount, numericality: true, allow_nil: true
 
+  after_save :set_claim_status
+
+
+  private
+    def set_claim_status
+      claim.set_status
+    end
 end

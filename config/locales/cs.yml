@@ -45,6 +45,12 @@ cs:
       victim-fullname: Jméno oběti
     claim:
       file_uid: Spisová značka případu
+      status: Stav
+      statuses:
+        empty: Prázdný případ
+        appeal_only: Pouze žádost
+        debt_only: Pouze tresty
+        both: Spárováno
     debt:
       value: Celková výše trestu
     payment:
