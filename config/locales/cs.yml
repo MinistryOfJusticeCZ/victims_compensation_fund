@@ -28,6 +28,10 @@ cs:
     debt:
       one: Trest
       other: Tresty
+    satisfaction:
+      one: Uspokojení
+      other: Uspokojení
+
 
   model_attributes: &my_attributes
     appeal:
