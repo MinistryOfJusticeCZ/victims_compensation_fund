@@ -7,12 +7,12 @@ class ClaimSchema < AzaharaSchema::ModelSchema
     if EgovUtils::User.current.has_role?('court')
       ['file_uid', 'appeals-victim-fullname', 'debts-offender-fullname']
     elsif EgovUtils::User.current.has_role?('compensator')
-      ['file_uid', 'court_uid', 'appeals-victim-fullname', 'debts-offender-fullname']
+      ['file_uid', 'court_uid', 'appeals-victim-fullname', 'debts-offender-fullname', 'status']
     end
   end
 
   def always_visible_filters
-    ['court_uid', 'file_uid', 'appeals-victim-fullname', 'debts-offender-fullname']
+    ['court_uid', 'file_uid', 'appeals-victim-fullname', 'debts-offender-fullname', 'status']
   end
 
   def attribute_for_column(col)

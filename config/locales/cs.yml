@@ -44,6 +44,7 @@ cs:
         foldout: Složenka
       victim-fullname: Jméno oběti
     claim:
+      court_uid: Prvostupňový soud
       file_uid: Spisová značka případu
       status: Stav
       statuses:
@@ -53,18 +54,18 @@ cs:
         both: Spárováno
     debt:
       value: Celková výše trestu
+      offender-fullname: Jméno pachatele
     payment:
       payment_uid: Variabilní symbol
       value: Částka
       currency_code: Měna
       offender_id: Pachatel
-      offender-fullname: Jméno pachatele
-    offender:
-      firstname: Jméno
-      lastname: Příjmení
-      birth_date: Datum narození
-    victim:
-      birth_date: Datum narození
+    redemption:
+      debt_id: Trest
+
+  model_help_messages: &my_help_messages
+    claim:
+      file_uid: S.Z. případu prvostupňového soudu, ze kterého vznikl nárok
 
 
   models_errors: &my_model_errors
@@ -76,6 +77,8 @@ cs:
       <<: *my_models
     attributes:
       <<: *my_attributes
+    help:
+      <<: *my_help_messages
     errors:
       models:
         <<: *my_model_errors
