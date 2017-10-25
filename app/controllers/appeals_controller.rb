@@ -24,16 +24,22 @@ class AppealsController < ApplicationController
 
   def create
     if @appeal.save
-      redirect_to @appeal.claim
+      respond_to do |format|
+        format.html { redirect_to @appeal.claim, notice: t('common_labels.notice_saved', model: @claim.model_name.human) }
+        format.json { render json: @appeal, status: :created }
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render 'new',  layout: !request.xhr? }
+        format.json { render json: { errors: @appeal.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
   private
 
     def create_params
-      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, claim_attributes: [:court_uid, :file_uid], victim_attributes: [:firstname, :lastname, :birth_date])
+      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, claim_attributes: [:court_uid, :file_uid], victim_attributes: [:firstname, :lastname, :birth_date])
     end
 
 end

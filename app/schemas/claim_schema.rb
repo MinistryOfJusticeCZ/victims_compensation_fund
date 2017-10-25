@@ -18,7 +18,7 @@ class ClaimSchema < AzaharaSchema::ModelSchema
   def attribute_for_column(col)
     case col.name
     when 'court_uid'
-      CourtUidAttribute.new(model, col.name, 'list')
+      CourtUidAttribute.new(model, col.name, 'love')
     when 'status'
       AzaharaSchema::Attribute.new(model, col.name, 'list')
     else
