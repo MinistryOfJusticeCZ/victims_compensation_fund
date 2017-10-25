@@ -25,9 +25,15 @@ class ClaimsController < ApplicationController
 
   def create
     if @claim.save
-      redirect_to @claim, notice: t(:notice_saved, entity: @claim.model_name.human)
+      respond_to do |format|
+        format.html { redirect_to @claim, notice: t('common_labels.notice_saved', model: @claim.model_name.human) }
+        format.json { render json: @claim, status: :created }
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render 'new' }
+        format.json { render json: { errors: @claim.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
