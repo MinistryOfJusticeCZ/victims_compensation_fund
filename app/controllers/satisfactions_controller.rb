@@ -19,7 +19,6 @@ class SatisfactionsController < ApplicationController
   end
 
   def create
-    @satisfaction.payment.direction = 'outcoming'
     if @satisfaction.save
       respond_to do |format|
         format.html { redirect_to @satisfaction.appeal }
@@ -27,7 +26,7 @@ class SatisfactionsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render 'new' }
+        format.html { render 'new', layout: !request.xhr? }
         format.json { render json: { errors: @satisfaction.errors.full_messages }, status: :unprocessable_entity }
       end
     end

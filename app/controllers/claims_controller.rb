@@ -31,7 +31,7 @@ class ClaimsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render 'new',  layout: !request.xhr? }
+        format.html { render 'new', layout: !request.xhr? }
         format.json { render json: { errors: @claim.errors.full_messages }, status: :unprocessable_entity }
       end
     end

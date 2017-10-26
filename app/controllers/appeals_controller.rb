@@ -25,7 +25,7 @@ class AppealsController < ApplicationController
   def create
     if @appeal.save
       respond_to do |format|
-        format.html { redirect_to @appeal.claim, notice: t('common_labels.notice_saved', model: @claim.model_name.human) }
+        format.html { redirect_to @appeal.claim, notice: t('common_labels.notice_saved', model: @appeal.model_name.human) }
         format.json { render json: @appeal, status: :created }
       end
     else

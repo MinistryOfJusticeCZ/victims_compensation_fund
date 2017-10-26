@@ -4,7 +4,7 @@ class Satisfaction < ApplicationRecord
 
   accepts_nested_attributes_for :payment
 
-  before_create :set_payment_direction
+  before_validation :set_payment_direction, if: :new_record?
 
   private
 

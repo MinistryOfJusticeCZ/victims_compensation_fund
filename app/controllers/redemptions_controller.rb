@@ -28,7 +28,7 @@ class RedemptionsController < ApplicationController
     else
       pp @redemption.errors
       respond_to do |format|
-        format.html { render 'new' }
+        format.html { render 'new', layout: !request.xhr? }
         format.json { render json: { errors: @redemption.errors.full_messages }, status: :unprocessable_entity }
       end
     end
@@ -37,7 +37,7 @@ class RedemptionsController < ApplicationController
   private
 
     def create_params
-      params.require(:redemption).permit(:debt_id, payment_attributes: [:value, :currency_code], debt_attributes: [:claim_id, :offender_id, {claim_attributes: [:court_uid, :file_uid], offender_attributes: [:firstname, :lastname, :birth_date]}])
+      params.require(:redemption).permit(:debt_id, payment_attributes: [:value, :currency_code], debt_attributes: [:claim_id, :offender_id, :value, {claim_attributes: [:court_uid, :file_uid], offender_attributes: [:firstname, :lastname, :birth_date]}])
     end
 
 end
