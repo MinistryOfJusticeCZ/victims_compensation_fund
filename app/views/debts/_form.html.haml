@@ -1,4 +1,4 @@
-- if debt.claim
+- if debt.claim.try(:persisted?)
   = form.hidden_field(:claim_id)
 - else
   = form.fields_for(:claim, Claim.new) do |fields|

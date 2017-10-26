@@ -6,7 +6,8 @@ class Payment < ApplicationRecord
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
   enum direction: { incoming: 1, outcoming: 16 }
 
-  validates :value, numericality: true, allow_nil: { unless: :in_czk? }
+  validates :value, numericality: true, if: :in_czk? # and status is not paid, if paid, it should be filled.
+  validates :currency_value, numericality: true, unless: :in_czk?
 
   before_validation :set_default_currency
   before_validation :set_currency_value, if: :value_changed?

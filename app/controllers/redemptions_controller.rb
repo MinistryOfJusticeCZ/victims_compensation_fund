@@ -26,6 +26,7 @@ class RedemptionsController < ApplicationController
         format.json { render json: @redemption, status: :created }
       end
     else
+      pp @redemption.errors
       respond_to do |format|
         format.html { render 'new' }
         format.json { render json: { errors: @redemption.errors.full_messages }, status: :unprocessable_entity }
