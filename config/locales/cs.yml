@@ -20,8 +20,8 @@ cs:
     victim:
       one: Oběť
     claim:
-      one: Nárok
-      other: Nároky
+      one: Případ
+      other: Případy
     offender:
       one: Pachatel
       other: Pachatelé
@@ -62,6 +62,7 @@ cs:
       offender_id: Pachatel
     redemption:
       debt_id: Trest
+      debt-claim_id: Identifikátor případu
     satisfaction:
       created_at: Vytvořeno
 

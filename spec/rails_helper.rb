@@ -62,7 +62,7 @@ RSpec.configure do |config|
 
   config.before(type: :controller) do
     stub_request(:get, "love.justice.cz/api/v1/organizations.json?f%5Bcategory_abbrev%5D=OS").
-      to_return(body: [{id: 1, abbrevation: 'OSSCECV', name: 'Okresní soud v Chomutově'}].to_json)
+      to_return(body: [{id: 1, abbrevation: 'OSSCECV', name: 'Okresní soud v Chomutově'}, {id: 2, abbrevation: 'OSSCETP', name: 'Okresní soud v Mostě'}].to_json)
   end
 
   config.before(logged: true) do

@@ -1,4 +1,7 @@
 .attribute
+  .label= Claim.model_name.human
+  .value= link_to(@appeal.claim.file_uid, @appeal.claim)
+.attribute
   .label= Victim.model_name.human
   .value= @appeal.victim.fullname
 .attribute
