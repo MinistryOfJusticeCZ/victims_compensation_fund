@@ -38,7 +38,7 @@ class Payment < ApplicationRecord
     end
 
     def generate_uid
-      self.update_column(:payment_uid, "#{Time.now.strftime("%y")}#{(id-first_id_in_year+1).to_s.rjust(8, "0")}")
+      self.update_column(:payment_uid, "8#{(id-first_id_in_year+1).to_s.rjust(7, "0")}#{Time.now.strftime("%y")}")
     end
 
 end

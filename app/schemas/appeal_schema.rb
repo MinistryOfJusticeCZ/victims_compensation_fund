@@ -4,4 +4,13 @@ class AppealSchema < AzaharaSchema::ModelSchema
     'file_uid'
   end
 
+  def attribute_for_column(col)
+    case col.name
+    when 'payment_type'
+      AzaharaSchema::Attribute.new(model, col.name, 'list')
+    else
+      super
+    end
+  end
+
 end

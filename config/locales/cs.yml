@@ -62,6 +62,8 @@ cs:
       offender_id: Pachatel
     redemption:
       debt_id: Trest
+    satisfaction:
+      created_at: Vytvořeno
 
   model_help_messages: &my_help_messages
     claim:

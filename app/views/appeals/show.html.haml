@@ -6,7 +6,7 @@
   .value= @appeal.victim.birth_date
 .attribute
   .label= Appeal.human_attribute_name('amount')
-  .value= @appeal.amount
+  .value= show_money(@appeal.amount)
 
 #satisfaction_grid
 

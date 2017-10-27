@@ -1,7 +1,7 @@
 - if debt.claim.try(:persisted?)
   = form.hidden_field(:claim_id)
 - else
-  = form.fields_for(:claim, Claim.new) do |fields|
+  = form.fields_for(:claim, debt.claim || Claim.new) do |fields|
     = render 'claims/form', form: fields, claim: fields.object
 
 %h5= Offender.model_name.human

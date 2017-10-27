@@ -7,7 +7,7 @@ class Claim < ApplicationRecord
   enum status: { empty: 1, appeal_only: 2, debt_only: 3, both: 4 }
 
   validates :court_uid, inclusion: { in: :court_uids }
-  validates :file_uid, uniqueness: true, length: { minimum: 2 }
+  validates :file_uid, uniqueness: true, fileuid: true
 
   def court_uids
     Organization.district_courts.collect{|c| c.abbrevation}
