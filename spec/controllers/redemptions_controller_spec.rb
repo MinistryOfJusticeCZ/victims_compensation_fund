@@ -7,7 +7,7 @@ RSpec.describe RedemptionsController, type: :controller do
         payment_attributes: { value: 100, currency_code: 'czk'},
         debt_attributes: {
           value: '150',
-          claim_attributes: { court_uid: 'OSSCECV', file_uid: 'ten-hajzl-je-moc-dobrej'},
+          claim_attributes: { court_uid: 'OSSCECV', file_uid: '200-T-20155/2017'},
           offender_attributes: {firstname: 'Adam', lastname: 'Ondra', birth_date: '5.2.1993'}
         }
       }
