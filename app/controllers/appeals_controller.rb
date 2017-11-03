@@ -4,7 +4,7 @@ class AppealsController < ApplicationController
   load_and_authorize_resource :appeal, :through => :claim, :shallow => true
 
   def index
-    @schema = AppealSchema.new(columns: ['file_uid', 'victim-fullname', 'payment_type'], outputs: ['grid'])
+    @schema = AppealSchema.new(outputs: ['grid'])
     @schema.from_params(params)
     respond_to do |format|
       format.html
@@ -39,7 +39,13 @@ class AppealsController < ApplicationController
   private
 
     def create_params
-      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, claim_attributes: [:court_uid, :file_uid], victim_attributes: [:firstname, :lastname, :birth_date])
+      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount,
+        claim_attributes: [:court_uid, :file_uid],
+        victim_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}],
+        offender_attributes: {
+          person_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}]
+        }
+      )
     end
 
 end

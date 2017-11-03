@@ -7,6 +7,10 @@ class AppealSchema < AzaharaSchema::ModelSchema
     'file_uid'
   end
 
+  def default_columns
+    ['file_uid', 'claim-court_uid', 'claim-file_uid', 'victim-fullname', 'offender-person-fullname', 'sum:satisfactions-payment-value']
+  end
+
   def attribute_for_column(col)
     case col.name
     when 'payment_type'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020143359) do
+ActiveRecord::Schema.define(version: 20171103141234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 20171020143359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "amount", precision: 15, scale: 3
+    t.bigint "offender_id"
     t.index ["assigned_to_id"], name: "index_appeals_on_assigned_to_id"
     t.index ["claim_id"], name: "index_appeals_on_claim_id"
+    t.index ["offender_id"], name: "index_appeals_on_offender_id"
     t.index ["victim_id"], name: "index_appeals_on_victim_id"
   end
 
@@ -64,10 +66,10 @@ ActiveRecord::Schema.define(version: 20171020143359) do
 
   create_table "debts", force: :cascade do |t|
     t.bigint "claim_id"
-    t.bigint "offender_id"
     t.decimal "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "offender_id"
     t.index ["claim_id"], name: "index_debts_on_claim_id"
     t.index ["offender_id"], name: "index_debts_on_offender_id"
   end
@@ -103,6 +105,9 @@ ActiveRecord::Schema.define(version: 20171020143359) do
     t.string "external_uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "birth_place"
+    t.bigint "residence_id"
+    t.index ["residence_id"], name: "index_egov_utils_people_on_residence_id"
   end
 
   create_table "egov_utils_users", id: :serial, force: :cascade do |t|
@@ -117,6 +122,15 @@ ActiveRecord::Schema.define(version: 20171020143359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
+  end
+
+  create_table "offenders", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "claim_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["claim_id"], name: "index_offenders_on_claim_id"
+    t.index ["person_id"], name: "index_offenders_on_person_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -155,8 +169,12 @@ ActiveRecord::Schema.define(version: 20171020143359) do
   add_foreign_key "appeals", "claims"
   add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
+  add_foreign_key "appeals", "offenders"
   add_foreign_key "debts", "claims"
-  add_foreign_key "debts", "egov_utils_people", column: "offender_id"
+  add_foreign_key "debts", "offenders"
+  add_foreign_key "egov_utils_people", "egov_utils_addresses", column: "residence_id"
+  add_foreign_key "offenders", "claims"
+  add_foreign_key "offenders", "egov_utils_people", column: "person_id"
   add_foreign_key "redemptions", "debts"
   add_foreign_key "redemptions", "egov_utils_users", column: "author_id"
   add_foreign_key "redemptions", "payments"

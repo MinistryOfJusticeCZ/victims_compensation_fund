@@ -14,5 +14,9 @@
     .appeal-attributes.col
       %h5= Appeal.model_name.human
       = render 'appeals/form', form: f, appeal: @appeal
+    .offender-attributes.col
+      %h5= Offender.model_name.human
+      = f.fields_for(:offender, @appeal.offender || Offender.new) do |fields|
+        = render 'offenders/form', form: fields, offender: fields.object
   .form-actions
     = f.submit

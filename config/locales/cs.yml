@@ -54,7 +54,8 @@ cs:
         both: Spárováno
     debt:
       value: Celková výše trestu
-      offender-fullname: Jméno pachatele
+    offender:
+      person-fullname: Jméno pachatele
     payment:
       payment_uid: Variabilní symbol
       value: Částka

@@ -6,6 +6,6 @@
 
 %h5= Offender.model_name.human
 = form.fields_for(:offender, debt.offender || Offender.new) do |fields|
-  = render 'egov_utils/people/form', form: fields, person: fields.object
+  = render 'offenders/form', form: fields, offender: fields.object
 
 = form.text_field(:value)
