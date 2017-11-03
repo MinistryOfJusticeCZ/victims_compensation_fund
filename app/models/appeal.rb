@@ -20,7 +20,6 @@ class Appeal < ApplicationRecord
   private
 
     def set_offenders_claim
-      binding.pry
       offender.claim ||= claim if offender && claim
     end
 

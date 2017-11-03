@@ -61,8 +61,11 @@ RSpec.configure do |config|
   config.include EgovUtils::TestUtils::ControllerHelpers, :type => :controller
 
   config.before(type: :controller) do
-    stub_request(:get, "love.justice.cz/api/v1/organizations.json?f%5Bcategory_abbrev%5D=OS").
-      to_return(body: [{id: 1, abbrevation: 'OSSCECV', name: 'Okresní soud v Chomutově'}, {id: 2, abbrevation: 'OSSCETP', name: 'Okresní soud v Mostě'}].to_json)
+    stub_request(:get, "love.justice.cz/api/v1/organizations.json?f%5Bcategory_abbrev%5D==%7COS%5CKS&sort%5B%5D%5Bpath%5D=category_abbrev").
+      to_return(body: [{id: 5, abbrevation: 'KSZPCPM', name: 'Krajský soud Plzeň', category_abbrev: 'KS'},
+                       {id: 1, abbrevation: 'OSSCECV', name: 'Okresní soud v Chomutově', category_abbrev: 'OS'},
+                       {id: 2, abbrevation: 'OSSCETP', name: 'Okresní soud v Mostě', category_abbrev: 'KS'}
+                      ].to_json)
   end
 
   config.before(logged: true) do

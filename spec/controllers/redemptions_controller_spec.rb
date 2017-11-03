@@ -8,7 +8,12 @@ RSpec.describe RedemptionsController, type: :controller do
         debt_attributes: {
           value: '150',
           claim_attributes: { court_uid: 'OSSCECV', file_uid: '200-T-20155/2017'},
-          offender_attributes: {firstname: 'Adam', lastname: 'Ondra', birth_date: '5.2.1993'}
+          offender_attributes: {
+            person_attributes: {
+              firstname: 'Adam', lastname: 'Ondra', birth_date: '5.2.1993',
+              residence_attributes: {street: 'Vysoka', house_number: '156', orientation_number: '9c', city: 'Neznamo', postcode: 42000, district: 'Hlavní město Praha'}
+            }
+          }
         }
       }
     }

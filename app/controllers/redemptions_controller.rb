@@ -38,7 +38,7 @@ class RedemptionsController < ApplicationController
     def create_params
       params.require(:redemption).permit(:debt_id, payment_attributes: [:value, :currency_code],
         debt_attributes: [:claim_id, :offender_id, :value, {
-          claim_attributes: [:court_uid, :file_uid], offender_attributes: { person_attributes: [:firstname, :lastname, :birth_date] }
+          claim_attributes: [:court_uid, :file_uid], offender_attributes: { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}] }
         }])
     end
 
