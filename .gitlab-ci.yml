@@ -50,7 +50,7 @@ test:2.3:
     - git config --global http.proxy 194.213.41.2:8080
     - http_proxy=http://proxy.justice.cz:3128 RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
     - cp config/database.yml.gitlabci config/database.yml
-    - rake db:migrate RAILS_ENV=test
+    - bundle exec rails db:migrate RAILS_ENV=test
     - rspec
 
 deploy_staging:
