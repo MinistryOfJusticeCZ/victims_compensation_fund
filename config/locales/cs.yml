@@ -1,7 +1,7 @@
 ---
 cs:
-  app_name: Fond obětí trestných činností
-  app_abbrev: Fond OTČ
+  app_name: Výnosy trestních sankcí
+  app_abbrev: VTS
 
   label_list: Výpis
   label_new_payment: Přidat platbu

@@ -4,19 +4,41 @@
     = @appeal.claim.file_uid
     = f.hidden_field(:claim_id)
   - else
+    %h5= Claim.model_name.human
     = f.fields_for(:claim, @appeal.claim || Claim.new) do |fields|
       = render 'claims/form', form: fields, claim: fields.object
-  .row
-    .victim.col
-      %h5= Victim.model_name.human
+
+  .victim
+    %h5= Victim.model_name.human
+    = f.select2(:victim_id, {url: victims_path}, prompt: t('label_new'))
+    .victim-attributes
       = f.fields_for(:victim, @appeal.victim || Victim.new) do |fields|
         = render 'egov_utils/people/form', form: fields, person: fields.object
-    .appeal-attributes.col
-      %h5= Appeal.model_name.human
-      = render 'appeals/form', form: f, appeal: @appeal
-    .offender-attributes.col
-      %h5= Offender.model_name.human
-      = f.fields_for(:offender, @appeal.offender || Offender.new) do |fields|
-        = render 'offenders/form', form: fields, offender: fields.object
+  .offender-attributes
+    %h5= Offender.model_name.human
+    = f.fields_for(:offender, @appeal.offender || Offender.new) do |fields|
+      = render 'offenders/form', form: fields, offender: fields.object
+  .appeal-attributes
+    %h5= Appeal.model_name.human
+    = render 'appeals/form', form: f, appeal: @appeal
   .form-actions
     = f.submit
+
+:javascript
+  $(function(){
+    function toggle_new_form($container, attr_names, toggle_state) {
+      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes').toggle(toggle_state)
+      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes :input').prop('disabled', !toggle_state)
+    }
+
+    var $victim_select = $('#appeal_victim_id');
+
+    toggle_new_form($victim_select, 'victim', !$victim_select.val() || $victim_select.val() == '')
+
+    $victim_select.on('select2:select', function(evt){
+      toggle_new_form($(this), 'victim', false)
+    });
+    $victim_select.on('select2:unselect', function(evt){
+      toggle_new_form($(this), 'victim', true)
+    });
+  });

@@ -1,3 +1,4 @@
 .court-form
-  = form.select(:court_uid, Organization.district_courts.collect{|o| [o.name, o.abbrevation] }, class: 'court_uid')
-  = form.fileuid_field(:file_uid, agendas: ['T', 'Tm'])
+  .row
+    .col-12.col-md-6= form.select2(:court_uid, Organization.district_courts.collect{|o| [o.name, o.abbrevation] }, class: 'court_uid')
+    .col-12.col-md-6= form.fileuid_field(:file_uid, agendas: ['T', 'Tm'])

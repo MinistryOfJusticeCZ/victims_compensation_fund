@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :appeals, only: [:new, :create]
   end
 
+  resources :victims, only: :index
+
   mount EgovUtils::Engine => '/internals'
 
 end
