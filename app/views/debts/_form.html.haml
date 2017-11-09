@@ -1,11 +1,34 @@
 - if debt.claim.try(:persisted?)
   = form.hidden_field(:claim_id)
 - else
+  %h5= Claim.model_name.human
   = form.fields_for(:claim, debt.claim || Claim.new) do |fields|
     = render 'claims/form', form: fields, claim: fields.object
 
-%h5= Offender.model_name.human
-= form.fields_for(:offender, debt.offender || Offender.new) do |fields|
-  = render 'offenders/form', form: fields, offender: fields.object
+.offender
+  %h5= Offender.model_name.human
+  = form.select2(:offender_id, {url: offenders_path}, prompt: t('label_new'))
+  .offender-attributes
+    = form.fields_for(:offender, debt.offender || Offender.new) do |fields|
+      = render 'offenders/form', form: fields, offender: fields.object
 
 = form.text_field(:value)
+
+:javascript
+  $(function(){
+    function toggle_new_form($container, attr_names, toggle_state) {
+      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes').toggle(toggle_state)
+      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes :input').prop('disabled', !toggle_state)
+    }
+
+    var $offender_select = $('#redemption_debt_attributes_offender_id');
+
+    toggle_new_form($offender_select, 'offender', !$offender_select.val() || $offender_select.val() == '')
+
+    $offender_select.on('select2:select', function(evt){
+      toggle_new_form($(this), 'offender', false)
+    });
+    $offender_select.on('select2:unselect', function(evt){
+      toggle_new_form($(this), 'offender', true)
+    });
+  });

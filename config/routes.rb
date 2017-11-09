@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :victims, only: :index
+  resources :offenders, only: :index
 
   mount EgovUtils::Engine => '/internals'
 

@@ -39,7 +39,7 @@ class AppealsController < ApplicationController
   private
 
     def create_params
-      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id,
+      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id, :offender_id,
         claim_attributes: [:court_uid, :file_uid],
         victim_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}],
         offender_attributes: {

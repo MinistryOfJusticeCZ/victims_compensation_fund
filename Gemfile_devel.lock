@@ -8,7 +8,7 @@ GIT
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.1.8)
+    azahara_schema (0.1.9)
       rails (~> 5.0)
 
 PATH
@@ -219,7 +219,7 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.1.4)
       sprockets-rails (>= 2.0.0)
-    rails-assets-tether (1.4.0)
+    rails-assets-tether (1.4.1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)

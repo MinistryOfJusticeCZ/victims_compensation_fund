@@ -14,10 +14,12 @@
     .victim-attributes
       = f.fields_for(:victim, @appeal.victim || Victim.new) do |fields|
         = render 'egov_utils/people/form', form: fields, person: fields.object
-  .offender-attributes
+  .offender
     %h5= Offender.model_name.human
-    = f.fields_for(:offender, @appeal.offender || Offender.new) do |fields|
-      = render 'offenders/form', form: fields, offender: fields.object
+    = f.select2(:offender_id, {url: offenders_path}, prompt: t('label_new'))
+    .offender-attributes
+      = f.fields_for(:offender, @appeal.offender || Offender.new) do |fields|
+        = render 'offenders/form', form: fields, offender: fields.object
   .appeal-attributes
     %h5= Appeal.model_name.human
     = render 'appeals/form', form: f, appeal: @appeal
@@ -32,13 +34,22 @@
     }
 
     var $victim_select = $('#appeal_victim_id');
+    var $offender_select = $('#appeal_offender_id')
 
     toggle_new_form($victim_select, 'victim', !$victim_select.val() || $victim_select.val() == '')
+    toggle_new_form($offender_select, 'offender', !$offender_select.val() || $offender_select.val() == '')
 
     $victim_select.on('select2:select', function(evt){
       toggle_new_form($(this), 'victim', false)
     });
     $victim_select.on('select2:unselect', function(evt){
       toggle_new_form($(this), 'victim', true)
+    });
+
+    $offender_select.on('select2:select', function(evt){
+      toggle_new_form($(this), 'offender', false)
+    });
+    $offender_select.on('select2:unselect', function(evt){
+      toggle_new_form($(this), 'offender', true)
     });
   });
