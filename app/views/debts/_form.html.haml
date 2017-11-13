@@ -7,15 +7,24 @@
 
 .offender
   %h5= Offender.model_name.human
-  = form.select2(:offender_id, {url: offenders_path}, prompt: t('label_new'))
+  - if debt.claim.try(:persisted?)
+    = form.select2(:offender_id, {url: offenders_path(f: {claim_id: debt.claim_id})}, prompt: t('label_new_offender_in_claim'), skip_label: true)
   .offender-attributes
     = form.fields_for(:offender, debt.offender || Offender.new) do |fields|
       = render 'offenders/form', form: fields, offender: fields.object
 
-= form.text_field(:value)
+= form.select(:debt_type, enum_values_for_select(debt.class, :debt_type), {}, id: 'debt_type')
+= form.text_field(:value, id: 'debt_value')
 
 :javascript
   $(function(){
+    var $debt_type = $('#debt_type');
+    $('#debt_value').parent().toggle( $debt_type.val() == 'financial' || $debt_type.val() == 'forfeiture_substitute' || $debt_type.val() == 'confiscation_substitute' );
+    $debt_type.on('change', function(evt){
+      var v = $(this).val();
+      $('#debt_value').parent().toggle( v == 'financial' || v == 'forfeiture_substitute' || v == 'confiscation_substitute' );
+    });
+
     function toggle_new_form($container, attr_names, toggle_state) {
       $container.closest('.'+attr_names).find('.'+attr_names+'-attributes').toggle(toggle_state)
       $container.closest('.'+attr_names).find('.'+attr_names+'-attributes :input').prop('disabled', !toggle_state)

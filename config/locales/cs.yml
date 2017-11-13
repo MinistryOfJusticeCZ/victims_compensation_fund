@@ -55,7 +55,18 @@ cs:
         both: Spárováno
     debt:
       value: Celková výše trestu
+      offender_id: Pachatel
+      debt_type: Druh trestu
+      debt_types:
+        financial: Peněžitý
+        forfeiture_possession: Propadnutí majetku
+        forfeiture_thing: Propadnutí věci
+        forfeiture_substitute: Propadnutí náhradní hodnoty
+        confiscation_substitute: Zabrání náhradní hodnoty
+        confiscation_thing: Zabrání věci
+        confiscation_possession: Zabrání majetku
     offender:
+      person_id: Údaje o osobě pachatele
       person-fullname: Jméno pachatele
     payment:
       payment_uid: Variabilní symbol
