@@ -13,7 +13,7 @@ class Appeal < ApplicationRecord
 
   validates :amount, numericality: true, allow_nil: true
 
-  before_validation :set_offenders_claim, if: :new_record?
+  before_validation :set_offenders_claim
   after_save :set_claim_status
 
 

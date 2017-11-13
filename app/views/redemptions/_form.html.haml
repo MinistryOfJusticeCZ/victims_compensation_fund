@@ -1,0 +1,27 @@
+- if claim
+  %strong= Claim.human_attribute_name('file_uid') + ': '
+  = claim.file_uid
+  = form.select(:debt_id, claim.debts.collect{|debt| [debt.offender.person.fullname + ' (' + l(debt.offender.person.birth_date.to_date) + ') - ' + debt.value.to_s, debt.id] }, {include_blank: t('label_new')}, id: 'debt-select')
+
+#debt-form
+  = form.fields_for(:debt, redemption.debt || (claim ? claim.debts.build : Debt.new) ) do |fields|
+    = render 'debts/form', form: fields, debt: fields.object
+
+%h5= Payment.model_name.human
+= form.fields_for(:payment, redemption.payment || Payment.new) do |fields|
+  = render 'payments/form', form: fields, payment: fields.object
+
+- if claim
+  :javascript
+    $(function(){
+
+      var $debt_select = $('#debt-select');
+
+      $('#debt-form').toggle($debt_select.length == 0 || $debt_select.val() == '');
+      $('#debt-form :input').prop('disabled', $debt_select.val() != '');
+
+      $debt_select.on('change', function(evt) {
+          $('#debt-form').toggle($(this).val() == '');
+          $('#debt-form :input').prop('disabled', $(this).val() != '');
+      });
+    });

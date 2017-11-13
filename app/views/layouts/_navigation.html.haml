@@ -9,20 +9,12 @@
       %ul.nav.navbar-nav.mr-auto.main-menu
         %li.nav-item.main-item= link_to t(:app_abbrev), main_app.root_path, class: 'nav-link'
       %ul.nav.navbar-nav
-        -# if can?(:manage, User)
-        %li.nav-item.dropdown
-          = link_to 'javascript:void(0)', id: 'navbarAdminDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
-            = 'Admin'
-          .dropdown-menu{'aria-labelledby' => 'navbarAdminDropdownLink'}
-            - if can? :create, Redemption
-              = link_to EgovUtils::User.model_name.human, egov_utils.users_path, class: 'dropdown-item'
-              = link_to EgovUtils::User.human_attribute_name('roles'), egov_utils.roles_path, class: 'dropdown-item'
 
         - if can?(:create, Redemption) || can?(:read, Redemption)
           %li.nav-item.dropdown
             = link_to 'javascript:void(0)', id: 'navbarPaymentDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
               = Redemption.model_name.human(count: :other)
-            .dropdown-menu{'aria-labelledby' => 'navbarPaymentDropdownLink'}
+            .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'navbarPaymentDropdownLink'}
               - if can? :create, Redemption
                 = link_to t('label_new'), main_app.new_redemption_path, class: 'dropdown-item'
               - if can? :read, Redemption
@@ -31,11 +23,18 @@
           %li.nav-item.dropdown
             = link_to 'javascript:void(0)', id: 'navbarAppealDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
               = Appeal.model_name.human(count: :other)
-            .dropdown-menu{'aria-labelledby' => 'navbarAppealDropdownLink'}
+            .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'navbarAppealDropdownLink'}
               - if can? :create, Appeal
                 = link_to t('label_new'), main_app.new_appeal_path, class: 'dropdown-item'
               - if can? :read, Appeal
                 = link_to t('label_list'), main_app.appeals_path, class: 'dropdown-item'
+        - if can?(:manage, EgovUtils::User)
+          %li.nav-item.dropdown
+            = link_to 'javascript:void(0)', id: 'navbarAdminDropdownLink', class: 'nav-link dropdown-toggle', aria: {haspopup: true}, data: {toggle: 'dropdown'} do
+              = 'Admin'
+            .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'navbarAdminDropdownLink'}
+              = link_to EgovUtils::User.model_name.human, egov_utils.users_path, class: 'dropdown-item'
+              = link_to EgovUtils::User.human_attribute_name('roles'), egov_utils.roles_path, class: 'dropdown-item'
       - if current_user.logged?
         %ul.nav.navbar-nav
           /%li.nav-item
@@ -44,7 +43,7 @@
             = link_to 'javascript:void(0)', id: 'navbarUserDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
               %i.fa.fa-user-circle.fa-lg
               = current_user.fullname
-            .dropdown-menu.dropdown-menu-align-right{'aria-labelledby' => 'navbarUserDropdownLink'}
+            .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'navbarUserDropdownLink'}
               = link_to t('label_profile'), egov_utils.user_path(current_user), class: 'dropdown-item'
               = link_to t('label_logout'), egov_utils.signout_path, class: 'dropdown-item', method: :delete
       - elsif internal_network?

@@ -1,5 +1,7 @@
 class OffendersController < ApplicationController
 
+  load_and_authorize_resource
+
   def index
     @offenders_schema = OffenderSchema.new
     @offenders_schema.from_params(params)

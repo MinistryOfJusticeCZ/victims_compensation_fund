@@ -20,14 +20,24 @@ class RedemptionsController < ApplicationController
   def create
     authorize!(:create, Debt) if @redemption.debt && @redemption.debt.new_record?
     @redemption.author = current_user
-    if @redemption.save
-      respond_to do |format|
+    respond_to do |format|
+      if @redemption.save
         format.html { redirect_to @redemption.debt.claim, notice: t('common_labels.notice_saved', model: @redemption.model_name.human) }
         format.json { render json: @redemption, status: :created }
-      end
-    else
-      respond_to do |format|
+      else
         format.html { render 'new', layout: !request.xhr? }
+        format.json { render json: { errors: @redemption.errors.full_messages }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @redemption.update(update_params)
+        format.html { redirect_to @redemption.debt.claim, notice: t('common_labels.notice_saved', model: @redemption.model_name.human) }
+        format.json { render json: @redemption }
+      else
+        format.html { render 'edit', layout: !request.xhr? }
         format.json { render json: { errors: @redemption.errors.full_messages }, status: :unprocessable_entity }
       end
     end
@@ -38,7 +48,16 @@ class RedemptionsController < ApplicationController
     def create_params
       params.require(:redemption).permit(:debt_id, payment_attributes: [:value, :currency_code],
         debt_attributes: [:claim_id, :offender_id, :value, {
-          claim_attributes: [:court_uid, :file_uid], offender_attributes: { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}] }
+          claim_attributes: [:court_uid, :file_uid],
+          offender_attributes: { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}] }
+        }])
+    end
+
+    def update_params
+      params.require(:redemption).permit(:debt_id, payment_attributes: [:value],
+        debt_attributes: [:claim_id, :offender_id, :value, {
+          claim_attributes: [:court_uid, :file_uid],
+          offender_attributes: { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}] }
         }])
     end
 

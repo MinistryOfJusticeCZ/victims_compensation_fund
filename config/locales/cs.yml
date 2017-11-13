@@ -6,6 +6,7 @@ cs:
   label_list: Výpis
   label_new_payment: Přidat platbu
   label_new_appeal: Přidat žádost
+  label_new_offender_in_claim: Nový pachatel v případu
 
   models: &my_models
     appeal:

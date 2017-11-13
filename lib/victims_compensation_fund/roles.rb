@@ -40,7 +40,9 @@ class CompensationDepartmentRole < EgovUtils::UserUtils::Role
     ability.can :manage, Appeal
     ability.can :manage, Claim
     ability.can :manage, Offender
-    ability.can :manage, Debt
+    ability.can :manage, Satisfaction
+    ability.can :manage, Victim
+    # ability.can :manage, Debt
   end
 
 end

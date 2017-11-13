@@ -1,3 +1,3 @@
-class VictimSchema < AzaharaSchema::ModelSchema
+class VictimSchema < EgovUtils::PersonSchema
 
 end

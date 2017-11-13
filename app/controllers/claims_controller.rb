@@ -24,14 +24,24 @@ class ClaimsController < ApplicationController
   end
 
   def create
-    if @claim.save
-      respond_to do |format|
+    respond_to do |format|
+      if @claim.save
         format.html { redirect_to @claim, notice: t('common_labels.notice_saved', model: @claim.model_name.human) }
         format.json { render json: @claim, status: :created }
-      end
-    else
-      respond_to do |format|
+      else
         format.html { render 'new', layout: !request.xhr? }
+        format.json { render json: { errors: @claim.errors.full_messages }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @claim.update(update_params)
+        format.html { redirect_to @claim, notice: t('common_labels.notice_saved', model: @claim.model_name.human) }
+        format.json { render json: @claim }
+      else
+        format.html { render 'edit', layout: !request.xhr? }
         format.json { render json: { errors: @claim.errors.full_messages }, status: :unprocessable_entity }
       end
     end
@@ -40,6 +50,10 @@ class ClaimsController < ApplicationController
   private
 
     def create_params
+      params.require(:claim).permit(:court_uid, :file_uid)
+    end
+
+    def update_params
       params.require(:claim).permit(:court_uid, :file_uid)
     end
 

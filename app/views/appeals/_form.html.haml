@@ -1,4 +1,56 @@
-= form.text_field(:file_uid)
-= form.select :payment_type, appeal.class.payment_types.collect{|val, _| [t("activerecord.attributes.#{appeal.class.model_name.i18n_key}.payment_types.#{val}"), val]}
-/= form.text_field(:bank_account)
-= form.text_field(:amount)
+- if  appeal.claim && appeal.claim.persisted?
+  %strong= Claim.human_attribute_name('file_uid') + ': '
+  = appeal.claim.file_uid
+  = form.hidden_field(:claim_id)
+- else
+  %h5= Claim.model_name.human
+  = form.fields_for(:claim, appeal.claim || Claim.new) do |fields|
+    = render 'claims/form', form: fields, claim: fields.object
+
+.victim
+  %h5= Victim.model_name.human
+  = form.select2(:victim_id, {url: victims_path}, prompt: t('label_new'))
+  .victim-attributes
+    = form.fields_for(:victim, appeal.victim || Victim.new) do |fields|
+      = render 'egov_utils/people/form', form: fields, person: fields.object
+.offender
+  %h5= Offender.model_name.human
+  - if appeal.claim && appeal.claim.persisted?
+    = form.select2(:offender_id, {url: offenders_path({f: {claim_id: appeal.claim.id}})}, prompt: t('label_new_offender_in_claim'))
+  .offender-attributes
+    = form.fields_for(:offender, appeal.offender || Offender.new) do |fields|
+      = render 'offenders/form', form: fields, offender: fields.object
+.appeal-attributes
+  %h5= Appeal.model_name.human
+  = form.text_field(:file_uid)
+  = form.select :payment_type, appeal.class.payment_types.collect{|val, _| [t("activerecord.attributes.#{appeal.class.model_name.i18n_key}.payment_types.#{val}"), val]}
+  /= form.text_field(:bank_account)
+  = form.text_field(:amount)
+
+:javascript
+  $(function(){
+    function toggle_new_form($container, attr_names, toggle_state) {
+      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes').toggle(toggle_state)
+      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes :input').prop('disabled', !toggle_state)
+    }
+
+    var $victim_select = $('#appeal_victim_id');
+    var $offender_select = $('#appeal_offender_id')
+
+    toggle_new_form($victim_select, 'victim', !$victim_select.val() || $victim_select.val() == '')
+    toggle_new_form($offender_select, 'offender', !$offender_select.val() || $offender_select.val() == '')
+
+    $victim_select.on('select2:select', function(evt){
+      toggle_new_form($(this), 'victim', false)
+    });
+    $victim_select.on('select2:unselect', function(evt){
+      toggle_new_form($(this), 'victim', true)
+    });
+
+    $offender_select.on('select2:select', function(evt){
+      toggle_new_form($(this), 'offender', false)
+    });
+    $offender_select.on('select2:unselect', function(evt){
+      toggle_new_form($(this), 'offender', true)
+    });
+  });
