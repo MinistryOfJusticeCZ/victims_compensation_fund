@@ -4,14 +4,7 @@ class AppealsController < ApplicationController
   load_and_authorize_resource :appeal, :through => :claim, :shallow => true
 
   def index
-    @schema = AppealSchema.new(outputs: ['grid'])
-    @schema.from_params(params)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @schema
-      }
-    end
+    azahara_schema_index
   end
 
   def show

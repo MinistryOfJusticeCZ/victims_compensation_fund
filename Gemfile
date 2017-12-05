@@ -32,8 +32,6 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
-gem 'activeresource'
-
 # Use Capistrano for deployment
 group :development do
   gem 'capistrano-rails'
@@ -81,6 +79,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'egov_utils', '~> 0.1.8' #, path: '../egov_utils'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
+
+gem 'savon', '~> 2.11'
 
 #UI gems
 source 'https://rails-assets.org' do

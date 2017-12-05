@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113160303) do
+ActiveRecord::Schema.define(version: 20171205122723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 20171113160303) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "external_uid"
+    t.string "organization_key"
+    t.index ["organization_key"], name: "index_egov_utils_groups_on_organization_key"
   end
 
   create_table "egov_utils_people", force: :cascade do |t|
@@ -124,6 +126,7 @@ ActiveRecord::Schema.define(version: 20171113160303) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
+    t.string "confirmation_code"
   end
 
   create_table "offenders", force: :cascade do |t|

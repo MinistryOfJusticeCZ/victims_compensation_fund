@@ -10,7 +10,8 @@ class Claim < ApplicationRecord
   validates :file_uid, uniqueness: {scope: :court_uid}, fileuid: true
 
   def court_uids
-    Organization.district_courts.collect{|c| c.abbrevation}
+    user_org_keys = EgovUtils::User.current.organization_with_suborganizations_keys
+    user_org_keys.present? ? user_org_keys : Organization.district_courts.collect{|c| c.key}
   end
 
 

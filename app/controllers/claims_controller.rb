@@ -3,14 +3,7 @@ class ClaimsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @schema = ClaimSchema.new(columns: ['court_uid', 'file_uid', 'status'], outputs: ['grid'])
-    @schema.from_params(params)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @schema
-      }
-    end
+    azahara_schema_index
   end
 
   def show

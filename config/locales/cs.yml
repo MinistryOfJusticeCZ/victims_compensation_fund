@@ -72,6 +72,10 @@ cs:
       payment_uid: Variabilní symbol
       value: Částka
       currency_code: Měna
+      currency_codes:
+        czk: Kč
+        eur: €
+        usd: $
       offender_id: Pachatel
     redemption:
       debt_id: Trest

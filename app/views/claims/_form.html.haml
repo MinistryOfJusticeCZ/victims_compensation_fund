@@ -1,4 +1,5 @@
+- court_uid_attribute = CourtUidAttribute.new(Claim, 'court_uid', 'love')
 .court-form
   .row
-    .col-12.col-md-6= form.select2(:court_uid, Organization.district_courts.collect{|o| [o.name, o.abbrevation] }, class: 'court_uid')
+    .col-12.col-md-6= form.select2(:court_uid, court_uid_attribute.available_values, class: 'court_uid')
     .col-12.col-md-6= form.fileuid_field(:file_uid, agendas: ['T', 'Tm'])

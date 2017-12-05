@@ -17,12 +17,18 @@ class ClaimSchema < AzaharaSchema::ModelSchema
     ['court_uid', 'file_uid', 'appeals-victim-fullname', 'debts-offender-person-fullname', 'status']
   end
 
+  def default_outputs
+    ['grid']
+  end
+
+  def default_columns
+    ['court_uid', 'file_uid', 'status']
+  end
+
   def attribute_for_column(col)
     case col.name
     when 'court_uid'
       CourtUidAttribute.new(model, col.name, 'love')
-    when 'status'
-      AzaharaSchema::Attribute.new(model, col.name, 'list')
     else
       super
     end

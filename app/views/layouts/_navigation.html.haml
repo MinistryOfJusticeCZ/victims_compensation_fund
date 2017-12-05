@@ -37,8 +37,6 @@
               = link_to EgovUtils::User.human_attribute_name('roles'), egov_utils.roles_path, class: 'dropdown-item'
       - if current_user.logged?
         %ul.nav.navbar-nav
-          /%li.nav-item
-          /  = link_to 'rejstrik_pyco', '', class: 'nav-link'
           %li.nav-item.dropdown.user-drop
             = link_to 'javascript:void(0)', id: 'navbarUserDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
               %i.fa.fa-user-circle.fa-lg

@@ -16,11 +16,16 @@ class CourtEmployeeRole < EgovUtils::UserUtils::Role
   add 'court'
 
   def define_abilities(ability, user)
-    ability.can :manage, Redemption
     ability.can :read, Payment
     ability.can :create, Payment
 
-    ability.can :read, Claim
+    if (org_keys = user.organization_with_suborganizations_keys).any?
+      ability.can [:read, :edit, :update], Redemption, claim: { court_uid: org_keys }
+      ability.can :read, Claim, court_uid: org_keys
+    else
+      ability.can :read, Claim
+    end
+    ability.can :create, Redemption
     ability.can :create, Claim
 
     ability.can :read, Offender
