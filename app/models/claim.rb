@@ -11,7 +11,9 @@ class Claim < ApplicationRecord
 
   def court_uids
     user_org_keys = EgovUtils::User.current.organization_with_suborganizations_keys
-    user_org_keys.present? ? user_org_keys : Organization.district_courts.collect{|c| c.key}
+
+    #in feature versions of egov_utils (nil) is useless
+    user_org_keys.present? ? user_org_keys : EgovUtils::Organization.courts(nil).collect{|c| c.key}
   end
 
 
