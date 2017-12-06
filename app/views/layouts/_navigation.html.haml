@@ -44,6 +44,6 @@
             .dropdown-menu.dropdown-menu-right{'aria-labelledby' => 'navbarUserDropdownLink'}
               = link_to t('label_profile'), egov_utils.user_path(current_user), class: 'dropdown-item'
               = link_to t('label_logout'), egov_utils.signout_path, class: 'dropdown-item', method: :delete
-      - elsif internal_network?
+      - else
         %ul.nav.navbar-nav
           %li.nav-item= link_to t('label_login'), egov_utils.signin_path
