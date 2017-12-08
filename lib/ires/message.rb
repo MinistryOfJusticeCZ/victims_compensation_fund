@@ -1,6 +1,7 @@
 require 'gyoku'
 require 'base64'
 require 'securerandom'
+require 'signer'
 
 module Ires
   class Message
@@ -37,14 +38,25 @@ module Ires
     end
 
     def message_hash
-      {'prijmiPredpisXml' => inner_xml_hash.merge('@xmlns'=>'http://iresois.cca.cz/', '@xmlns:ns2' => 'http://www.w3.org/2000/09/xmldsig#')}
+      {'prijmiPredpisXml' => inner_xml_hash.merge('@xmlns'=>'http://iresois.cca.cz/')}
     end
 
-    def to_s
+    def to_xml
       Gyoku.xml(message_hash, key_converter: :underscore)
     end
 
     def signed_and_encoded
+      Rails.logger.debug to_xml if Object.const_defined?('Rails') && Rails.logger
+
+      signer = Signer.new(to_xml)
+      signer.cert = OpenSSL::X509::Certificate.new(File.read("cert.pem"))
+      signer.private_key = OpenSSL::PKey::RSA.new(File.read("key.pem"), "test")
+
+      signer.sign!
+
+      Rails.logger.debug signer.to_xml if Object.const_defined?('Rails') && Rails.logger
+
+      Base64.encode(signer.to_xml)
 
     end
 

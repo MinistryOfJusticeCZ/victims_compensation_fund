@@ -37,7 +37,7 @@ module Ires
           por_cislo: payment.file_uid.document_number,
           castka: payment.value,
           mena: payment.currency_code.upper,
-          datum_zapisu: Time.now.iso8601(3),
+          datum_zapisu: payment.updated_at.to_time.iso8601(3),
           variabilni_symbol: payment.payment_uid
         }
       }
