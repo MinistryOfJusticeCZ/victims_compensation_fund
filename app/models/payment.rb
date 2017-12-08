@@ -1,10 +1,10 @@
 class Payment < ApplicationRecord
 
-  has_many :satisfactions
-  has_many :redemptions
+  has_one :satisfaction
+  has_one :redemption
 
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
-  enum direction: { incoming: 1, outcoming: 16 }
+  enum direction: { incoming: 1, outgoing: 16 }
 
   validates :value, numericality: true, if: :in_czk? # and status is not paid, if paid, it should be filled.
   validates :currency_value, numericality: true, unless: :in_czk?
@@ -13,6 +13,14 @@ class Payment < ApplicationRecord
   before_validation :set_currency_value, if: :value_changed?
   after_create :generate_uid
 
+  def file_uid
+    case direction
+    when 'outgoing'
+      satisfaction.file_uid
+    when 'incoming'
+      redemption.file_uid
+    end
+  end
 
   private
 
@@ -38,7 +46,7 @@ class Payment < ApplicationRecord
     end
 
     def generate_uid
-      self.update_column(:payment_uid, "88#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}")
+      self.update_columns(payment_uid: "88#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}", uuid: SecureRandom.uuid)
     end
 
 end

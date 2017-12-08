@@ -9,11 +9,11 @@ class Claim < ApplicationRecord
   validates :court_uid, inclusion: { in: :court_uids }
   validates :file_uid, uniqueness: {scope: :court_uid}, fileuid: true
 
+  serialize :file_uid, EgovUtils::Fileuid
+
   def court_uids
     user_org_keys = EgovUtils::User.current.organization_with_suborganizations_keys
-
-    #in feature versions of egov_utils (nil) is useless
-    user_org_keys.present? ? user_org_keys : EgovUtils::Organization.courts(nil).collect{|c| c.key}
+    user_org_keys.present? ? user_org_keys : EgovUtils::Organization.courts.collect{|c| c.key}
   end
 
 

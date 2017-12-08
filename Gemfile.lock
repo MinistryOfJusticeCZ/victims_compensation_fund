@@ -64,7 +64,7 @@ GEM
     arel (8.0.0)
     audited (4.5.0)
       activerecord (>= 4.0, < 5.2)
-    autoprefixer-rails (7.2.1)
+    autoprefixer-rails (7.2.2)
       execjs
     azahara_schema (0.1.15)
       rails (~> 5.0)
@@ -107,7 +107,7 @@ GEM
     diff-lcs (1.3)
     egon_gate (0.1.0)
       savon (~> 2.11.0)
-    egov_utils (0.1.21)
+    egov_utils (0.1.24)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.1)
@@ -278,6 +278,8 @@ GEM
       nori (~> 2.4)
       wasabi (~> 3.4)
     settingslogic (2.0.9)
+    signer (1.6.0)
+      nokogiri (>= 1.5.1)
     socksify (1.7.1)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -358,6 +360,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   savon (~> 2.11)
+  signer (~> 1.6)
   spring
   spring-watcher-listen (~> 2.0.0)
   therubyracer

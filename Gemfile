@@ -82,6 +82,7 @@ gem 'egov_utils', '~> 0.1.8' #, path: '../egov_utils'
 
 # IRES
 gem 'savon', '~> 2.11'
+gem 'signer', '~> 1.6'
 
 #UI gems
 source 'https://rails-assets.org' do
