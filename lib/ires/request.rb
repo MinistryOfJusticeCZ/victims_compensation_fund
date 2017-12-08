@@ -40,7 +40,7 @@ module Ires
           bc_vec: payment.file_uid.bc,
           druh_vec: payment.file_uid.agenda,
           rocnik: payment.file_uid.year,
-          castka: payment.value,
+          castka: payment.value.to_s.sub('.', ','),
           mena: payment.currency_code.upcase,
           datum_zapisu: payment.updated_at.to_time.iso8601(3),
           variabilni_symbol: payment.payment_uid
