@@ -26,6 +26,8 @@ RSpec.describe RedemptionsController, type: :controller do
     end
     it 'sets payment direction to incoming' do
       subject
+      expect(Redemption.first.claim.file_uid).to be_a(EgovUtils::Fileuid)
+      expect(Redemption.first.claim.file_uid.to_s).to eq('200-T-20155/2017')
       expect(Redemption.first.payment.direction).to eq('incoming')
     end
   end

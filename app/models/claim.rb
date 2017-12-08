@@ -9,7 +9,7 @@ class Claim < ApplicationRecord
   validates :court_uid, inclusion: { in: :court_uids }
   validates :file_uid, uniqueness: {scope: :court_uid}, fileuid: true
 
-  serialize :file_uid, EgovUtils::Fileuid
+  serialize :file_uid, EgovUtils::Fileuid::Coder.new(:file_uid, 'court')
 
   def court_uids
     user_org_keys = EgovUtils::User.current.organization_with_suborganizations_keys
