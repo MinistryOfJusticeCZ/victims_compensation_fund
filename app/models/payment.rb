@@ -22,6 +22,15 @@ class Payment < ApplicationRecord
     end
   end
 
+  def person
+    case direction
+    when 'outgoing'
+      satisfaction.appeal.victim
+    when 'incoming'
+      redemption.debt.offender.person
+    end
+  end
+
   private
 
     def set_default_currency
