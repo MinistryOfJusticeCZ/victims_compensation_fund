@@ -11,7 +11,8 @@ class Payment < ApplicationRecord
 
   before_validation :set_default_currency
   before_validation :set_currency_value, if: :value_changed?
-  after_create :generate_uid, :send_to_ires
+  after_create :generate_uid
+  after_create :send_to_ires, if: :direction?
 
   scope :for_organization, ->(organization_code) {
     s = PaymentSchema.new
