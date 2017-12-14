@@ -29,6 +29,7 @@ test:2.3:
       - cache/bundler/
   services:
     - postgres
+    - redis
   script:
     - BASE_URL=`echo $CI_REPOSITORY_URL | sed "s;\/*$CI_PROJECT_PATH.*;;"`
     - REPO_URL="$BASE_URL/libraries/egon_gate.git"
