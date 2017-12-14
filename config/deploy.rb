@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.10.1"
+lock "~> 3.10"
 
 set :application, "victims_compensation_fund"
 set :repo_url, "git@git.servis.justice.cz:internal_apps/victims_compensation_fund.git"
@@ -37,3 +37,8 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
 # set :keep_releases, 5
 
 # after "deploy:symlink:linked_dirs", "deploy:symlink_config_files"
+
+set :default_env, {
+  'http_proxy' => 'http://proxy.justice.cz:3128/',
+  'https_proxy' => 'http://proxy.justice.cz:3128/'
+}

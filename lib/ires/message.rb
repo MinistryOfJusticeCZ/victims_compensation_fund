@@ -9,17 +9,14 @@ module Ires
     end
 
     def organization_code
-      '101000'
+      # '101000' #- msp
+      '201000'
     end
 
     attr_reader :ires_requests
 
     def initialize(ires_requests)
       @ires_requests = ires_requests
-    end
-
-    def payment
-      @payment
     end
 
     def inner_xml_hash
@@ -29,7 +26,7 @@ module Ires
           datum: Time.now.iso8601(3),
           system: system_code,
           organizace: organization_code,
-          pozadavek: ires_requests.each_with_index.collect{|ireq,i| {id_pozadavku: i+1, typ_pozadavku: ireq.request_type}.merge(ireq.prescription_hash) }
+          pozadavek: ires_requests.each_with_index.collect{|ireq,i| {id_pozadavku: i+1, typ_pozadavku: ireq.request_type}.merge(ireq.request_hash) }
         }
       }
     end

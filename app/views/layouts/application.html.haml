@@ -20,6 +20,10 @@
     %footer
       .container
         .row
+          .col-12.text-center
+            = link_to '/vts_userguide.pdf', target: '_blank', title: t('label_user_guide') do
+              %i.fa.fa-file-pdf-o
+              = t('label_user_guide')
           .col-12.col-md-6.notice
             Webové stránky jsou v souladu s
             = link_to 'vyhláškou č. 64/2008 Sb', "http://www.mvcr.cz/clanek/vyhlaska-c-64-2008-sb-o-forme-uverejnovani-informaci-souvisejicich-s-vykonem-verejne-spravy-prostrednictvim-webovych-stranek-pro-osoby-se-zdravotnim-postizenim-vyhlaska-o-pristupnosti-10.aspx", title: "Vyhláška č. 64/2008 Sb"
