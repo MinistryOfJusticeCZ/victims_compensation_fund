@@ -5,6 +5,7 @@ module Ires
 
     def initialize(payment)
       @payment = payment
+      @payment.uuid = SecureRandom.uuid
     end
 
     def request_type

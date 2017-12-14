@@ -3,6 +3,7 @@ require 'ires/request'
 
 require 'base64'
 require 'signer'
+require 'securerandom'
 
 class IresSigner < Signer
   def security_node
@@ -99,6 +100,10 @@ module Ires
       config.sign_cert_pkey_password
     end
 
+    def initialize(organization_code)
+      @organization_code = organization_code
+    end
+
     def client
       @client ||= Savon.client(wsdl: self.class.url+'?wsdl', ssl_verify_mode: :none)
     end
@@ -139,21 +144,18 @@ module Ires
       signed_message(message)
     end
 
-    def send_payment_prescription(payment)
-      payments = [payment].flatten
-      message = Message.new(payments.collect{|p| Ires::Request.new(p) })
+    def send!
+      payments = Payment.where( organization_code: @organization_code, uuid: nil )
+
+      message = Message.new(@organization_code, payments.collect{|p| Ires::Request.new(p) })
 
       signed_message = signed_message(message)
       validate_message(signed_message)
 
-      Rails.logger.debug signed_message if Object.const_defined?('Rails') && Rails.logger
-
-
       base64_message = Base64.encode64(signed_message).gsub("\n", '')
 
-      Rails.logger.debug base64_message if Object.const_defined?('Rails') && Rails.logger
-
       client.call(:prijmi_predpis, message: {'prijmiPredpis' => { 'xmlData' => base64_message }})
+      payments.each {|p| p.save }
     end
 
 

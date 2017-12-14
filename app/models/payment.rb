@@ -11,7 +11,7 @@ class Payment < ApplicationRecord
 
   before_validation :set_default_currency
   before_validation :set_currency_value, if: :value_changed?
-  after_create :generate_uid
+  after_create :generate_uid, :send_to_ires
 
   def file_uid
     case direction
@@ -19,6 +19,15 @@ class Payment < ApplicationRecord
       satisfaction.file_uid
     when 'incoming'
       redemption.file_uid
+    end
+  end
+
+  def claim
+    case direction
+    when 'outgoing'
+      satisfaction.appeal.claim
+    when 'incoming'
+      redemption.debt.claim
     end
   end
 
@@ -55,7 +64,11 @@ class Payment < ApplicationRecord
     end
 
     def generate_uid
-      self.update_columns(payment_uid: "88#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}", uuid: SecureRandom.uuid)
+      self.update_columns(payment_uid: "88#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}")
+    end
+
+    def send_to_ires
+      SendPaymentJob.perform_later(claim.court_uid)
     end
 
 end

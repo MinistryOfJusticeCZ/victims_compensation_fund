@@ -17,4 +17,11 @@ Rails.application.routes.draw do
 
   mount EgovUtils::Engine => '/internals'
 
+
+  require 'sidekiq/api'
+  get "queue-status" => proc { [200, {"Content-Type" => "text/plain"}, [Sidekiq::Queue.new.size < 100 ? "OK" : "UHOH" ]] }
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
 end

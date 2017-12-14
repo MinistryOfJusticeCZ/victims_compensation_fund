@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:common="http://common.iresois.cca.cz/" xmlns:sig="http://www.w3.org/2000/09/xmldsig#" xmlns:tns="http://iresois.cca.cz/" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://iresois.cca.cz/">
+  <xs:import namespace="http://common.iresois.cca.cz/" schemaLocation="commonTypes.xsd" />
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"></xs:import>
+
+  <xs:element name="prijmiPredpisXml">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="davka" type="tns:davka_predpisu"/>
+        <xs:element ref="sig:Signature"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="davka_predpisu">
+    <xs:sequence>
+      <xs:element name="cislo_davky" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="datum" type="xs:dateTime" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="system" type="common:system" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="organizace" type="common:organizace" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="pozadavek" type="tns:pozadavek" minOccurs="1" maxOccurs="1000" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pozadavek">
+    <xs:sequence>
+      <xs:element name="id_pozadavku" type="common:number4" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="typ_pozadavku" type="tns:typ_pozadavku" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:choice>
+        <xs:element name="predpis_zalozeni" type="tns:predpis_zalozeni" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="predpis_storno" type="tns:predpis_storno" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="uhrada_pozadavek" type="tns:uhrada_pozadavek" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="uhrada_zruseni" type="tns:uhrada_zruseni" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="predpis_aktualizace" type="tns:predpis_aktualizace" minOccurs="1" maxOccurs="1" nillable="false"/>
+        <xs:element name="predpis_postoupeni" type="tns:predpis_postoupeni" minOccurs="1" maxOccurs="1" nillable="false"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="typ_pozadavku">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="P" />
+      <xs:enumeration value="S" />
+      <xs:enumeration value="U" />
+      <xs:enumeration value="Z" />
+      <xs:enumeration value="A" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="predpis_aktualizace">
+    <xs:sequence>
+      <xs:element name="id_predpisu" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="castka" type="common:castka" minOccurs="1" maxOccurs="1" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="predpis_postoupeni">
+    <xs:sequence>
+      <xs:element name="id_predpisu" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="predpis_zalozeni">
+    <xs:sequence>
+      <xs:element name="id_predpisu" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="druh_akce" type="common:text50" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="druh_platby" type="common:text50" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="ucel" type="common:text50" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="bc_vec" type="common:number6" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="druh_vec" type="common:text10" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="cislo_senatu" type="common:number6" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rocnik" type="common:number4" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="por_cislo" type="common:number6" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_nazev" type="common:text255" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="osoba_jmeno" type="common:text40" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_datum_narozeni" type="xs:date" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_ic" type="common:text8" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_rodne_cislo" type="common:rodne_cislo" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="titul_pred" type="common:text50" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="titul_za" type="common:text50" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="castka" type="common:castka" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="mena" type="common:text3" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="datum_zapisu" type="xs:date" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="variabilni_symbol" type="common:text10" minOccurs="1" maxOccurs="1" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="typ_uhrady_predpis">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KOLEK" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="predpis_storno">
+    <xs:sequence>
+      <xs:element name="id_predpisu" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uhrada_pozadavek">
+    <xs:sequence>
+      <xs:element name="id_uhrady" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="id_predpisu" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="typ_uhrady" type="common:typ_uhrady_uhrada" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="datum_uhrady" type="xs:date" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="castka_uhrazeno" type="common:castka" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="variabilni_symbol" type="common:text10" minOccurs="1" maxOccurs="1" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uhrada_zruseni">
+    <xs:sequence>
+      <xs:element name="id_uhrady" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

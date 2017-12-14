@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://common.iresois.cca.cz/" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://common.iresois.cca.cz/">
+  <xs:element name="statusOperace" type="tns:status_operace"/>
+  <xs:element name="predpisZpracovani" type="tns:predpis_zpracovani"/>
+
+  <xs:complexType name="predpis_zpracovani">
+    <xs:sequence>
+      <xs:element name="id_zdroj_predpisu" type="tns:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="stav_predpisu" type="tns:stav_predpisu" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:choice>
+        <xs:element name="doklady" type="tns:doklady" />
+        <xs:element name="odmitnuti_predpisu" type="tns:odmitnuti_predpisu" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="doklady">
+    <xs:sequence>
+      <xs:element name="doklad" type="tns:doklad" minOccurs="1" maxOccurs="unbounded" nillable="false"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="stav_predpisu">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="V" />
+      <xs:enumeration value="Z" />
+      <xs:enumeration value="O" />
+      <xs:enumeration value="N" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="doklad">
+    <xs:sequence>
+      <xs:element name="stav_dokladu" type="tns:stav_dokladu" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="rok" type="tns:number4" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="dokl_rada" type="tns:text7" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="cislo_dokladu" type="tns:number10" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="cislo_splatky" type="tns:number3" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="variabilni_symbol" type="tns:text10" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="castka_predpis" type="tns:castka" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="castka_zbyva" type="tns:castka" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="mena" type="tns:text3" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="osoba_id" type="tns:text20" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_nazev" type="tns:text255" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_jmeno" type="tns:text40" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="osoba_ic" type="tns:text9" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="uhrada" type="tns:uhrada" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="stav_dokladu">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="E" />
+      <xs:enumeration value="Z" />
+      <xs:enumeration value="D" />
+      <xs:enumeration value="S" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="uhrada">
+    <xs:sequence>
+      <xs:element name="typ_uhrady" type="tns:typ_uhrady_uhrada" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="datum_uhrady" type="xs:date" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="castka_uhrazeno" type="tns:castka" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="mena" type="tns:text3" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="doklad_uhrady" type="tns:text50" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="bank_ucet_cislo_abo" type="tns:text24" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="kod_banka" type="tns:text6" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="bank_ucet_iban" type="tns:text34" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="kod_banky_bic" type="tns:text11" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="typ_uhrady_uhrada">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BANKA" />
+      <xs:enumeration value="POKLADNA" />
+      <xs:enumeration value="RUCNI UHRADA" />
+      <xs:enumeration value="ZAPOCET" />
+      <xs:enumeration value="KOLEK" />
+      <xs:enumeration value="MIMO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="odmitnuti_predpisu">
+    <xs:sequence>
+      <xs:element name="duvod_odmitnuti" type="tns:text255" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="status_operace">
+    <xs:sequence>
+      <xs:element name="vysledek" type="xs:boolean" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="popis" type="tns:text255" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="system">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ISVKS" />
+      <xs:enumeration value="FOTRC" />
+      <xs:enumeration value="ISROR" />
+      <xs:enumeration value="CEPR" />
+      <xs:enumeration value="IRES" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="organizace">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="201000" />
+      <xs:enumeration value="201010" />
+      <xs:enumeration value="201020" />
+      <xs:enumeration value="201030" />
+      <xs:enumeration value="201040" />
+      <xs:enumeration value="201050" />
+      <xs:enumeration value="201060" />
+      <xs:enumeration value="201070" />
+      <xs:enumeration value="201080" />
+      <xs:enumeration value="201090" />
+      <xs:enumeration value="201100" />
+      <xs:enumeration value="202000" />
+      <xs:enumeration value="202010" />
+      <xs:enumeration value="202020" />
+      <xs:enumeration value="202030" />
+      <xs:enumeration value="202040" />
+      <xs:enumeration value="202050" />
+      <xs:enumeration value="202060" />
+      <xs:enumeration value="202070" />
+      <xs:enumeration value="202080" />
+      <xs:enumeration value="202090" />
+      <xs:enumeration value="202100" />
+      <xs:enumeration value="202110" />
+      <xs:enumeration value="202120" />
+      <xs:enumeration value="203000" />
+      <xs:enumeration value="203001" />
+      <xs:enumeration value="203010" />
+      <xs:enumeration value="203020" />
+      <xs:enumeration value="203030" />
+      <xs:enumeration value="203040" />
+      <xs:enumeration value="203050" />
+      <xs:enumeration value="203060" />
+      <xs:enumeration value="203070" />
+      <xs:enumeration value="203080" />
+      <xs:enumeration value="204000" />
+      <xs:enumeration value="204001" />
+      <xs:enumeration value="204010" />
+      <xs:enumeration value="204020" />
+      <xs:enumeration value="204030" />
+      <xs:enumeration value="204040" />
+      <xs:enumeration value="204050" />
+      <xs:enumeration value="204060" />
+      <xs:enumeration value="204070" />
+      <xs:enumeration value="204080" />
+      <xs:enumeration value="204090" />
+      <xs:enumeration value="204100" />
+      <xs:enumeration value="205000" />
+      <xs:enumeration value="205001" />
+      <xs:enumeration value="205010" />
+      <xs:enumeration value="205020" />
+      <xs:enumeration value="205030" />
+      <xs:enumeration value="205040" />
+      <xs:enumeration value="205050" />
+      <xs:enumeration value="205060" />
+      <xs:enumeration value="205070" />
+      <xs:enumeration value="205080" />
+      <xs:enumeration value="205090" />
+      <xs:enumeration value="205100" />
+      <xs:enumeration value="206000" />
+      <xs:enumeration value="206001" />
+      <xs:enumeration value="206010" />
+      <xs:enumeration value="206020" />
+      <xs:enumeration value="206030" />
+      <xs:enumeration value="206040" />
+      <xs:enumeration value="206050" />
+      <xs:enumeration value="206060" />
+      <xs:enumeration value="206070" />
+      <xs:enumeration value="206080" />
+      <xs:enumeration value="206090" />
+      <xs:enumeration value="206100" />
+      <xs:enumeration value="206110" />
+      <xs:enumeration value="207000" />
+      <xs:enumeration value="207001" />
+      <xs:enumeration value="207002" />
+      <xs:enumeration value="207010" />
+      <xs:enumeration value="207020" />
+      <xs:enumeration value="207030" />
+      <xs:enumeration value="207040" />
+      <xs:enumeration value="207050" />
+      <xs:enumeration value="207060" />
+      <xs:enumeration value="207070" />
+      <xs:enumeration value="207080" />
+      <xs:enumeration value="207090" />
+      <xs:enumeration value="207100" />
+      <xs:enumeration value="207110" />
+      <xs:enumeration value="207120" />
+      <xs:enumeration value="207130" />
+      <xs:enumeration value="207140" />
+      <xs:enumeration value="208000" />
+      <xs:enumeration value="208001" />
+      <xs:enumeration value="208010" />
+      <xs:enumeration value="208011" />
+      <xs:enumeration value="208020" />
+      <xs:enumeration value="208030" />
+      <xs:enumeration value="208040" />
+      <xs:enumeration value="208041" />
+      <xs:enumeration value="208050" />
+      <xs:enumeration value="208060" />
+      <xs:enumeration value="208070" />
+      <xs:enumeration value="208080" />
+      <xs:enumeration value="208090" />
+      <xs:enumeration value="208100" />
+      <xs:enumeration value="208110" />
+      <xs:enumeration value="208111" />
+      <xs:enumeration value="220000" />
+      <xs:enumeration value="221000" />
+      <xs:enumeration value="222000" />
+      <xs:enumeration value="223000" />
+      <xs:enumeration value="301000" />
+      <xs:enumeration value="301010" />
+      <xs:enumeration value="301020" />
+      <xs:enumeration value="301030" />
+      <xs:enumeration value="301040" />
+      <xs:enumeration value="301050" />
+      <xs:enumeration value="301060" />
+      <xs:enumeration value="301070" />
+      <xs:enumeration value="301080" />
+      <xs:enumeration value="301090" />
+      <xs:enumeration value="301100" />
+      <xs:enumeration value="302000" />
+      <xs:enumeration value="302010" />
+      <xs:enumeration value="302020" />
+      <xs:enumeration value="302030" />
+      <xs:enumeration value="302040" />
+      <xs:enumeration value="302050" />
+      <xs:enumeration value="302060" />
+      <xs:enumeration value="302070" />
+      <xs:enumeration value="302080" />
+      <xs:enumeration value="302090" />
+      <xs:enumeration value="302100" />
+      <xs:enumeration value="302110" />
+      <xs:enumeration value="302120" />
+      <xs:enumeration value="303000" />
+      <xs:enumeration value="303001" />
+      <xs:enumeration value="303010" />
+      <xs:enumeration value="303020" />
+      <xs:enumeration value="303030" />
+      <xs:enumeration value="303040" />
+      <xs:enumeration value="303050" />
+      <xs:enumeration value="303060" />
+      <xs:enumeration value="303070" />
+      <xs:enumeration value="303080" />
+      <xs:enumeration value="304000" />
+      <xs:enumeration value="304010" />
+      <xs:enumeration value="304020" />
+      <xs:enumeration value="304030" />
+      <xs:enumeration value="304040" />
+      <xs:enumeration value="304050" />
+      <xs:enumeration value="304060" />
+      <xs:enumeration value="304070" />
+      <xs:enumeration value="304080" />
+      <xs:enumeration value="304090" />
+      <xs:enumeration value="304100" />
+      <xs:enumeration value="305000" />
+      <xs:enumeration value="305001" />
+      <xs:enumeration value="305002" />
+      <xs:enumeration value="305010" />
+      <xs:enumeration value="305020" />
+      <xs:enumeration value="305030" />
+      <xs:enumeration value="305040" />
+      <xs:enumeration value="305050" />
+      <xs:enumeration value="305060" />
+      <xs:enumeration value="305070" />
+      <xs:enumeration value="305080" />
+      <xs:enumeration value="305090" />
+      <xs:enumeration value="305100" />
+      <xs:enumeration value="306000" />
+      <xs:enumeration value="306010" />
+      <xs:enumeration value="306020" />
+      <xs:enumeration value="306030" />
+      <xs:enumeration value="306040" />
+      <xs:enumeration value="306050" />
+      <xs:enumeration value="306060" />
+      <xs:enumeration value="306070" />
+      <xs:enumeration value="306080" />
+      <xs:enumeration value="306090" />
+      <xs:enumeration value="306100" />
+      <xs:enumeration value="306110" />
+      <xs:enumeration value="307000" />
+      <xs:enumeration value="307001" />
+      <xs:enumeration value="307010" />
+      <xs:enumeration value="307020" />
+      <xs:enumeration value="307030" />
+      <xs:enumeration value="307040" />
+      <xs:enumeration value="307050" />
+      <xs:enumeration value="307060" />
+      <xs:enumeration value="307070" />
+      <xs:enumeration value="307080" />
+      <xs:enumeration value="307090" />
+      <xs:enumeration value="307100" />
+      <xs:enumeration value="307110" />
+      <xs:enumeration value="307120" />
+      <xs:enumeration value="307130" />
+      <xs:enumeration value="307140" />
+      <xs:enumeration value="308000" />
+      <xs:enumeration value="308001" />
+      <xs:enumeration value="308010" />
+      <xs:enumeration value="308020" />
+      <xs:enumeration value="308030" />
+      <xs:enumeration value="308040" />
+      <xs:enumeration value="308041" />
+      <xs:enumeration value="308050" />
+      <xs:enumeration value="308060" />
+      <xs:enumeration value="308070" />
+      <xs:enumeration value="308080" />
+      <xs:enumeration value="308090" />
+      <xs:enumeration value="308100" />
+      <xs:enumeration value="308110" />
+      <xs:enumeration value="320000" />
+      <xs:enumeration value="320001" />
+      <xs:enumeration value="320002" />
+      <xs:enumeration value="321000" />
+      <xs:enumeration value="322000" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="rodne_cislo">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="castka">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="9999999999999.99"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text3">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text5">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text6">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="6"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text7">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="7"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="text8">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text9">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="9"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text10">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text11">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text20">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text24">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="24"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text32">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="32"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text34">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="34"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text35">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="35"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text40">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="40"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text50">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="text255">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="number3">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="999"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="number4">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="9999"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="number6">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="999999"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="number10">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="9999999999"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

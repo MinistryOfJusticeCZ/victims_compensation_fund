@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn', require: false
+  gem 'capistrano-sidekiq', require: false
 end
 
 gem 'haml'
@@ -79,6 +80,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'egov_utils', '~> 0.1.8' #, path: '../egov_utils'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
+
+gem 'sidekiq', '~> 5.0'
 
 # IRES
 gem 'savon', '~> 2.11'

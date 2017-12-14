@@ -1,5 +1,4 @@
 require 'gyoku'
-require 'securerandom'
 
 module Ires
   class Message
@@ -10,12 +9,13 @@ module Ires
 
     def organization_code
       # '101000' #- msp
-      '201000'
+      @organization_code.to_s
     end
 
     attr_reader :ires_requests
 
-    def initialize(ires_requests)
+    def initialize(organization_code, ires_requests)
+      @organization_code = organization_code
       @ires_requests = ires_requests
     end
 

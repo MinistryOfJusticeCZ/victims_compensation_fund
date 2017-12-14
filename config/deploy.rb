@@ -42,3 +42,5 @@ set :default_env, {
   'http_proxy' => 'http://proxy.justice.cz:3128/',
   'https_proxy' => 'http://proxy.justice.cz:3128/'
 }
+
+set :sidekiq_options_per_process, ["-q default -q mailers"]
