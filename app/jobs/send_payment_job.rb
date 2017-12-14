@@ -5,6 +5,6 @@ class SendPaymentJob < ApplicationJob
 
   def perform(organization_code)
     sender = Ires::Sender.new(organization_code)
-    sender.send!
+    sender.send!(job_id)
   end
 end

@@ -105,7 +105,7 @@ module Ires
     end
 
     def client
-      @client ||= Savon.client(wsdl: self.class.url+'?wsdl', ssl_verify_mode: :none)
+      @client ||= Savon.client(wsdl: self.class.url+'?wsdl', log: :true, log_level: :info, ssl_verify_mode: :none)
     end
 
     def validate_message(message_xml)
@@ -144,17 +144,18 @@ module Ires
       signed_message(message)
     end
 
-    def send!
-      payments = Payment.where( organization_code: @organization_code, uuid: nil )
+    def send!(job_id)
+      payments = Payment.for_organization(@organization_code).where( uuid: nil )
 
-      message = Message.new(@organization_code, payments.collect{|p| Ires::Request.new(p) })
+      message = Message.new(@organization_code, job_id, payments.collect{|p| Ires::Request.new(p) })
 
       signed_message = signed_message(message)
       validate_message(signed_message)
 
       base64_message = Base64.encode64(signed_message).gsub("\n", '')
 
-      client.call(:prijmi_predpis, message: {'prijmiPredpis' => { 'xmlData' => base64_message }})
+      response = client.call(:prijmi_predpis, message: {'tns:xmlData' => base64_message })
+      Rails.logger.info response.body
       payments.each {|p| p.save }
     end
 

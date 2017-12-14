@@ -13,6 +13,14 @@ class Payment < ApplicationRecord
   before_validation :set_currency_value, if: :value_changed?
   after_create :generate_uid, :send_to_ires
 
+  scope :for_organization, ->(organization_code) {
+    s = PaymentSchema.new
+    s.available_attributes << AzaharaSchema::DerivedAttribute.new(Payment, 'derived_court_uid', :concat, 'satisfaction-appeal-claim-court_uid', 'redemption-debt-claim-court_uid', schema: s)
+    s.add_filter('derived_court_uid', '~', organization_code)
+    s.instance_variable_set(:@entity_scope, self)
+    s.filtered_scope
+  }
+
   def file_uid
     case direction
     when 'outgoing'

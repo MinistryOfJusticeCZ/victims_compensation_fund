@@ -1,4 +1,5 @@
 require 'gyoku'
+require 'securerandom'
 
 module Ires
   class Message
@@ -14,15 +15,16 @@ module Ires
 
     attr_reader :ires_requests
 
-    def initialize(organization_code, ires_requests)
+    def initialize(organization_code, job_id, ires_requests)
       @organization_code = organization_code
+      @job_id = job_id
       @ires_requests = ires_requests
     end
 
     def inner_xml_hash
       {
         davka: {
-          cislo_davky: SecureRandom.uuid,
+          cislo_davky: @job_id,
           datum: Time.now.iso8601(3),
           system: system_code,
           organizace: organization_code,
