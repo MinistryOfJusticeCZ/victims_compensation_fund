@@ -77,7 +77,7 @@ end
 
 
 
-EgovUtils::Settings['ires'] ||= SettingsLogic.new({})
+EgovUtils::Settings['ires'] ||= Settingslogic.new({})
 
 module Ires
   class Sender
