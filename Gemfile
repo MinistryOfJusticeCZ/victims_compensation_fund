@@ -58,6 +58,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'webmock'
+  gem 'rspec-sidekiq'
 end
 
 group :development do
