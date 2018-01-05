@@ -38,6 +38,10 @@ class RedemptionsController < ApplicationController
 
   private
 
+    def new_params
+      create_params
+    end
+
     def create_params
       params.require(:redemption).permit(:debt_id, payment_attributes: [:value, :currency_code],
         debt_attributes: [:claim_id, :offender_id, :debt_type, :value, {

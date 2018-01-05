@@ -14,7 +14,7 @@ PATH
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.1.36)
+    egov_utils (0.1.37)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.1)
@@ -281,7 +281,7 @@ GEM
     rspec-support (3.7.0)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
-    sass (3.5.4)
+    sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)

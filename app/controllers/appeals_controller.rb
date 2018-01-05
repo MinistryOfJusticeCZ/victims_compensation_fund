@@ -41,6 +41,10 @@ class AppealsController < ApplicationController
 
   private
 
+    def new_params
+      create_params
+    end
+
     def create_params
       params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id,
         claim_attributes: [:court_uid, :file_uid],

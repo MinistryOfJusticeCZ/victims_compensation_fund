@@ -5,7 +5,7 @@
 
 #debt-form
   = form.fields_for(:debt, redemption.debt || (claim ? claim.debts.build : Debt.new) ) do |fields|
-    = render 'debts/form', form: fields, debt: fields.object
+    = render 'debts/form', form: fields, debt: fields.object, claim: claim
 
 %h5= Payment.model_name.human
 = form.fields_for(:payment, redemption.payment || Payment.new) do |fields|

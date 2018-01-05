@@ -1,14 +1,15 @@
-- if debt.claim.try(:persisted?)
+- claim ||= debt.claim
+- if claim.try(:persisted?)
   = form.hidden_field(:claim_id)
 - else
   %h5= Claim.model_name.human
-  = form.fields_for(:claim, debt.claim || Claim.new) do |fields|
+  = form.fields_for(:claim, claim || Claim.new) do |fields|
     = render 'claims/form', form: fields, claim: fields.object
 
 .offender
   %h5= Offender.model_name.human
-  - if debt.claim.try(:persisted?)
-    = form.select2(:offender_id, {url: offenders_path(f: {claim_id: debt.claim_id})}, prompt: t('label_new_offender_in_claim'), skip_label: true)
+  - if claim.try(:persisted?)
+    = form.select2(:offender_id, {url: offenders_path(f: {claim_id: claim.id})}, prompt: t('label_new_offender_in_claim'), skip_label: true)
   .offender-attributes
     = form.fields_for(:offender, debt.offender || Offender.new) do |fields|
       = render 'offenders/form', form: fields, offender: fields.object
