@@ -4,10 +4,9 @@
     %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "exCollapsingNavbar2", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     = link_to main_app.root_path, class: 'navbar-brand' do
-      /= image_tag('logo.svg', size: '40x40')
+      = image_tag('logo.svg', width: '200', style: 'margin-top: -0.5rem;')
     #exCollapsingNavbar2.collapse.navbar-collapse
       %ul.nav.navbar-nav.mr-auto.main-menu
-        %li.nav-item.main-item= link_to t(:app_abbrev), main_app.root_path, class: 'nav-link'
       %ul.nav.navbar-nav
 
         - if can?(:create, Redemption) || can?(:read, Redemption)
