@@ -54,7 +54,7 @@ test:2.3:
     - bundle exec rails db:migrate RAILS_ENV=test
     - bundle exec rspec
 
-deploy_staging:
+deploy_lab:
   stage: deploy
   tags:
     - lab
@@ -64,6 +64,24 @@ deploy_staging:
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh && chmod 700 ~/.ssh
     - echo "$STAGING_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_rsa
+    - gem install capistrano-rails
+    - gem install capistrano3-unicorn
+    - gem install capistrano-sidekiq
+    - cap lab deploy
+  environment:
+    name: lab
+  only:
+    - master
+
+deploy_staging:
+  stage: deploy
+  script:
+    - 'which ssh-agent || ( apt-get update && apt-get install openssh-client )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo "$PRODUCTION_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
     - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
     - ssh-add ~/.ssh/id_rsa
     - gem install capistrano-rails

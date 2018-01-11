@@ -10,7 +10,7 @@ end
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "servisvtstst01.servis.justice.cz", user: ENV['PRODUCTION_USER_NAME'], roles: %w{app db web}
+server "172.31.225.21", user: ENV['STAGING_USER_NAME'], roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
@@ -36,6 +36,8 @@ server "servisvtstst01.servis.justice.cz", user: ENV['PRODUCTION_USER_NAME'], ro
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
+
+set :rails_env, 'staging'
 
 set :unicorn_config_path, File.join(current_path, "config", "unicorn.rb")
 
