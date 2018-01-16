@@ -17,6 +17,18 @@ Rails.application.routes.draw do
 
   mount EgovUtils::Engine => '/internals'
 
+  apipie
+
+  namespace :api do
+    concern :api_base do
+      resources :ires_batch, only: [:create]
+    end
+
+    namespace :v1 do
+      concerns :api_base
+    end
+  end
+
 
   require 'sidekiq/api'
   get "queue-status" => proc { [200, {"Content-Type" => "text/plain"}, [Sidekiq::Queue.new.size < 100 ? "OK" : "UHOH" ]] }

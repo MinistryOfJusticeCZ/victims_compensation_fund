@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.21'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -83,6 +83,8 @@ gem 'egov_utils', '~> 0.1.8' #, path: '../egov_utils'
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
 
 gem 'sidekiq', '~> 5.0'
+
+gem 'apipie-rails', '~> 0.5'
 
 # IRES
 gem 'savon', '~> 2.11'
