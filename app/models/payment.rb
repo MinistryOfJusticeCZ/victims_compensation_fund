@@ -5,6 +5,8 @@ class Payment < ApplicationRecord
 
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
   enum direction: { incoming: 1, outgoing: 16 }
+  # sent to ires, received by ires, accepted by ires user, processed payment(sent or received payment)
+  enum status: { sent: 1, received: 2, accepted: 3, processed: 10 }
 
   validates :value, numericality: true, if: :in_czk? # and status is not paid, if paid, it should be filled.
   validates :currency_value, numericality: true, unless: :in_czk?

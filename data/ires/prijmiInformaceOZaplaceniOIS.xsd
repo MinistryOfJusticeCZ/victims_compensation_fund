@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:common="http://common.iresois.cca.cz/" xmlns:sig="http://www.w3.org/2000/09/xmldsig#" xmlns:tns="http://ois.cca.cz/" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ois.cca.cz/">
+  <xs:import namespace="http://common.iresois.cca.cz/" schemaLocation="commonTypes.xsd" />
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd" />
+
+  <xs:element name="prijmiInformaceOZaplaceniXml">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="davka" type="tns:davka_uhrad" />
+	      <xs:element ref="sig:Signature"/>
+	    </xs:sequence>
+	  </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="davka_uhrad">
+    <xs:sequence>
+      <xs:element name="cislo_davky" type="common:guid" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="datum" type="xs:dateTime" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="system" type="common:system" fixed="IRES" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element name="organizace" type="common:organizace" minOccurs="1" maxOccurs="1" nillable="false"/>
+      <xs:element ref="common:predpisZpracovani" minOccurs="1" maxOccurs="1000" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

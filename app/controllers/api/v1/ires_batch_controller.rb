@@ -7,7 +7,12 @@ module Api::V1
       require 'ires/status_batch'
       batch = Ires::StatusBatch.new(params[:xml_data])
 
-      render json: { return: "AHOJ SVETE" }
+      batch.payment_infos.each do |pi|
+        payment = Payment.find_by(uuid: pi.payment_uuid)
+        payment.status = 'processed' if pi.paid?
+      end
+
+      render json: { return: batch.encoded_signed_response }
     end
 
   end

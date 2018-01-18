@@ -100,16 +100,19 @@ module Ires
       config.sign_cert_pkey_password
     end
 
-    def initialize(organization_code)
-      @organization_code = organization_code
-    end
-
     def client
       @client ||= Savon.client(wsdl: self.class.url+'?wsdl', log: :true, log_level: :info, ssl_verify_mode: :none)
     end
 
-    def validate_message(message_xml)
+    def validate_prescription(message_xml)
       xsd = Nokogiri::XML::Schema(File.open(Rails.root.join('data', 'ires', 'prijmiPredpisIresOIS.xsd')))
+      xsd.validate(Nokogiri::XML(message_xml)).each do |error|
+        puts error.message
+      end
+    end
+
+    def validate_response(message_xml)
+      xsd = Nokogiri::XML::Schema(File.open(Rails.root.join('data', 'ires', 'prijmiInformaceOZaplaceniResponseOIS.xsd')))
       xsd.validate(Nokogiri::XML(message_xml)).each do |error|
         puts error.message
       end
@@ -123,9 +126,8 @@ module Ires
     end
 
     def signed_message(message)
-      # Rails.logger.debug message.to_xml if Object.const_defined?('Rails') && Rails.logger
 
-      signer = IresSigner.new(message.to_xml)
+      signer = IresSigner.new(message)
       signer.cert = certificate
       signer.private_key = certificate_pkey
 
@@ -141,16 +143,16 @@ module Ires
     end
 
     def signed_xml_message(message)
-      signed_message(message)
+      signed_message(message.to_xml)
     end
 
-    def send!(job_id)
-      payments = Payment.for_organization(@organization_code).where( uuid: nil )
+    def send_prescription!(organization_code, job_id)
+      payments = Payment.for_organization(organization_code).where( uuid: nil )
 
-      message = Message.new(@organization_code, job_id, payments.collect{|p| Ires::Request.new(p) })
+      message = Message.new(organization_code, job_id, payments.collect{|p| Ires::Request.new(p) })
 
-      signed_message = signed_message(message)
-      validate_message(signed_message)
+      signed_message = signed_message(message.to_xml)
+      validate_prescription(signed_message)
 
       base64_message = Base64.encode64(signed_message).gsub("\n", '')
 
