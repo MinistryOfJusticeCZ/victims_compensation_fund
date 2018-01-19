@@ -103,9 +103,9 @@ GEM
       execjs
     bcrypt (3.1.11)
     bindex (0.5.0)
-    bootstrap (4.0.0.beta3)
+    bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
-      popper_js (>= 1.12.3, < 2)
+      popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
     bootstrap_form (2.7.0)
     builder (3.2.3)
@@ -219,7 +219,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.1)
-    puma (3.11.0)
+    puma (3.11.1)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -351,7 +351,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.2.1)
+    webmock (3.3.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
@@ -365,7 +365,7 @@ PLATFORMS
 DEPENDENCIES
   apipie-rails (~> 0.5)
   azahara_schema!
-  bootstrap (~> 4.0.0.beta)
+  bootstrap (~> 4.0.0)
   bootstrap3-datetimepicker-rails!
   bootstrap_form
   byebug

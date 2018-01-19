@@ -94,7 +94,7 @@ gem 'signer', '~> 1.6'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-sass'
 gem 'bootstrap_form'
 gem 'momentjs-rails', '>= 2.9.0'
