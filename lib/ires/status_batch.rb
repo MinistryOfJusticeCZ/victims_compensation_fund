@@ -17,6 +17,10 @@ module Ires
       'http://common.iresois.cca.cz/'
     end
 
+    def sender
+      ::Ires::Sender.new
+    end
+
     def initialize(message)
       decoded_message = Base64.decode64(message)
       @xml = Nokogiri::XML( decoded_message )
@@ -48,8 +52,7 @@ module Ires
       header_tag + Gyoku.xml(response_hash, key_converter: :none)
     end
 
-    def signed_response
-      sender = ::Ires::Sender.new
+    def signed_response(sender=self.sender)
       sender.signed_message(response)
     end
 
