@@ -148,6 +148,7 @@ module Ires
 
     def send_prescription!(organization_code, job_id)
       payments = Payment.for_organization(organization_code).where( uuid: nil )
+      return true unless payments.any?
 
       message = Message.new(organization_code, job_id, payments.collect{|p| Ires::Request.new(p) })
 
@@ -158,7 +159,7 @@ module Ires
 
       response = client.call(:prijmi_predpis, message: {'tns:xmlData' => base64_message })
       Rails.logger.info response.body
-      payments.each {|p| p.save }
+      payments.all? {|p| p.save }
     end
 
 

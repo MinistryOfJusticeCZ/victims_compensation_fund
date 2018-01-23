@@ -17,7 +17,7 @@ module Ires
     end
 
     def payment_type
-      'SOUDNÍ POPLATKY'
+      'VÝNOSY Z TRESTNÍCH SANKCÍ'
     end
 
     def purpose
