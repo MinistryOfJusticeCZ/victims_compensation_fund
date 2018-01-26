@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207165200) do
+ActiveRecord::Schema.define(version: 20180126131416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,13 @@ ActiveRecord::Schema.define(version: 20171207165200) do
     t.index ["organization_key"], name: "index_egov_utils_groups_on_organization_key"
   end
 
+  create_table "egov_utils_groups_users", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.index ["group_id"], name: "index_egov_utils_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_egov_utils_groups_users_on_user_id"
+  end
+
   create_table "egov_utils_people", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -127,6 +134,8 @@ ActiveRecord::Schema.define(version: 20171207165200) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "confirmation_code"
+    t.boolean "must_change_password"
+    t.datetime "password_changed_at"
   end
 
   create_table "offenders", force: :cascade do |t|
@@ -178,6 +187,8 @@ ActiveRecord::Schema.define(version: 20171207165200) do
   add_foreign_key "appeals", "offenders"
   add_foreign_key "debts", "claims"
   add_foreign_key "debts", "offenders"
+  add_foreign_key "egov_utils_groups_users", "egov_utils_groups", column: "group_id"
+  add_foreign_key "egov_utils_groups_users", "egov_utils_users", column: "user_id"
   add_foreign_key "egov_utils_people", "egov_utils_addresses", column: "residence_id"
   add_foreign_key "offenders", "claims"
   add_foreign_key "offenders", "egov_utils_people", column: "person_id"

@@ -5,7 +5,7 @@ module Ires
   class Message
 
     def system_code
-      'FOTRC'
+      'VTS'
     end
 
     def organization_code

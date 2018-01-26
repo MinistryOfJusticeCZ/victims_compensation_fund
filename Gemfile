@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.3'
+gem 'rails', '~> 5.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg', '~> 0.21'
 # Use Puma as the app server
@@ -78,7 +78,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'egov_utils', path: '../egov_utils'
-gem 'egov_utils', '~> 0.1.8' #, path: '../egov_utils'
+gem 'egov_utils', '~> 0.2.0' #, path: '../egov_utils'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
 
