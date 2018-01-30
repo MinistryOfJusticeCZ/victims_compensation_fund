@@ -14,7 +14,7 @@ PATH
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.2.0)
+    egov_utils (0.2.2)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.2)
@@ -209,7 +209,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     nio4r (2.2.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     nori (2.6.0)
     paranoia (2.4.0)
@@ -283,7 +283,7 @@ GEM
     rspec-sidekiq (3.0.3)
       rspec-core (~> 3.0, >= 3.0.0)
       sidekiq (>= 2.4.0)
-    rspec-support (3.7.0)
+    rspec-support (3.7.1)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
     sass (3.5.5)
