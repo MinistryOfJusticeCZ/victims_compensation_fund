@@ -20,7 +20,7 @@ class CourtEmployeeRole < EgovUtils::UserUtils::Role
     ability.can :create, Payment
 
     if (org_keys = user.organization_with_suborganizations_keys).any?
-      ability.can [:read, :edit, :update], Redemption, claim: { court_uid: org_keys }
+      ability.can :read, Redemption, claim: { court_uid: org_keys }
       ability.can :read, Claim, court_uid: org_keys
     else
       ability.can :read, Claim
