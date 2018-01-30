@@ -79,6 +79,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'egov_utils', path: '../egov_utils'
 gem 'egov_utils', '~> 0.2.0' #, path: '../egov_utils'
+gem 'paranoia', '~> 2.4'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
 
