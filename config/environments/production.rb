@@ -67,7 +67,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              '172.31.255.3',
+    address:              'Servisex03.servis.justice.cz',
     port:                 25,
     domain:               'justice.cz',
     # user_name:            '<username>',
