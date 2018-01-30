@@ -51,3 +51,12 @@ class CompensationDepartmentRole < EgovUtils::UserUtils::Role
   end
 
 end
+
+class AccountantRole < EgovUtils::UserUtils::Role
+  add 'accountant'
+
+  def define_abilities(ability, user)
+    ability.can :read, Redemption
+    ability.can :read, Payment
+  end
+end
