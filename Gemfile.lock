@@ -115,7 +115,7 @@ GEM
     diff-lcs (1.3)
     egon_gate (0.1.0)
       savon (~> 2.11.0)
-    egov_utils (0.2.2)
+    egov_utils (0.2.3)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.2)
