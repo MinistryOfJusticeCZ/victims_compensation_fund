@@ -56,6 +56,7 @@ class AccountantRole < EgovUtils::UserUtils::Role
   add 'accountant'
 
   def define_abilities(ability, user)
+    ability.can :read, Claim
     ability.can :read, Redemption
     ability.can :read, Payment
   end

@@ -8,13 +8,13 @@ GIT
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.2.1)
+    azahara_schema (0.2.4)
       rails (~> 5.1)
 
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.2.3)
+    egov_utils (0.2.6)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.2)
@@ -185,7 +185,7 @@ GEM
       railties (>= 3.2.16)
     js_cookie_rails (2.1.4)
       railties (>= 3.1)
-    kgio (2.11.1)
+    kgio (2.11.2)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
