@@ -1,6 +1,6 @@
 module Ires
   module Requests
-    class RequestCreate < Request
+    class RequestChange < Request
 
       def request_type
         'A'
