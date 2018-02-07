@@ -5,7 +5,7 @@
     %title= content_for?(:title) ? yield(:title) : t(:app_name)
     %meta{:name => "description", :content => content_for?(:description) ? yield(:description) : t(:app_description)}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
-    = javascript_include_tag 'modernizr'
+    = javascript_include_tag 'modernizr', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = i18n_js_set_locales_tag
     = csrf_meta_tags
