@@ -92,7 +92,7 @@
   <xs:simpleType name="system">
     <xs:restriction base="xs:string">
       <xs:enumeration value="ISVKS" />
-      <xs:enumeration value="FOTRC" />
+      <xs:enumeration value="VTS" />
       <xs:enumeration value="ISROR" />
       <xs:enumeration value="CEPR" />
       <xs:enumeration value="IRES" />

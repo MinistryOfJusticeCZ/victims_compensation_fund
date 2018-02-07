@@ -9,6 +9,8 @@ class Redemption < ApplicationRecord
 
   before_validation :set_payment_direction, if: :new_record?
 
+  acts_as_paranoid
+
   def file_uid
     claim.file_uid
   end

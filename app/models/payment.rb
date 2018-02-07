@@ -6,15 +6,21 @@ class Payment < ApplicationRecord
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
   enum direction: { incoming: 1, outgoing: 16 }
   # sent to ires, received by ires, accepted by ires user, processed payment(sent or received payment)
-  enum status: { sent: 1, received: 2, accepted: 3, processed: 10 }
+  enum status: { sent: 1, received: 2, accepted: 3, processed: 10, canceled: 20, updated: 30 }
 
   validates :value, numericality: true, if: :in_czk? # and status is not paid, if paid, it should be filled.
   validates :currency_value, numericality: true, unless: :in_czk?
 
+  audited
+  acts_as_paranoid
+
   before_validation :set_default_currency
   before_validation :set_currency_value, if: :value_changed?
-  after_create :generate_uid
-  after_create :send_to_ires, if: :direction?
+  after_create   :generate_uid
+  after_create   :send_to_ires, if: :direction?
+  before_update  :mark_for_ires_update, if: :value_changed?
+  after_update   :send_to_ires, if: :direction?
+  after_destroy  :send_to_ires, if: :direction?
 
   scope :for_organization, ->(organization_code) {
     s = PaymentSchema.new
@@ -63,7 +69,7 @@ class Payment < ApplicationRecord
 
     def first_id_in_year
       Rails.cache.fetch("payment/#{Date.today.year}/first_id") do
-        Payment.where(Payment.arel_table[:created_at].gteq( Date.new(Date.today.year, 1, 1) )).order(:created_at).select(:id).first.try(:id).to_i
+        Payment.unscoped.where(Payment.arel_table[:created_at].gteq( Date.new(Date.today.year, 1, 1) )).order(:created_at).select(:id).first.try(:id).to_i
       end
     end
 
@@ -76,6 +82,10 @@ class Payment < ApplicationRecord
 
     def generate_uid
       self.update_columns(payment_uid: "88#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}")
+    end
+
+    def mark_for_ires_update
+      self.status = 'updated'
     end
 
     def send_to_ires

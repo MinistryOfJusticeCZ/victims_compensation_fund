@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126131416) do
+ActiveRecord::Schema.define(version: 20180207134743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(version: 20180126131416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "uuid"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_payments_on_deleted_at"
   end
 
   create_table "redemptions", force: :cascade do |t|
@@ -165,8 +167,10 @@ ActiveRecord::Schema.define(version: 20180126131416) do
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["author_id"], name: "index_redemptions_on_author_id"
     t.index ["debt_id"], name: "index_redemptions_on_debt_id"
+    t.index ["deleted_at"], name: "index_redemptions_on_deleted_at"
     t.index ["payment_id"], name: "index_redemptions_on_payment_id"
   end
 
@@ -176,8 +180,10 @@ ActiveRecord::Schema.define(version: 20180126131416) do
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["appeal_id"], name: "index_satisfactions_on_appeal_id"
     t.index ["author_id"], name: "index_satisfactions_on_author_id"
+    t.index ["deleted_at"], name: "index_satisfactions_on_deleted_at"
     t.index ["payment_id"], name: "index_satisfactions_on_payment_id"
   end
 

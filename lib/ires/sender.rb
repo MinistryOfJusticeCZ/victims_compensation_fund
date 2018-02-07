@@ -1,5 +1,5 @@
 require 'ires/message'
-require 'ires/request'
+require 'ires/requests/request'
 
 require 'base64'
 require 'signer'
@@ -147,10 +147,13 @@ module Ires
     end
 
     def send_prescription!(organization_code, job_id)
-      payments = Payment.for_organization(organization_code).where( uuid: nil )
+      new_payments = Payment.for_organization(organization_code).where( uuid: nil )
+      updated_payments = Payment.for_organization(organization_code).where(status: 'updated')
+      deleted_payments = Payment.only_deleted.for_organization(organization_code).where.not(status: 'canceled')
+      payments = new_payments.to_a.concat(deleted_payments.to_a).concat(updated_payments.to_a)
       return true unless payments.any?
 
-      message = Message.new(organization_code, job_id, payments.collect{|p| Ires::Request.new(p) })
+      message = Message.new(organization_code, job_id, payments.collect{|p| Ires::Requests::Request.for_payment(p) })
 
       signed_message = signed_message(message.to_xml)
       validate_prescription(signed_message)
@@ -159,7 +162,7 @@ module Ires
 
       response = client.call(:prijmi_predpis, message: {'tns:xmlData' => base64_message })
       Rails.logger.info response.body
-      payments.all? {|p| p.save }
+      message.ires_requests.all? {|req| req.after_sent }
     end
 
 
