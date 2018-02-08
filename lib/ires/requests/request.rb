@@ -6,12 +6,12 @@ module Ires
         if payment.uuid.nil?
           require 'ires/requests/request_create'
           Ires::Requests::RequestCreate.new(payment)
-        elsif payment.audits.last.audited_changes.key?('value')
-          require 'ires/requests/request_change'
-          Ires::Requests::RequestChange.new(payment)
         elsif payment.deleted?
           require 'ires/requests/request_cancel'
           Ires::Requests::RequestCancel.new(payment)
+        elsif payment.audits.last.audited_changes.key?('value')
+          require 'ires/requests/request_change'
+          Ires::Requests::RequestChange.new(payment)
         else
           raise 'Unknown request type for payment.'
         end
