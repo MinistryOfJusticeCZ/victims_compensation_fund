@@ -7,8 +7,7 @@ module Ires
       end
 
       def after_sent
-        payment.status = 'canceled'
-        super
+        payment.update_columns(status: 'canceled')
       end
 
       def request_hash

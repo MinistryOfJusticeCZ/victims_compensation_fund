@@ -1,7 +1,7 @@
 class Payment < ApplicationRecord
 
-  has_one :satisfaction
-  has_one :redemption
+  has_one :satisfaction, ->{with_deleted}
+  has_one :redemption, ->{with_deleted}
 
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
   enum direction: { incoming: 1, outgoing: 16 }
@@ -19,7 +19,7 @@ class Payment < ApplicationRecord
   after_create   :generate_uid
   after_create   :send_to_ires, if: :direction?
   before_update  :mark_for_ires_update, if: :value_changed?
-  after_update   :send_to_ires, if: :direction?
+  after_update   :send_to_ires, if: :value_changed?
   after_destroy  :send_to_ires, if: :direction?
 
   scope :for_organization, ->(organization_code) {
