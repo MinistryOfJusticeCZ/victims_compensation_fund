@@ -1,7 +1,9 @@
 class Payment < ApplicationRecord
 
-  has_one :satisfaction, ->{with_deleted}
-  has_one :redemption, ->{with_deleted}
+  has_one :satisfaction
+  has_one :redemption
+  has_one :satisfaction_may_deleted, ->{with_deleted}, class_name: 'Satisfaction'
+  has_one :redemption_may_deleted, ->{with_deleted}, class_name: 'Redemption'
 
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
   enum direction: { incoming: 1, outgoing: 16 }
@@ -33,27 +35,27 @@ class Payment < ApplicationRecord
   def file_uid
     case direction
     when 'outgoing'
-      satisfaction.file_uid
+      satisfaction_may_deleted.file_uid
     when 'incoming'
-      redemption.file_uid
+      redemption_may_deleted.file_uid
     end
   end
 
   def claim
     case direction
     when 'outgoing'
-      satisfaction.appeal.claim
+      satisfaction_may_deleted.appeal.claim
     when 'incoming'
-      redemption.debt.claim
+      redemption_may_deleted.debt.claim
     end
   end
 
   def person
     case direction
     when 'outgoing'
-      satisfaction.appeal.victim
+      satisfaction_may_deleted.appeal.victim
     when 'incoming'
-      redemption.debt.offender.person
+      redemption_may_deleted.debt.offender.person
     end
   end
 
