@@ -1,6 +1,6 @@
 module Ires
   module Requests
-    class RequestCreate < Request
+    class RequestCancel < Request
 
       def request_type
         'S'
