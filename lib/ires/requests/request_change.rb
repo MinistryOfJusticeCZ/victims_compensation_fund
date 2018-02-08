@@ -8,6 +8,7 @@ module Ires
 
       def after_sent
         payment.status = 'sent'
+        super
       end
 
       def request_hash

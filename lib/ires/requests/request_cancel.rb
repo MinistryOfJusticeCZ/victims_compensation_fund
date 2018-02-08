@@ -8,6 +8,7 @@ module Ires
 
       def after_sent
         payment.status = 'canceled'
+        super
       end
 
       def request_hash
