@@ -18,7 +18,7 @@ module Ires
     end
 
     def sender
-      ::Ires::Sender.new
+      @sender ||= ::Ires::Sender.new
     end
 
     def initialize(message)
@@ -57,7 +57,7 @@ module Ires
     end
 
     def encoded_signed_response
-      Base64.encode64(signed_response)
+      Base64.encode64(signed_response).gsub("\n", '')
     end
 
   end

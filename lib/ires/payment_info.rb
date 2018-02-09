@@ -14,7 +14,7 @@ module Ires
     end
 
     def paid?
-      infos.all?{|info| info['stav_dokladu'] == 'D' && info['castka_zbyva'].to_f < 0.001 }
+      infos.all?{|info| %w{D E}.include?(info['stav_dokladu']) && info['castka_zbyva'].to_f < 0.001 }
     end
 
   end
