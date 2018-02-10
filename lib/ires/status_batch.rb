@@ -42,10 +42,10 @@ module Ires
       '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
     end
     def inner_response_hash
-      { 'common:statusOperace' => {'common:vysledek' => 1} }
+      { 'urn2:statusOperace' => {'urn2:vysledek' => 1} }
     end
     def response_hash
-      {'prijmiInformaceOZaplaceniXmlResponse' => inner_response_hash.merge('@xmlns'=>ois_namespace, '@xmlns:common' => common_namespace)}
+      {'prijmiInformaceOZaplaceniXmlResponse' => inner_response_hash.merge('@xmlns'=>ois_namespace, '@xmlns:urn2' => common_namespace)}
     end
 
     def response
