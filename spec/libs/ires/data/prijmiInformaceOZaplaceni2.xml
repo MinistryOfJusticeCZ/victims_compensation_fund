@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<prijmiInformaceOZaplaceniXml xmlns="http://ois.cca.cz/" xmlns:ns2="http://common.iresois.cca.cz/" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
+  <davka>
+    <cislo_davky>b7e53b98-b21b-4262-9f24-cca48f6aa624</cislo_davky>
+    <datum>2018-02-10T00:33:45.336+01:00</datum>
+    <system>VTS</system>
+    <organizace>101000</organizace>
+    <ns2:predpisZpracovani>
+      <ns2:id_zdroj_predpisu>fd736776-3754-44d2-931f-2e2fde8085bc</ns2:id_zdroj_predpisu>
+      <ns2:stav_predpisu>Z</ns2:stav_predpisu>
+      <ns2:doklady>
+        <ns2:doklad>
+          <ns2:stav_dokladu>E</ns2:stav_dokladu>
+          <ns2:rok>2018</ns2:rok>
+          <ns2:dokl_rada>808</ns2:dokl_rada>
+          <ns2:cislo_dokladu>5</ns2:cislo_dokladu>
+          <ns2:cislo_splatky>1</ns2:cislo_splatky>
+          <ns2:variabilni_symbol>8080000518</ns2:variabilni_symbol>
+          <ns2:castka_predpis>10000</ns2:castka_predpis>
+          <ns2:castka_zbyva>10000</ns2:castka_zbyva>
+          <ns2:mena>CZK</ns2:mena>
+        </ns2:doklad>
+      </ns2:doklady>
+    </ns2:predpisZpracovani>
+    <ns2:predpisZpracovani>
+      <ns2:id_zdroj_predpisu>6af5289b-4791-4bd6-bd1d-6fd95a61c90b</ns2:id_zdroj_predpisu>
+      <ns2:stav_predpisu>Z</ns2:stav_predpisu>
+      <ns2:doklady>
+        <ns2:doklad>
+          <ns2:stav_dokladu>E</ns2:stav_dokladu>
+          <ns2:rok>2018</ns2:rok>
+          <ns2:dokl_rada>808</ns2:dokl_rada>
+          <ns2:cislo_dokladu>2</ns2:cislo_dokladu>
+          <ns2:cislo_splatky>1</ns2:cislo_splatky>
+          <ns2:variabilni_symbol>8800000918</ns2:variabilni_symbol>
+          <ns2:castka_predpis>5000</ns2:castka_predpis>
+          <ns2:castka_zbyva>0</ns2:castka_zbyva>
+          <ns2:mena>CZK</ns2:mena>
+          <ns2:uhrada>
+            <ns2:typ_uhrady>BANKA</ns2:typ_uhrady>
+            <ns2:datum_uhrady>2018-02-01+01:00</ns2:datum_uhrady>
+            <ns2:castka_uhrazeno>5000</ns2:castka_uhrazeno>
+            <ns2:mena>CZK</ns2:mena>
+            <ns2:doklad_uhrady>19/22/2</ns2:doklad_uhrady>
+            <ns2:bank_ucet_cislo_abo>2300847288</ns2:bank_ucet_cislo_abo>
+            <ns2:kod_banka>2010</ns2:kod_banka>
+          </ns2:uhrada>
+        </ns2:doklad>
+      </ns2:doklady>
+    </ns2:predpisZpracovani>
+  </davka>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>7AbMHgQv8rBVQFm90DQRzDrzHO/HXA9GdeCaosYASto=</DigestValue></Reference></SignedInfo><SignatureValue>ZBC5Y260DQbf7nkh2s6ZaTdiwdj7IVMKKGYHoZLyjZ8ocCgBvS2VF8vbJhjygRQFeDxI29zpk+Uv
+BTwQ1iQF9mcE6wbnA/kO9GZayxoXYYoJS8z+/UWrc5Z1b3KlPqcm/atEdxOcJtWbFrRQEGWR8rx2
+ndbM28lg9nikAFrJPWceFnJqCyj6qp3yNNoIzuk3lMAIdSUZDqDHAqU7dAIl977hE/uvq0x9k7tX
+vh1LeTm2iGoQIbQxQM+0uqmaQpWvYYLZQsvT0FWsEFiNs1ogPGSgCZzvdstsKF+2mVf9ol3gVTzB
+QKV7pOUsYBC6uZwXde4D1+Qqn5I5+tmoZi1DkA==</SignatureValue><KeyInfo><X509Data><X509SubjectName>CN=mspphaepo01.msp-pha.justice.cz,OU=odchozí zprávy IRES-OIS,O=Ministerstvo spravedlnosti ČR</X509SubjectName><X509Certificate>MIIHjDCCBXSgAwIBAgIKFCH3BQAEAABh/DANBgkqhkiG9w0BAQsFADBRMQswCQYDVQQGEwJDWjEn
+MCUGA1UECgweTWluaXN0ZXJzdHZvIHNwcmF2ZWRsbm9zdGkgxIxSMRkwFwYDVQQDExBNU3AgU2Vy
+dmlzIENBIDAyMB4XDTE3MTExMDA5NDYwOVoXDTE5MTExMDA5NDYwOVowdjEnMCUGA1UECgweTWlu
+aXN0ZXJzdHZvIHNwcmF2ZWRsbm9zdGkgxIxSMSIwIAYDVQQLDBlvZGNob3rDrSB6cHLDoXZ5IElS
+RVMtT0lTMScwJQYDVQQDEx5tc3BwaGFlcG8wMS5tc3AtcGhhLmp1c3RpY2UuY3owggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDc6ZvB6FFCyt4Q9aXRn+HeWUrut8fz0QkK8iswK9FspQHx
+R4+aawx5blD/XKOLddIBDpOBWECsc0MMdQpvxhiyHu06d0VRRvWc3BCzxCFc7RjAz7BQKyStJQgC
+MPYAs5g9WWAlyAcf3JvqOt+FThbYY3ON+9VuCz3F91gn+qB3d86cT5Rd3OTcdpB3FHNE94ECllFC
+2ExRkEld36a6m5ZHGI171rWJBu25lFU5xh7fnZH0WMLLemaJXBOTJnZdFLbipAbLDS/d5c6iQBH8
+BloueT+IflV7X93JnhlME1qj+/5H8eFLfm/zcPLkqjZiluLwtWgE+EfqxDinaUUtzWpfAgMBAAGj
+ggM/MIIDOzALBgNVHQ8EBAMCBaAwPgYJKwYBBAGCNxUHBDEwLwYnKwYBBAGCNxUIhoG1RYO/6wOE
+sZc9gsztKoLd3S6BOoWXsnaDhIAoAgFkAgEFMB0GA1UdDgQWBBSnSO5lFJA/GcmV0T1N2brlVhab
+2DAfBgNVHSMEGDAWgBQbuzFpPTaNg8DC1niHyE7/a4V5ljCCAScGA1UdHwSCAR4wggEaMIIBFqCC
+ARKgggEOhoHMbGRhcDovLy9DTj1NU3AlMjBTZXJ2aXMlMjBDQSUyMDAyKDQpLENOPXNlcnZpc2Nh
+MDIsQ049Q0RQLENOPVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNvbmZp
+Z3VyYXRpb24sREM9YWRyb290LERDPWp1c3RpY2UsREM9Y3o/Y2VydGlmaWNhdGVSZXZvY2F0aW9u
+TGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50hj1odHRwOi8vcGtpLnNl
+cnZpcy5qdXN0aWNlLmN6L2NhL01TcCUyMFNlcnZpcyUyMENBJTIwMDIoNCkuY3JsMIIBTQYIKwYB
+BQUHAQEEggE/MIIBOzCBvgYIKwYBBQUHMAKGgbFsZGFwOi8vL0NOPU1TcCUyMFNlcnZpcyUyMENB
+JTIwMDIsQ049QUlBLENOPVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNv
+bmZpZ3VyYXRpb24sREM9YWRyb290LERDPWp1c3RpY2UsREM9Y3o/Y0FDZXJ0aWZpY2F0ZT9iYXNl
+P29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkwSQYIKwYBBQUHMAKGPWh0dHA6Ly9w
+a2kuc2VydmlzLmp1c3RpY2UuY3ovY2EvTVNwJTIwU2VydmlzJTIwQ0ElMjAwMig0KS5jcnQwLQYI
+KwYBBQUHMAGGIWh0dHA6Ly9wa2kuc2VydmlzLmp1c3RpY2UuY3ovb2NzcDATBgNVHSUEDDAKBggr
+BgEFBQcDATAbBgkrBgEEAYI3FQoEDjAMMAoGCCsGAQUFBwMBMA0GCSqGSIb3DQEBCwUAA4ICAQAq
+LtSHT0p6xDubacuxPfIIfxHsdZWZ31VeptuLwlSaoLaEV7prCa/eT1hGkWIFAIlfrTYawKp8630e
+Q8G7pfpWG2/qt2SCinD68Z5h6mEFMXpebFrrRmiEhntTs6ODOM1Nio/D+pqFL0Tslt3yz7LUGHHw
+D6PCnJ56RcTCSXMTfOywDWfm/IJKgo21uIqS4TSmSFvQ/KWkx7gzab3+GVbpjpzC8FBE3JnZFScN
+OXc2nKhDlWQ32ZgZ1bPpphvF4BkQyOeAv5LN/Sb8ODDnXP52r7muamwuWTobglXSqEBS3uCEXeIS
+oyuPFrOKmJmWyhDFS6KOZWGAB3lla6P3o+mCZtSo3s4C38mDJ0oZfralYCN5hLldH/Y9xqhpXICR
+3jK7mP6Sg1qm/UmPlqUUflaWBXqE30KhoDVKA7GCvUHnX+ZjcrxcS9THCndJhzJlsYxKxtrP9xzN
+CaZZT3Q3HAZvpNGzHPMnqe+9UTegRuTmE7HJGno9ne6fDD1+CCk5P5WbOfthtnCi2OiXlJxWjbPc
+tmf8O995jelREwb7Io34CBuycfZTfqzK+y5K1RP+XtbYMzqpStlwwuwb/IUlgzrIdxtc5K/0jA/d
+h4nXc0o4v2hLpcbz5SlkWUM9rzyFFXK93ltFQ5nJPgx35y45Jw7vgRnQ/hvo+ik0TtShQAaeng==</X509Certificate></X509Data></KeyInfo></Signature></prijmiInformaceOZaplaceniXml>
