@@ -12,6 +12,7 @@ RSpec.describe Api::V1::IresBatchController, type: :controller do
       expect(sender).to receive(:signed_message) do |message|
         message
       end
+      expect(sender).to receive(:validate_response).and_return(true)
     end
 
     context 'with test file' do

@@ -53,7 +53,9 @@ module Ires
     end
 
     def signed_response(sender=self.sender)
-      sender.signed_xml_message(response)
+      res = sender.signed_message(response)
+      sender.validate_response(res)
+      res
     end
 
     def encoded_signed_response
