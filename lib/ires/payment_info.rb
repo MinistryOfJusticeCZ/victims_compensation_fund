@@ -9,6 +9,15 @@ module Ires
       @payment_info['id_zdroj_predpisu']
     end
 
+    def prescription_status
+      case @payment_info['stav_predpisu']
+      when 'Z'
+        paid? ? 'processed' : 'accepted'
+      when 'O'
+        'canceled'
+      end
+    end
+
     def infos
       @infos ||= Array.wrap(@payment_info['doklady']['doklad'])
     end

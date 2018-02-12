@@ -9,7 +9,7 @@ module Api::V1
 
       batch.payment_infos.each do |pi|
         payment = Payment.find_by(uuid: pi.payment_uuid)
-        payment.update_column(:status, 'processed') if pi.paid?
+        payment.update_column(:status, pi.prescription_status) if payment
       end
 
       render json: { return: batch.encoded_signed_response }
