@@ -80,6 +80,14 @@ cs:
         czk: Kč
         eur: €
         usd: $
+      status: Stav platby
+      statuses:
+        sent: Zaslána ke zpracování
+        received: Přijata ke zpracování
+        accepted: Přijata
+        processed: Zaplacena
+        canceled: Zrušena
+        updated: Příkaz čeká na přijetí aktualizace
       offender_id: Pachatel
     redemption:
       debt_id: Trest
