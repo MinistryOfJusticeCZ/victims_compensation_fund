@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   resources :appeals do
     resources :satisfactions
   end
+  resources :debts #, only: [:index, :new, :create]
   resources :satisfactions, only: [:index, :new, :create]
   resources :claims do
     resources :redemptions, only: [:new, :create]
     resources :appeals, only: [:new, :create]
+    resources :debts, only: [:new, :create]
   end
 
   resources :victims, only: :index

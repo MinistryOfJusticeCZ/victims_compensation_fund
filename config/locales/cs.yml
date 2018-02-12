@@ -60,6 +60,7 @@ cs:
       value: Celková výše trestu
       offender_id: Pachatel
       debt_type: Druh trestu
+      sum:redemptions-payment-value: Součet vybraných částek
       debt_types:
         financial: Peněžitý
         forfeiture_possession: Propadnutí majetku
