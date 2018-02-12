@@ -84,6 +84,7 @@ cs:
     redemption:
       debt_id: Trest
       debt-claim_id: Identifikátor případu
+      created_at: Vytvořeno
     satisfaction:
       created_at: Vytvořeno
 

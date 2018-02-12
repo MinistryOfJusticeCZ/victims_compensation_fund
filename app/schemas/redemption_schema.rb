@@ -9,7 +9,7 @@ class RedemptionSchema < AzaharaSchema::ModelSchema
   end
 
   def enabled_filters
-    ['debt-claim_id', 'debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
+    ['debt_id', 'debt-claim_id', 'debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
   end
 
   def always_visible_filters

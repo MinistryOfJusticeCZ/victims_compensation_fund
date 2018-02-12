@@ -1,0 +1,17 @@
+.attribute
+  .label= Claim.model_name.human
+  .value= link_to(@debt.claim.file_uid, @debt.claim)
+.attribute
+  .label= Offender.model_name.human
+  .value= @debt.offender.person.fullname
+.attribute
+  .label= Offender.human_attribute_name('birth_date')
+  .value= @debt.offender.person.birth_date
+.attribute
+  .label= Debt.human_attribute_name('value')
+  .value= show_money(@debt.value)
+
+#redemptions_grid
+
+:javascript
+  #{raw render 'common/grid', grid_id: 'redemptions_grid', schema: @redemption_schema, create_attributes: {claim_id: @debt.claim.id, debt_id: @debt.id}}
