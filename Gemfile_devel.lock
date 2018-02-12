@@ -8,7 +8,7 @@ GIT
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.2.5)
+    azahara_schema (0.2.6)
       rails (~> 5.1)
 
 PATH
