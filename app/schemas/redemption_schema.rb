@@ -9,11 +9,15 @@ class RedemptionSchema < AzaharaSchema::ModelSchema
   end
 
   def enabled_filters
-    ['debt_id', 'debt-claim_id', 'debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
+    ['debt_id', 'debt-claim_id', 'payment-payment_uid', 'debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
   end
 
   def always_visible_filters
-    ['debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
+    ['debt-claim-file_uid', 'debt-offender-person-fullname', 'payment-payment_uid']
+  end
+
+  def default_sort
+    {'updated_at' => 'desc'}
   end
 
 end

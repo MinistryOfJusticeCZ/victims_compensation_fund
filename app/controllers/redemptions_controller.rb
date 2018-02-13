@@ -15,8 +15,8 @@ class RedemptionsController < ApplicationController
     @redemption.author = current_user
     respond_to do |format|
       if @redemption.save
-        format.html { redirect_to @redemption.debt.claim, notice: t('common_labels.notice_saved', model: @redemption.model_name.human) }
-        format.json { render json: @redemption, status: :created }
+        format.html { redirect_to @redemption.debt, notice: t('common_labels.notice_saved', model: @redemption.model_name.human) }
+        format.json { render json: @redemption.reload.as_json(include: :payment), status: :created }
       else
         format.html { render 'new', layout: !request.xhr? }
         format.json { render json: { errors: @redemption.errors.full_messages }, status: :unprocessable_entity }
@@ -27,7 +27,7 @@ class RedemptionsController < ApplicationController
   def update
     respond_to do |format|
       if @redemption.update(update_params)
-        format.html { redirect_to @redemption.debt.claim, notice: t('common_labels.notice_saved', model: @redemption.model_name.human) }
+        format.html { redirect_to @redemption.debt, notice: t('common_labels.notice_saved', model: @redemption.model_name.human) }
         format.json { render json: @redemption }
       else
         format.html { render 'edit', layout: !request.xhr? }

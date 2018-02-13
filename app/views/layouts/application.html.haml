@@ -15,7 +15,8 @@
     %main#container{:role => "main"}
       #content
         .container
-          = render 'layouts/egov_utils/messages'
+          .flash-messages
+            = render 'layouts/egov_utils/messages'
           = yield
     %footer
       .container

@@ -25,3 +25,11 @@
           $('#debt-form :input').prop('disabled', $(this).val() != '');
       });
     });
+
+:javascript
+  $(function(){
+    $('body').on('egov:submitted', '#modal', function(evt, xhr){
+      var body = $('<div class="payment-uid attribute"><span class="label">#{Payment.human_attribute_name('payment_uid')}</span><span class="value">'+ xhr.payment.payment_uid.toString() +'</span></div>');
+      eGovUtilities.showModal(body, {modalId: 'vsModal', title: '#{Payment.human_attribute_name('payment_uid')}'})
+    });
+  });
