@@ -22,7 +22,7 @@ RSpec.describe RedemptionsController, type: :controller do
 
     it 'saves the record and sets all parameters' do
       expect { subject }.to change{ Redemption.count }.from(0).to(1)
-      expect(subject).to redirect_to("/claims/#{Redemption.first.claim.id}")
+      expect(subject).to redirect_to("/debts/#{Redemption.first.debt.id}")
     end
     it 'sets payment direction to incoming' do
       subject
