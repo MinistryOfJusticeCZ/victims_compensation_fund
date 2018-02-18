@@ -1,5 +1,5 @@
 .replacable_form
-  = bootstrap_form_for(@redemption) do |f|
+  = bootstrap_form_for( @claim ? [@claim, @redemption] : @redemption) do |f|
     = render 'redemptions/form', form: f, redemption: @redemption, claim: @claim
     .form-actions
       = f.submit

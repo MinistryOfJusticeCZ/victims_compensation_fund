@@ -46,7 +46,7 @@ class RedemptionsController < ApplicationController
       params.require(:redemption).permit(:debt_id, payment_attributes: [:value, :currency_code],
         debt_attributes: [:claim_id, :offender_id, :debt_type, :value, {
           claim_attributes: [:court_uid, :file_uid],
-          offender_attributes: [:person_id, { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}] }]
+          offender_attributes: [:person_id, { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region, :country]}] }]
         }])
     end
 
@@ -54,7 +54,7 @@ class RedemptionsController < ApplicationController
       params.require(:redemption).permit(:debt_id, # payment_attributes: [:value],
         debt_attributes: [:claim_id, :offender_id, :debt_type, :value, {
           claim_attributes: [:court_uid, :file_uid],
-          offender_attributes: [:person_id, { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}] }]
+          offender_attributes: [:person_id, { person_attributes: [:firstname, :lastname, :birth_date, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region, :country]}] }]
         }])
     end
 

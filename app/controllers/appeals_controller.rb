@@ -48,11 +48,11 @@ class AppealsController < ApplicationController
     def create_params
       params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id,
         claim_attributes: [:court_uid, :file_uid],
-        victim_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}],
+        victim_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region, :country]}],
         offender_attributes: [
           :person_id,
           {person_attributes: [:firstname, :lastname, :birth_date, :birth_place,
-            {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}
+            {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region, :country]}
           ]}
         ]
       )
@@ -61,11 +61,11 @@ class AppealsController < ApplicationController
     def update_params
       params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id,
         claim_attributes: [:court_uid, :file_uid],
-        victim_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}],
+        victim_attributes: [:firstname, :lastname, :birth_date, :birth_place, {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region, :country]}],
         offender_attributes: [
           :person_id,
           {person_attributes: [:firstname, :lastname, :birth_date, :birth_place,
-            {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region]}
+            {residence_attributes: [:street, :house_number, :orientation_number, :city, :postcode, :district, :region, :country]}
           ]}
         ]
       )

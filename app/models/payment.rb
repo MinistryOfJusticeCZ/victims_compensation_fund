@@ -32,6 +32,10 @@ class Payment < ApplicationRecord
     s.filtered_scope
   }
 
+  def value
+    super || currency_value
+  end
+
   def file_uid
     case direction
     when 'outgoing'
