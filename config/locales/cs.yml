@@ -9,6 +9,7 @@ cs:
   label_new_offender_in_claim: Nový pachatel v případu
   label_user_guide: Uživatelská příručka
   label_confirm: Potvrdit
+  label_changelog: Poslední změny
   notice_claim_merge: Případ tohoto prvostupňového soudu s touto spisovou značkou již existuje. Chcete záznam přiřadit tomuto případu?
 
   models: &my_models
