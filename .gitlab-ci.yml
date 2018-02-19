@@ -22,6 +22,7 @@ test:2.3:
     - export LC_ALL=en_US.UTF-8
     - export RUBYOPT="-KU -E utf-8:utf-8"
     - export BUNDLE_GEMFILE="Gemfile_devel"
+    - git config --global http.sslVerify false
   cache:
     untracked: true
     key: "$CI_BUILD_REF_NAME"
