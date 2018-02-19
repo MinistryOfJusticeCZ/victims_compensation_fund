@@ -43,7 +43,6 @@ test:2.3:
     - rm -fr $REPO_DIR
     - git clone $REPO_URL $REPO_DIR
     - "sed -i \"s|gem 'azahara_schema', path: '.*'|gem 'azahara_schema', path: '$REPO_DIR'|g\" Gemfile_devel"
-    - git config --global http.proxy 194.213.41.2:8080
     - REPO_URL="$BASE_URL/libraries/egov_utils-rails.git"
     - REPO_DIR=libraries/egov_utils
     - rm -fr $REPO_DIR
