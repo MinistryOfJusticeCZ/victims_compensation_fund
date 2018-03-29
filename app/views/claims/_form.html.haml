@@ -6,6 +6,7 @@
     .col-12.merge_container{hidden: true}
       .message= t('notice_claim_merge')
       .btn-container
+    .col-12= form.date_field(:binding_effect)
 
 :javascript
   $(function(){
