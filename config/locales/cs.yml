@@ -52,6 +52,7 @@ cs:
     claim:
       court_uid: Prvostupňový soud
       file_uid: Spisová značka případu
+      binding_effect: Nabytí právní moci
       status: Stav
       statuses:
         empty: Prázdný případ
