@@ -37,11 +37,19 @@ module Ires
       end
 
       def person_attributes
-        {
-          osoba_nazev: payment.person.lastname,
-          osoba_jmeno: payment.person.firstname,
-          osoba_datum_narozeni: payment.person.birth_date.iso8601
-        }
+        case payment.person.person_type
+        when 'natural'
+          {
+            osoba_nazev: payment.person.natural_person.lastname,
+            osoba_jmeno: payment.person.natural_person.firstname,
+            osoba_datum_narozeni: payment.person.natural_person.birth_date.iso8601
+          }
+        when 'legal'
+          {
+            osoba_nazev: payment.person.legal_person.name,
+            osoba_ic: payment.person.legal_person.ico
+          }
+        end
       end
 
       def ordering
