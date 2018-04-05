@@ -1,4 +1,4 @@
-- court_uid_attribute = CourtUidAttribute.new(Claim, 'court_uid', 'love')
+- court_uid_attribute = CourtUidAttribute.new(Claim, 'court_uid')
 .court-form
   .row
     .col-12.col-md-6= form.select2(:court_uid, court_uid_attribute.available_values, {}, {class: 'court-uid', id: "claim_court_uid-#{form.object.id}"})

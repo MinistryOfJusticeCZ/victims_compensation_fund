@@ -1,5 +1,9 @@
 class CourtUidAttribute < AzaharaSchema::Attribute
 
+  def initialize(model, name)
+    super(model, name, 'love')
+  end
+
   def user_allowed_organization_keys
     EgovUtils::User.current.organization_with_suborganizations_keys unless EgovUtils::User.current.organization_key == '101000'
   end

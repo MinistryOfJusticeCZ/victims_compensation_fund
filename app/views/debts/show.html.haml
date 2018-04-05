@@ -4,9 +4,10 @@
 .attribute
   .label= Offender.model_name.human
   .value= @debt.offender.person.fullname
-.attribute
-  .label= Offender.human_attribute_name('birth_date')
-  .value= @debt.offender.person.birth_date
+- if @debt.offender.person.natural?
+  .attribute
+    .label= EgovUtils::NaturalPerson.human_attribute_name('birth_date')
+    .value= @debt.offender.person.natural_person.birth_date
 .attribute
   .label= Debt.human_attribute_name('value')
   .value= show_money(@debt.value)

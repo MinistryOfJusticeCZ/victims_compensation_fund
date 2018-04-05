@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207134743) do
+ActiveRecord::Schema.define(version: 20180404232133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +109,15 @@ ActiveRecord::Schema.define(version: 20180207134743) do
     t.index ["user_id"], name: "index_egov_utils_groups_users_on_user_id"
   end
 
-  create_table "egov_utils_people", force: :cascade do |t|
+  create_table "egov_utils_legal_people", force: :cascade do |t|
+    t.bigint "person_id"
+    t.string "name"
+    t.string "ico"
+    t.integer "legal_form"
+    t.index ["person_id"], name: "index_egov_utils_legal_people_on_person_id"
+  end
+
+  create_table "egov_utils_natural_people", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.date "birth_date"
@@ -117,6 +125,13 @@ ActiveRecord::Schema.define(version: 20180207134743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "birth_place"
+    t.bigint "person_id"
+    t.index ["person_id"], name: "index_egov_utils_natural_people_on_person_id"
+  end
+
+  create_table "egov_utils_people", force: :cascade do |t|
+    t.integer "person_type"
+    t.string "joid"
     t.bigint "residence_id"
     t.index ["residence_id"], name: "index_egov_utils_people_on_residence_id"
   end
@@ -188,13 +203,15 @@ ActiveRecord::Schema.define(version: 20180207134743) do
   end
 
   add_foreign_key "appeals", "claims"
-  add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
+  add_foreign_key "appeals", "egov_utils_natural_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
   add_foreign_key "appeals", "offenders"
   add_foreign_key "debts", "claims"
   add_foreign_key "debts", "offenders"
   add_foreign_key "egov_utils_groups_users", "egov_utils_groups", column: "group_id"
   add_foreign_key "egov_utils_groups_users", "egov_utils_users", column: "user_id"
+  add_foreign_key "egov_utils_legal_people", "egov_utils_people", column: "person_id"
+  add_foreign_key "egov_utils_natural_people", "egov_utils_people", column: "person_id"
   add_foreign_key "egov_utils_people", "egov_utils_addresses", column: "residence_id"
   add_foreign_key "offenders", "claims"
   add_foreign_key "offenders", "egov_utils_people", column: "person_id"
