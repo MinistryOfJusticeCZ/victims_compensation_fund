@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404232133) do
+ActiveRecord::Schema.define(version: 20180405125228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 20180404232133) do
   end
 
   add_foreign_key "appeals", "claims"
-  add_foreign_key "appeals", "egov_utils_natural_people", column: "victim_id"
+  add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
   add_foreign_key "appeals", "offenders"
   add_foreign_key "debts", "claims"
