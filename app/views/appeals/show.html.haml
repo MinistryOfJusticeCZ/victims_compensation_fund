@@ -4,9 +4,14 @@
 .attribute
   .label= Victim.model_name.human
   .value= @appeal.victim.fullname
-.attribute
-  .label= Victim.human_attribute_name('birth_date')
-  .value= @appeal.victim.birth_date
+- if @appeal.victim.natural?
+  .attribute
+    .label= EgovUtils::NaturalPerson.human_attribute_name('birth_date')
+    .value= @appeal.victim.natural_person.birth_date
+- elsif @appeal.victim.legal?
+  .attribute
+    .label= EgovUtils::LegalPerson.human_attribute_name('ico')
+    .value= @appeal.victim.legal_person.ico
 .attribute
   .label= Appeal.human_attribute_name('amount')
   .value= show_money(@appeal.amount)
