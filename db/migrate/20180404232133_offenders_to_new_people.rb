@@ -1,6 +1,5 @@
 class OffendersToNewPeople < ActiveRecord::Migration[5.1]
   def up
-    binding.pry
     remove_foreign_key :offenders, column: :person_id
     rows = ActiveRecord::Base.connection.select_rows(<<-SQL)
       SELECT offenders.id, np.person_id
