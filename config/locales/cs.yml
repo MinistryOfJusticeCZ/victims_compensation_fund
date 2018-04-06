@@ -96,6 +96,7 @@ cs:
       debt_id: Trest
       debt-claim_id: Identifikátor případu
       created_at: Vytvořeno
+      author-fullname: Vybral (jméno)
     satisfaction:
       created_at: Vytvořeno
 

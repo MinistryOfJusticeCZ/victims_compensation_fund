@@ -8,13 +8,13 @@ GIT
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.3.1)
+    azahara_schema (0.3.2)
       rails (~> 5.1)
 
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.3.0)
+    egov_utils (0.3.1)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.3)
