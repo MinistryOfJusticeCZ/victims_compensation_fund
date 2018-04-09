@@ -4,12 +4,16 @@ class CourtUidAttribute < AzaharaSchema::Attribute
     super(model, name, 'love')
   end
 
-  def user_allowed_organization_keys
-    EgovUtils::User.current.organization_with_suborganizations_keys unless EgovUtils::User.current.organization_key == '101000'
+  def user_allowed_organization_keys(user=EgovUtils::User.current)
+    user.organization_with_suborganizations_keys unless user.organization_key == '101000'
+  end
+
+  def user_allowed_organizations(user=EgovUtils::User.current)
+    EgovUtils::Organization.courts(user_allowed_organization_keys(user))
   end
 
   def available_values
-    @available_values ||= EgovUtils::Organization.courts(user_allowed_organization_keys).collect{|o| [o.name, o.key] }
+    @available_values ||= user_allowed_organizations.collect{|o| [o.name, o.key] }
   end
 
 end

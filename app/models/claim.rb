@@ -12,8 +12,7 @@ class Claim < ApplicationRecord
   serialize :file_uid, EgovUtils::Fileuid::Coder.new(:file_uid, 'court')
 
   def court_uids
-    user_org_keys = EgovUtils::User.current.organization_with_suborganizations_keys
-    user_org_keys.present? ? user_org_keys : EgovUtils::Organization.courts.collect{|c| c.key}
+    CourtUidAttribute.new(self.class, 'court_uid').user_allowed_organizations.collect{|o| o.key}
   end
 
 
