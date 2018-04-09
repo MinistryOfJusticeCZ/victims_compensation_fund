@@ -4,14 +4,7 @@ class SatisfactionsController < ApplicationController
   load_and_authorize_resource :satisfaction, :through => :appeal, :shallow => true
 
   def index
-    @schema = SatisfactionSchema.new(outputs: ['grid'])
-    @schema.from_params(params)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @schema
-      }
-    end
+    azahara_schema_index
   end
 
   def new
