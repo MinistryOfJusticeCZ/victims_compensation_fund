@@ -11,6 +11,8 @@ class Claim < ApplicationRecord
 
   serialize :file_uid, EgovUtils::Fileuid::Coder.new(:file_uid, 'court')
 
+  audited
+
   def court_uids
     CourtUidAttribute.new(self.class, 'court_uid').user_allowed_organizations.collect{|o| o.key}
   end
