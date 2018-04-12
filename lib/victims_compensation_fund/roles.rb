@@ -23,7 +23,6 @@ class CourtEmployeeRole < EgovUtils::UserUtils::Role
       ability.can :read, Redemption, claim: { court_uid: org_keys }
       ability.can :read, Claim, court_uid: org_keys
     else
-      #TODO only Redemptions and Claims of my group
       ability.can :read, Redemption
       ability.can :read, Claim
     end
@@ -34,6 +33,7 @@ class CourtEmployeeRole < EgovUtils::UserUtils::Role
     ability.can :create, Offender
     ability.can :read, Debt
     ability.can :create, Debt
+    ability.can :read, EgovUtils::Person
   end
 
 end
@@ -49,6 +49,7 @@ class CompensationDepartmentRole < EgovUtils::UserUtils::Role
     ability.can :manage, Offender
     ability.can :manage, Satisfaction
     ability.can :manage, Victim
+    ability.can :manage, EgovUtils::Person
     # ability.can :manage, Debt
   end
 
