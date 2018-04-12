@@ -6,20 +6,5 @@
 
 :javascript
   $(function(){
-    function toggle_new_form($container, attr_names, toggle_state) {
-      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes').toggle(toggle_state)
-      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes :input').prop('disabled', !toggle_state)
-    }
-
-    var $person_select = $('#offender_person_id');
-
-    toggle_new_form($person_select, 'person', !$person_select.val() || $person_select.val() == '');
-
-
-    $person_select.on('select2:select', function(evt){
-      toggle_new_form($(this), 'person', false)
-    });
-    $person_select.on('select2:unselect', function(evt){
-      toggle_new_form($(this), 'person', true)
-    });
+    eGovUtilities.toggableForm($('#offender_person_id'), 'person');
   });

@@ -26,19 +26,7 @@
       $('#debt_value').parent().toggle( v == 'financial' || v == 'forfeiture_substitute' || v == 'confiscation_substitute' );
     });
 
-    function toggle_new_form($container, attr_names, toggle_state) {
-      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes').toggle(toggle_state)
-      $container.closest('.'+attr_names).find('.'+attr_names+'-attributes :input').prop('disabled', !toggle_state)
-    }
-
     var $offender_select = $('#redemption_debt_attributes_offender_id');
+    eGovUtilities.toggableForm($offender_select, 'offender');
 
-    toggle_new_form($offender_select, 'offender', !$offender_select.val() || $offender_select.val() == '')
-
-    $offender_select.on('select2:select', function(evt){
-      toggle_new_form($(this), 'offender', false)
-    });
-    $offender_select.on('select2:unselect', function(evt){
-      toggle_new_form($(this), 'offender', true)
-    });
   });
