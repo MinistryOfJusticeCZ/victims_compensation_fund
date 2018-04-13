@@ -2,7 +2,7 @@ class Debt < ApplicationRecord
   belongs_to :claim
   belongs_to :offender
 
-  has_many :redemptions
+  has_many :redemptions, dependent: :destroy
 
   accepts_nested_attributes_for :claim
   accepts_nested_attributes_for :offender

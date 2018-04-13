@@ -4,7 +4,7 @@ class Appeal < ApplicationRecord
   belongs_to :victim, class_name: 'Victim'
   belongs_to :offender
   belongs_to :assigned_to, class_name: 'EgovUtils::User', optional: true
-  has_many :satisfactions
+  has_many :satisfactions, dependent: :destroy
 
   accepts_nested_attributes_for :claim
   accepts_nested_attributes_for :victim, :offender
