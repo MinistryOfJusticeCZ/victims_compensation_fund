@@ -1,5 +1,5 @@
 class Redemption < ApplicationRecord
-  belongs_to :payment
+  belongs_to :payment, dependent: :destroy
   belongs_to :debt
   has_one :claim, through: :debt
   belongs_to :author, class_name: 'EgovUtils::User'

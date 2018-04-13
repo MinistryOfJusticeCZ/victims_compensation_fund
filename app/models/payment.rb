@@ -1,7 +1,7 @@
 class Payment < ApplicationRecord
 
-  has_one :satisfaction, dependent: :destroy
-  has_one :redemption, dependent: :destroy
+  has_one :satisfaction
+  has_one :redemption
   has_one :satisfaction_may_deleted, ->{with_deleted}, class_name: 'Satisfaction'
   has_one :redemption_may_deleted, ->{with_deleted}, class_name: 'Redemption'
 
