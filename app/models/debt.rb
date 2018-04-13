@@ -17,6 +17,7 @@ class Debt < ApplicationRecord
     nonfinancial_debt.validates :value, numericality: true, allow_nil: true
   end
 
+  acts_as_paranoid
   audited
 
   before_validation :set_offenders_claim, if: :new_record?

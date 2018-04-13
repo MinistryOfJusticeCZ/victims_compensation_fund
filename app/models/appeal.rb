@@ -13,6 +13,7 @@ class Appeal < ApplicationRecord
 
   validates :amount, numericality: true, allow_nil: true
 
+  acts_as_paranoid
   audited
 
   before_validation :set_offenders_claim

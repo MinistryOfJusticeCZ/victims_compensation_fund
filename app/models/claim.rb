@@ -1,6 +1,5 @@
 class Claim < ApplicationRecord
 
-
   has_many :appeals
   has_many :debts
 
@@ -11,6 +10,7 @@ class Claim < ApplicationRecord
 
   serialize :file_uid, EgovUtils::Fileuid::Coder.new(:file_uid, 'court')
 
+  acts_as_paranoid
   audited
 
   def court_uids

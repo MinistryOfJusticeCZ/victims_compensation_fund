@@ -8,7 +8,7 @@ GIT
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.3.2)
+    azahara_schema (0.3.3)
       rails (~> 5.1)
 
 PATH
@@ -124,7 +124,7 @@ GEM
     capistrano-rails (1.3.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-sidekiq (1.0.1)
+    capistrano-sidekiq (1.0.2)
       capistrano (>= 3.9.0)
       sidekiq (>= 3.4)
     capistrano3-unicorn (0.2.1)
@@ -224,7 +224,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.2)
-    puma (3.11.3)
+    puma (3.11.4)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack

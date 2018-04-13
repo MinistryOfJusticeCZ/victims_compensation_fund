@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405125228) do
+ActiveRecord::Schema.define(version: 20180413112507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,10 @@ ActiveRecord::Schema.define(version: 20180405125228) do
     t.datetime "updated_at", null: false
     t.decimal "amount", precision: 15, scale: 3
     t.bigint "offender_id"
+    t.datetime "deleted_at"
     t.index ["assigned_to_id"], name: "index_appeals_on_assigned_to_id"
     t.index ["claim_id"], name: "index_appeals_on_claim_id"
+    t.index ["deleted_at"], name: "index_appeals_on_deleted_at"
     t.index ["offender_id"], name: "index_appeals_on_offender_id"
     t.index ["victim_id"], name: "index_appeals_on_victim_id"
   end
@@ -62,6 +64,8 @@ ActiveRecord::Schema.define(version: 20180405125228) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 1
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_claims_on_deleted_at"
   end
 
   create_table "debts", force: :cascade do |t|
@@ -71,7 +75,9 @@ ActiveRecord::Schema.define(version: 20180405125228) do
     t.datetime "updated_at", null: false
     t.bigint "offender_id"
     t.integer "debt_type", default: 1
+    t.datetime "deleted_at"
     t.index ["claim_id"], name: "index_debts_on_claim_id"
+    t.index ["deleted_at"], name: "index_debts_on_deleted_at"
     t.index ["offender_id"], name: "index_debts_on_offender_id"
   end
 
