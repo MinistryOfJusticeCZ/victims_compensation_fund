@@ -68,8 +68,8 @@ RSpec.configure do |config|
                       ].to_json)
   end
 
-  config.before(logged: true) do
-    sign_in
+  config.before(logged: :court) do
+    sign_in(default_user(roles: ['court']))
   end
   config.before(logged: :admin) do
     sign_in admin_user

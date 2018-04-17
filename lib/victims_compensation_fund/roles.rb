@@ -34,6 +34,10 @@ class CourtEmployeeRole < EgovUtils::UserUtils::Role
     ability.can :read, Debt
     ability.can :create, Debt
     ability.can :read, EgovUtils::Person
+    ability.can :create, EgovUtils::Person
+    ability.can :create, EgovUtils::NaturalPerson
+    ability.can :create, EgovUtils::LegalPerson
+    ability.can :create, EgovUtils::Address
   end
 
 end
