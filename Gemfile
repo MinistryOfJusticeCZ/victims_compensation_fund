@@ -11,7 +11,8 @@ gem 'rails', '~> 5.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg', '~> 0.21'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'unicorn', '~> 5.4', group: :production
+gem 'puma', '~> 3.7', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -42,10 +43,6 @@ end
 gem 'haml'
 
 gem 'rails-i18n', '~> 5.0'
-
-group :production do
-  gem 'unicorn'
-end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

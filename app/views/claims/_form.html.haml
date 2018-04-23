@@ -21,10 +21,10 @@
       $container.attr('hidden', false)
 
       $.ajax('#{claims_path(format: :json)}', {method: "GET", data: {
-        f: { court_uid: court_val, file_uid: '~|'+fileu_val }
+        f: { court_uid: court_val, file_uid: '=|'+fileu_val }
       }}).done(function(data, status, xhr){
-        if ( data.length > 0 ) {
-          $merge_id = $('<input name="claim_id" type="hidden" value="'+data[0].id+'" class="claim_merge_id">');
+        if ( data.count > 0 ) {
+          $merge_id = $('<input name="claim_id" type="hidden" value="'+data.entities[0].id+'" class="claim_merge_id">');
           $form.append($merge_id);
           $btn = $('<a></a>', {href: window.location.href+ '?' + $form.serialize(), class: 'btn btn-secondary', 'data-method': '#{request.request_method}'}).text("#{j t('label_confirm')}");
           $container.find('.btn-container').html('').append($btn);
