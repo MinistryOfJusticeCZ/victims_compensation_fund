@@ -3,6 +3,17 @@ class AppealSchema < AzaharaSchema::ModelSchema
   filter_operators 'file_uid', ['~']
   filter_operators 'victim-fullname', ['~']
 
+  def self.attribute(model, name, attr_type=nil)
+    case name
+    when 'payment_type'
+      AzaharaSchema::Attribute.new(model, name, 'list')
+    when 'amount'
+      AzaharaSchemaCurrency::CurrencyAttribute.new(model, name, 'currency')
+    else
+      super
+    end
+  end
+
   def main_attribute_name
     'file_uid'
   end
@@ -13,15 +24,6 @@ class AppealSchema < AzaharaSchema::ModelSchema
 
   def default_outputs
     ['grid']
-  end
-
-  def attribute_for_column(col)
-    case col.name
-    when 'payment_type'
-      AzaharaSchema::Attribute.new(model, col.name, 'list')
-    else
-      super
-    end
   end
 
   def enabled_filters

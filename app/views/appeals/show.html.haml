@@ -14,7 +14,7 @@
     .value= @appeal.victim.legal_person.ico
 .attribute
   .label= Appeal.human_attribute_name('amount')
-  .value= show_money(@appeal.amount)
+  .value= Money.from_amount(@appeal.amount.to_f, @appeal.currency_code.upcase).format
 
 #satisfaction_grid
 

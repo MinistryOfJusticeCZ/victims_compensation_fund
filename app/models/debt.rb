@@ -23,6 +23,10 @@ class Debt < ApplicationRecord
   before_validation :set_offenders_claim, if: :new_record?
   after_save :set_claim_status
 
+  def currency_code
+    'czk'
+  end
+
   private
 
     def set_offenders_claim
