@@ -1,0 +1,4 @@
+= bootstrap_form_for(@debt) do |f|
+  = render 'debts/form', form: f, debt: @debt, claim: @claim
+  .form-actions
+    = f.submit

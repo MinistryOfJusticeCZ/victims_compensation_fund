@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413112507) do
+ActiveRecord::Schema.define(version: 20180424143207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,8 @@ ActiveRecord::Schema.define(version: 20180413112507) do
     t.datetime "updated_at", null: false
     t.string "birth_place"
     t.bigint "person_id"
+    t.string "title"
+    t.string "higher_title"
     t.index ["person_id"], name: "index_egov_utils_natural_people_on_person_id"
   end
 

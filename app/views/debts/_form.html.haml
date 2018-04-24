@@ -9,7 +9,7 @@
 .offender
   %h5= Offender.model_name.human
   - if claim.try(:persisted?)
-    = form.select2(:offender_id, {url: offenders_path(f: {claim_id: claim.id})}, prompt: t('label_new_offender_in_claim'), skip_label: true)
+    = form.select2(:offender_id, {url: offenders_path(f: {claim_id: claim.id})}, {prompt: t('label_new_offender_in_claim'), skip_label: true}, id: 'debt_offender_id')
   .offender-attributes
     = form.fields_for(:offender, debt.offender || Offender.new) do |fields|
       = render 'offenders/form', form: fields, offender: fields.object
@@ -26,7 +26,7 @@
       $('#debt_value').parent().toggle( v == 'financial' || v == 'forfeiture_substitute' || v == 'confiscation_substitute' );
     });
 
-    var $offender_select = $('#redemption_debt_attributes_offender_id');
+    var $offender_select = $('#debt_offender_id');
     eGovUtilities.toggableForm($offender_select, 'offender');
 
   });

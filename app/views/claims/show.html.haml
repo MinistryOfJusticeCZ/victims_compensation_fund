@@ -16,4 +16,4 @@
 
 :javascript
   #{raw render 'common/grid', grid_id: 'appeals_grid', schema: @appeals_schema, create_attributes: {claim_id: @claim.id}}
-  #{raw render 'common/grid', grid_id: 'debts_grid', schema: @debts_schema, create_model: Redemption, create_attributes: {claim_id: @claim.id}}
+  #{raw render 'common/grid', grid_id: 'debts_grid', schema: @debts_schema, create_model: Redemption, create_attributes: {claim_id: @claim.id}, allow_delete: true}

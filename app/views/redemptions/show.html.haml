@@ -1,0 +1,13 @@
+.attribute
+  .label= Claim.model_name.human
+  .value= link_to(@redemption.claim.file_uid, @redemption.claim)
+.attribute
+  .label= Debt.model_name.human
+  .value= link_to(@redemption.debt.offender.person.fullname, @redemption.debt)
+- if @redemption.debt.offender.person.natural?
+  .attribute
+    .label= EgovUtils::NaturalPerson.human_attribute_name('birth_date')
+    .value= @redemption.debt.offender.person.natural_person.birth_date
+.attribute
+  .label= Payment.human_attribute_name('value')
+  .value= Money.from_amount(@redemption.payment.value, @redemption.payment.currency_code.upcase).format

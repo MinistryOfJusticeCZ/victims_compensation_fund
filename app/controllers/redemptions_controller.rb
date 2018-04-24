@@ -7,6 +7,9 @@ class RedemptionsController < ApplicationController
     azahara_schema_index
   end
 
+  def show
+  end
+
   def new
   end
 
@@ -24,6 +27,9 @@ class RedemptionsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     respond_to do |format|
       if @redemption.update(update_params)
@@ -33,6 +39,14 @@ class RedemptionsController < ApplicationController
         format.html { render 'edit', layout: !request.xhr? }
         format.json { render json: { errors: @redemption.errors.full_messages }, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @redemption.destroy
+    respond_to do |format|
+      format.html { redirect_to @redemption.debt, notice: t('common_labels.notice_destroyed', model: @redemption.model_name.human) }
+      format.json { render json: @redemption }
     end
   end
 

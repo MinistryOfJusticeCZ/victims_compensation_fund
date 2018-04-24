@@ -12,6 +12,9 @@ class DebtsController < ApplicationController
     @redemption_schema.add_filter('debt_id', '=', @debt.id)
   end
 
+  def new
+  end
+
   def create
     respond_to do |format|
       if @debt.save
@@ -23,5 +26,38 @@ class DebtsController < ApplicationController
       end
     end
   end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @debt.update(update_params)
+        format.html { redirect_to @debt, notice: t('common_labels.notice_saved', model: @debt.model_name.human) }
+        format.json { render json: @debt }
+      else
+        format.html { render 'edit', layout: !request.xhr? }
+        format.json { render json: { errors: @debt.errors.full_messages }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @debt.destroy
+    respond_to do |format|
+      format.html { redirect_to @debt.claim, notice: t('common_labels.notice_destroyed', model: @debt.model_name.human) }
+      format.json { render json: @debt }
+    end
+  end
+
+  private
+
+    def new_params
+      create_params
+    end
+
+    def update_params
+      params.require(:debt).permit(editable_attributes(Debt, :update))
+    end
 
 end

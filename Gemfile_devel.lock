@@ -14,7 +14,7 @@ PATH
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.3.4)
+    egov_utils (0.3.5)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.3)
@@ -40,6 +40,7 @@ PATH
       request_store_rails (~> 1.0)
       sass-rails (~> 5.0)
       settingslogic (~> 2.0)
+      vuejs-rails (~> 2.5)
 
 GEM
   remote: https://rubygems.org/
@@ -351,6 +352,7 @@ GEM
     unicorn (5.4.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    vuejs-rails (2.5.13)
     wasabi (3.5.0)
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
