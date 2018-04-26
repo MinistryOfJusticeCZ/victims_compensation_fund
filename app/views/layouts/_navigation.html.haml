@@ -47,3 +47,8 @@
       - else
         %ul.nav.navbar-nav
           %li.nav-item= link_to t('label_login'), egov_utils.signin_path
+  - if Rails.env.staging?
+    .alert.alert-warning.d-flex.flex-row
+      %button.mr-2.align-self-center.close{'type' => 'button', 'data-dismiss' => 'alert'}
+        %i.fa.fa-exclamation-triangle
+      %div= t('warning_staging_version')
