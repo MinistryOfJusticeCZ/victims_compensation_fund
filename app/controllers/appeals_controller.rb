@@ -21,6 +21,7 @@ class AppealsController < ApplicationController
         format.html { redirect_to @appeal.claim, notice: t('common_labels.notice_saved', model: @appeal.model_name.human) }
         format.json { render json: @appeal, status: :created }
       else
+        binding.pry
         format.html { render 'new',  layout: !request.xhr? }
         format.json { render json: { errors: @appeal.errors.full_messages }, status: :unprocessable_entity }
       end
@@ -46,11 +47,7 @@ class AppealsController < ApplicationController
     end
 
     def create_params
-      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id,
-        claim_attributes: [:court_uid, :file_uid, :binding_effect],
-        victim_attributes: editable_attributes(EgovUtils::Person, :create),
-        offender_attributes: [:person_id, person_attributes: editable_attributes(EgovUtils::Person, :create)]
-      )
+      params.require(:appeal).permit(editable_attributes(Appeal, :create))
     end
 
     def update_params
