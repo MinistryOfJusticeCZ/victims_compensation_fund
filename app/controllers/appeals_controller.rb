@@ -21,7 +21,6 @@ class AppealsController < ApplicationController
         format.html { redirect_to @appeal.claim, notice: t('common_labels.notice_saved', model: @appeal.model_name.human) }
         format.json { render json: @appeal, status: :created }
       else
-        binding.pry
         format.html { render 'new',  layout: !request.xhr? }
         format.json { render json: { errors: @appeal.errors.full_messages }, status: :unprocessable_entity }
       end
