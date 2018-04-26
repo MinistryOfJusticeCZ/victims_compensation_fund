@@ -51,11 +51,7 @@ class AppealsController < ApplicationController
     end
 
     def update_params
-      params.require(:appeal).permit(:claim_id, :payment_type, :bank_account, :file_uid, :amount, :victim_id,
-        claim_attributes: [:court_uid, :file_uid, :binding_effect],
-        victim_attributes: editable_attributes(EgovUtils::Person, :update),
-        offender_attributes: [:person_id, person_attributes: editable_attributes(EgovUtils::Person, :update)]
-      )
+      params.require(:appeal).permit(editable_attributes(Appeal, :update))
     end
 
 end
