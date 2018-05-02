@@ -8,7 +8,7 @@ class AppealsController < ApplicationController
   end
 
   def show
-    @satisfaction_schema = SatisfactionSchema.new(columns: ['payment-value', 'created_at'], outputs: ['grid'])
+    @satisfaction_schema = SatisfactionSchema.new(columns: ['payment-value', 'payment-status', 'created_at'], outputs: ['grid'])
     @satisfaction_schema.add_filter('appeal_id', '=', @appeal.id)
   end
 

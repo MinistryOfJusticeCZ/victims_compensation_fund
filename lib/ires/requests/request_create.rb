@@ -12,11 +12,21 @@ module Ires
       end
 
       def action_type
-        'PŘEDEPSÁNO'
+        case payment.direction
+        when 'incoming'
+          'PŘEDEPSÁNO'
+        when 'outgoing'
+          'PŘEDEPSÁNO K ODŠKODNĚNÍ'
+        end
       end
 
       def payment_type
-        'VÝNOSY Z TRESTNÍCH SANKCÍ'
+        case payment.direction
+        when 'incoming'
+          'VÝNOSY Z TRESTNÍCH SANKCÍ'
+        when 'outgoing'
+          'ODŠKODNĚNÍ OBĚTÍ Z VTS'
+        end
       end
 
       def purpose
