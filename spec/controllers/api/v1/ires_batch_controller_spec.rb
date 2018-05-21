@@ -37,8 +37,8 @@ RSpec.describe Api::V1::IresBatchController, type: :controller do
       it 'sends response - real data' do
         expect(Payment).to receive(:find_by).with(hash_including(uuid: payment1.uuid)).and_return(payment1)
         expect(Payment).to receive(:find_by).with(hash_including(uuid: payment2.uuid)).and_return(payment2)
-        expect(payment1).to receive(:update_column).with(:status, 'accepted')
-        expect(payment2).to receive(:update_column).with(:status, 'processed')
+        expect(payment1).to receive(:update_columns).with(hash_including(status: 'accepted', paid_at: nil))
+        expect(payment2).to receive(:update_columns).with(hash_including(status: 'processed', paid_at: DateTime.new(2018,2,1,1,0)))
 
         post :create, params: { xml_data: encoded_message }
         expect( JSON.parse(response.body).keys ).to include('return')
