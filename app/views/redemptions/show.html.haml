@@ -1,3 +1,10 @@
+= egov_breadcrumbs do |breadcrumbs|
+  - breadcrumbs << link_to( @redemption.claim.file_uid, @redemption.claim )
+  - breadcrumbs << link_to( Debt.model_name.human(count: :other), @redemption.claim )
+  - breadcrumbs << link_to( @redemption.debt.offender.person.fullname, @redemption.debt )
+  - breadcrumbs << link_to( Redemption.model_name.human(count: :other), @debt )
+  - breadcrumbs << @redemption.payment.payment_uid
+
 .attribute
   .label= Claim.model_name.human
   .value= link_to(@redemption.claim.file_uid, @redemption.claim)
@@ -11,3 +18,7 @@
 .attribute
   .label= Payment.human_attribute_name('value')
   .value= Money.from_amount(@redemption.payment.value, @redemption.payment.currency_code.upcase).format
+- formatter = attribute_formatter_for(schema = RedemptionSchema.new)
+= formatter.labeled_html_attribute_value(schema.attribute('payment-status'), @redemption)
+= formatter.labeled_html_attribute_value(schema.attribute('payment-paid_at'), @redemption)
+

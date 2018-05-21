@@ -79,6 +79,7 @@ cs:
       payment_uid: Variabilní symbol
       value: Částka
       currency_code: Měna
+      paid_at: Uhrazeno dne
       currency_codes:
         czk: Kč
         eur: €
