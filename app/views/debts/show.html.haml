@@ -10,7 +10,7 @@
     .value= @debt.offender.person.natural_person.birth_date
 .attribute
   .label= Debt.human_attribute_name('value')
-  .value= Money.from_amount(@debt.value, @debt.currency_code.upcase).format
+  .value= @debt.value.nil? ? unfilled_attribute_message : Money.from_amount(@debt.value, @debt.currency_code.upcase).format
 
 .actions.text-center
   = link_to t('label_edit'), edit_debt_path(@debt), class: 'btn btn-secondary'
