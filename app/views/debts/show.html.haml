@@ -8,6 +8,8 @@
   .attribute
     .label= EgovUtils::NaturalPerson.human_attribute_name('birth_date')
     .value= @debt.offender.person.natural_person.birth_date
+- formatter = attribute_formatter_for(Debt)
+= formatter.labeled_html_attribute_value(azahara_attribute_for(Debt, 'debt_type'), @debt)
 .attribute
   .label= Debt.human_attribute_name('value')
   .value= @debt.value.nil? ? unfilled_attribute_message : Money.from_amount(@debt.value, @debt.currency_code.upcase).format
