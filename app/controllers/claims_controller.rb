@@ -42,7 +42,10 @@ class ClaimsController < ApplicationController
 
   def destroy
     @claim.destroy
-    head :ok
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: t('common_labels.notice_destroyed', model: @claim.model_name.human) }
+      format.json { render json: @claim }
+    end
   end
 
   private
