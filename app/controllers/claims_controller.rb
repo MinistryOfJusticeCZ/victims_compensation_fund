@@ -40,6 +40,11 @@ class ClaimsController < ApplicationController
     end
   end
 
+  def destroy
+    @claim.destroy
+    head :ok
+  end
+
   private
 
     def create_params
