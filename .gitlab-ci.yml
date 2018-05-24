@@ -71,7 +71,7 @@ deploy_lab:
     - gem install capistrano-sidekiq
     - ls /usr/local/bin/
     - echo $GEM_HOME
-    - ls /var/lib/gems/2.3.0/
+    - ls $GEM_HOME
     - cap lab deploy
   environment:
     name: lab
