@@ -70,7 +70,7 @@ deploy_lab:
     - gem install capistrano3-unicorn
     - gem install capistrano-sidekiq
     - ls /usr/local/bin/
-    - ls /var/lib/gems/2.3/bin
+    - ls /var/lib/gems/2.3.0/
     - echo $GEM_HOME
     - cap lab deploy
   environment:
