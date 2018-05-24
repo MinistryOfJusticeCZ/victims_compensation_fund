@@ -14,46 +14,46 @@ stages:
   - test
   - deploy
 
-# test:2.3:
-#   before_script:
-#     - export http_proxy=http://proxy.justice.cz:3128
-#     - export no_proxy="git.servis.justice.cz"
-#     - export LANG=en_US.UTF-8
-#     - export LANGUAGE=en_US.UTF-8
-#     - export LC_ALL=en_US.UTF-8
-#     - export RUBYOPT="-KU -E utf-8:utf-8"
-#     - export BUNDLE_GEMFILE="Gemfile_devel"
-#     - git config --global http.sslVerify false
-#   cache:
-#     untracked: true
-#     key: "$CI_BUILD_REF_NAME"
-#     paths:
-#       - cache/bundler/
-#   services:
-#     - postgres
-#     - redis
-#   script:
-#     - BASE_URL=`echo $CI_REPOSITORY_URL | sed "s;\/*$CI_PROJECT_PATH.*;;"`
-#     - REPO_URL="$BASE_URL/libraries/egon_gate.git"
-#     - REPO_DIR=libraries/egon_gate
-#     - rm -fr $REPO_DIR
-#     - git clone $REPO_URL $REPO_DIR
-#     - "sed -i \"s|gem 'egon_gate', path: '.*'|gem 'egon_gate', path: '$REPO_DIR'|g\" Gemfile_devel"
-#     - REPO_URL="$BASE_URL/libraries/azahara_schema.git"
-#     - REPO_DIR=libraries/azahara_schema
-#     - rm -fr $REPO_DIR
-#     - git clone $REPO_URL $REPO_DIR
-#     - "sed -i \"s|gem 'azahara_schema', path: '.*'|gem 'azahara_schema', path: '$REPO_DIR'|g\" Gemfile_devel"
-#     - REPO_URL="$BASE_URL/libraries/egov_utils-rails.git"
-#     - REPO_DIR=libraries/egov_utils
-#     - rm -fr $REPO_DIR
-#     - git clone $REPO_URL $REPO_DIR
-#     - "sed -i \"s|gem 'egov_utils', path: '.*'|gem 'egov_utils', path: '$REPO_DIR'|g\" Gemfile_devel"
-#     - git config --global http.proxy 194.213.41.2:8080
-#     - http_proxy=http://proxy.justice.cz:3128 RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
-#     - cp config/database.yml.gitlabci config/database.yml
-#     - bundle exec rails db:migrate RAILS_ENV=test
-#     - bundle exec rspec
+test:2.3:
+  before_script:
+    - export http_proxy=http://proxy.justice.cz:3128
+    - export no_proxy="git.servis.justice.cz"
+    - export LANG=en_US.UTF-8
+    - export LANGUAGE=en_US.UTF-8
+    - export LC_ALL=en_US.UTF-8
+    - export RUBYOPT="-KU -E utf-8:utf-8"
+    - export BUNDLE_GEMFILE="Gemfile_devel"
+    - git config --global http.sslVerify false
+  cache:
+    untracked: true
+    key: "$CI_BUILD_REF_NAME"
+    paths:
+      - cache/bundler/
+  services:
+    - postgres
+    - redis
+  script:
+    - BASE_URL=`echo $CI_REPOSITORY_URL | sed "s;\/*$CI_PROJECT_PATH.*;;"`
+    - REPO_URL="$BASE_URL/libraries/egon_gate.git"
+    - REPO_DIR=libraries/egon_gate
+    - rm -fr $REPO_DIR
+    - git clone $REPO_URL $REPO_DIR
+    - "sed -i \"s|gem 'egon_gate', path: '.*'|gem 'egon_gate', path: '$REPO_DIR'|g\" Gemfile_devel"
+    - REPO_URL="$BASE_URL/libraries/azahara_schema.git"
+    - REPO_DIR=libraries/azahara_schema
+    - rm -fr $REPO_DIR
+    - git clone $REPO_URL $REPO_DIR
+    - "sed -i \"s|gem 'azahara_schema', path: '.*'|gem 'azahara_schema', path: '$REPO_DIR'|g\" Gemfile_devel"
+    - REPO_URL="$BASE_URL/libraries/egov_utils-rails.git"
+    - REPO_DIR=libraries/egov_utils
+    - rm -fr $REPO_DIR
+    - git clone $REPO_URL $REPO_DIR
+    - "sed -i \"s|gem 'egov_utils', path: '.*'|gem 'egov_utils', path: '$REPO_DIR'|g\" Gemfile_devel"
+    - git config --global http.proxy 194.213.41.2:8080
+    - http_proxy=http://proxy.justice.cz:3128 RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
+    - cp config/database.yml.gitlabci config/database.yml
+    - bundle exec rails db:migrate RAILS_ENV=test
+    - bundle exec rspec
 
 deploy_lab:
   stage: deploy
@@ -76,42 +76,42 @@ deploy_lab:
   only:
     - master
 
-# deploy_staging:
-#   stage: deploy
-#   script:
-#     - 'which ssh-agent || ( apt-get update && apt-get install openssh-client )'
-#     - eval $(ssh-agent -s)
-#     - mkdir -p ~/.ssh && chmod 700 ~/.ssh
-#     - echo "$PRODUCTION_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-#     - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
-#     - ssh-add ~/.ssh/id_rsa
-#     - gem install capistrano-rails
-#     - gem install capistrano3-unicorn
-#     - gem install capistrano-sidekiq
-#     - cap staging deploy
-#   environment:
-#     name: staging
-#   only:
-#     - master
+deploy_staging:
+  stage: deploy
+  script:
+    - 'which ssh-agent || ( apt-get update && apt-get install openssh-client )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo "$PRODUCTION_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_rsa
+    - gem install capistrano-rails
+    - gem install capistrano3-unicorn
+    - gem install capistrano-sidekiq
+    - cap staging deploy
+  environment:
+    name: staging
+  only:
+    - master
 
-# deploy_production:
-#   stage: deploy
-#   tags:
-#     - external
-#     - deploy
-#   script:
-#     - 'which ssh-agent || ( apt-get update && apt-get install openssh-client )'
-#     - eval $(ssh-agent -s)
-#     - mkdir -p ~/.ssh && chmod 700 ~/.ssh
-#     - echo "$PRODUCTION_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-#     - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
-#     - ssh-add ~/.ssh/id_rsa
-#     - gem install capistrano-rails
-#     - gem install capistrano3-unicorn
-#     - gem install capistrano-sidekiq
-#     - cap production deploy
-#   environment:
-#     name: production
-#   only:
-#     - master
-#   when: manual
+deploy_production:
+  stage: deploy
+  tags:
+    - external
+    - deploy
+  script:
+    - 'which ssh-agent || ( apt-get update && apt-get install openssh-client )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo "$PRODUCTION_USER_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - sed -n ':a;N;$!ba;s/\n/ /g' ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_rsa
+    - gem install capistrano-rails
+    - gem install capistrano3-unicorn
+    - gem install capistrano-sidekiq
+    - cap production deploy
+  environment:
+    name: production
+  only:
+    - master
+  when: manual
