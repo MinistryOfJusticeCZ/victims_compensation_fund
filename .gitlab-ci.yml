@@ -8,6 +8,7 @@ variables:
 before_script:
   - export http_proxy=http://proxy.justice.cz:3128
   - export no_proxy="git.servis.justice.cz"
+  - export PATH="$PATH:$GEM_HOME/bin"
 
 stages:
   - test
@@ -69,9 +70,6 @@ deploy_lab:
     - gem install capistrano-rails
     - gem install capistrano3-unicorn
     - gem install capistrano-sidekiq
-    - ls /usr/local/bin/
-    - echo $GEM_HOME
-    - ls $GEM_HOME
     - cap lab deploy
   environment:
     name: lab
