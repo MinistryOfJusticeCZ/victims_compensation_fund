@@ -11,6 +11,7 @@ cs:
   label_confirm: Potvrdit
   label_changelog: Poslední změny
   label_change_password: Změnit heslo
+  label_send: Odeslat
   notice_claim_merge: Případ tohoto prvostupňového soudu s touto spisovou značkou již existuje. Chcete záznam přiřadit tomuto případu?
 
   models: &my_models
