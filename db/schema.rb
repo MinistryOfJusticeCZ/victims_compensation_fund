@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_133824) do
+ActiveRecord::Schema.define(version: 2018_05_29_154138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2018_05_21_133824) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 1
     t.datetime "deleted_at"
+    t.bigint "assigned_to_id"
+    t.index ["assigned_to_id"], name: "index_claims_on_assigned_to_id"
     t.index ["deleted_at"], name: "index_claims_on_deleted_at"
   end
 
@@ -215,6 +217,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_133824) do
   add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
   add_foreign_key "appeals", "offenders"
+  add_foreign_key "claims", "egov_utils_users", column: "assigned_to_id"
   add_foreign_key "debts", "claims"
   add_foreign_key "debts", "offenders"
   add_foreign_key "egov_utils_groups_users", "egov_utils_groups", column: "group_id"

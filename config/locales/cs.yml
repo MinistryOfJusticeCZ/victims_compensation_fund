@@ -3,6 +3,7 @@ cs:
   app_name: Výnosy trestních sankcí
   app_abbrev: VTS
 
+  button_assign: Přiřadit
   label_list: Výpis
   label_new_payment: Přidat platbu
   label_new_appeal: Přidat žádost
@@ -12,6 +13,7 @@ cs:
   label_changelog: Poslední změny
   label_change_password: Změnit heslo
   label_send: Odeslat
+  label_informations: Informace
   notice_claim_merge: Případ tohoto prvostupňového soudu s touto spisovou značkou již existuje. Chcete záznam přiřadit tomuto případu?
 
   models: &my_models
@@ -60,6 +62,8 @@ cs:
         appeal_only: Pouze žádost
         debt_only: Pouze tresty
         both: Spárováno
+      assigned_to-fullname: Řešitel
+      assigned_to_id: Řešitel
     debt:
       value: Celková výše trestu
       offender_id: Pachatel

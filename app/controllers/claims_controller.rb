@@ -55,7 +55,7 @@ class ClaimsController < ApplicationController
     end
 
     def update_params
-      params.require(:claim).permit(:court_uid, :file_uid, :binding_effect)
+      params.require(:claim).permit(:court_uid, :file_uid, :binding_effect, :assigned_to_id)
     end
 
 end

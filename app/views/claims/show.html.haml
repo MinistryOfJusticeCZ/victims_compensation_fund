@@ -1,18 +1,34 @@
+- formatter = attribute_formatter_for(schema = ClaimSchema.new)
 .claim
-  .attribute
-    .label= Claim.human_attribute_name('file_uid')
-    .value= @claim.file_uid
-  .attribute
-    .label= Claim.human_attribute_name('binding_effect')
-    .value= @claim.binding_effect ? l(@claim.binding_effect.to_date) : unfilled_attribute_message
-- if can? :read, Appeal
-  .appeals
-    %h4= Appeal.model_name.human(count: :other)
-    #appeals_grid
-- if can? :read, Debt
-  .redemptions
-    %h4= Debt.model_name.human(count: :other)
-    #debts_grid
+  .card
+    .card-header
+      = t('label_informations')
+    .card-body
+      = formatter.labeled_html_attribute_value(schema.attribute('court_uid'), @claim)
+      .attribute
+        .label= Claim.human_attribute_name('file_uid')
+        .value= @claim.file_uid
+      .attribute
+        .label= Claim.human_attribute_name('binding_effect')
+        .value= @claim.binding_effect ? l(@claim.binding_effect.to_date) : unfilled_attribute_message
+  .card
+    .card-header
+      = Claim.human_attribute_name('assigned_to-fullname')
+    .card-body
+      = formatter.html_formatted_value(schema.attribute('assigned_to-fullname'), @claim)
+      - if can?(:assign, @claim)
+        = bootstrap_form_for(@claim, layout: :inline) do |f|
+          = f.select2(:assigned_to_id, claim_assignable_to(@claim).collect{|u| [u.id, u.fullname]}, {hide_label: true})
+          = f.submit(t('button_assign'))
+
+  - if can? :read, Appeal
+    .appeals
+      %h4= Appeal.model_name.human(count: :other)
+      #appeals_grid
+  - if can? :read, Debt
+    .redemptions
+      %h4= Debt.model_name.human(count: :other)
+      #debts_grid
 
 :javascript
   #{raw render 'common/grid', grid_id: 'appeals_grid', schema: @appeals_schema, create_attributes: {claim_id: @claim.id}}
