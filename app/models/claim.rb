@@ -2,7 +2,7 @@ class Claim < ApplicationRecord
 
   has_many :appeals, dependent: :destroy
   has_many :debts, dependent: :destroy
-  belongs_to :assigned_to, class_name: 'EgovUtils::User'
+  belongs_to :assigned_to, class_name: 'EgovUtils::User', optional: true
 
   enum status: { empty: 1, appeal_only: 2, debt_only: 3, both: 4 }
 
