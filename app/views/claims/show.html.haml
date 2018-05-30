@@ -18,7 +18,7 @@
       = formatter.html_formatted_value(schema.attribute('assigned_to-fullname'), @claim)
       - if can?(:assign, @claim)
         = bootstrap_form_for(@claim, layout: :inline) do |f|
-          = f.select2(:assigned_to_id, claim_assignable_to(@claim).collect{|u| [u.id, u.fullname]}, {hide_label: true})
+          = f.select2(:assigned_to_id, claim_assignable_to(@claim).collect{|u| [u.fullname, u.id]}, {hide_label: true})
           = f.submit(t('button_assign'))
 
   - if can? :read, Appeal
