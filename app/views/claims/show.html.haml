@@ -25,6 +25,7 @@
     .appeals
       %h4= Appeal.model_name.human(count: :other)
       #appeals_grid
+
   - if can? :read, Debt
     .redemptions
       %h4= Debt.model_name.human(count: :other)
