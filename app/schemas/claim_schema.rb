@@ -18,7 +18,9 @@ class ClaimSchema < AzaharaSchema::ModelSchema
     if EgovUtils::User.current.has_role?('court')
       ['file_uid', 'appeals-victim-fullname', 'debts-offender-person-fullname']
     else
-      ['file_uid', 'court_uid', 'appeals-victim-fullname', 'debts-offender-person-fullname', 'status']
+      f = ['file_uid', 'court_uid', 'appeals-victim-fullname', 'debts-offender-person-fullname', 'status']
+      f << 'assigned_to_id' if EgovUtils::User.current.has_role?('compensator')
+      f
     end
   end
 
