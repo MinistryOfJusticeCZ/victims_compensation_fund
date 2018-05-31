@@ -5,6 +5,7 @@
   - breadcrumbs << link_to( Redemption.model_name.human(count: :other), @debt )
   - breadcrumbs << @redemption.payment.payment_uid
 
+- formatter = attribute_formatter_for(schema = RedemptionSchema.new)
 .attribute
   .label= Claim.model_name.human
   .value= link_to(@redemption.claim.file_uid, @redemption.claim)
@@ -12,13 +13,14 @@
   .label= Debt.model_name.human
   .value= link_to(@redemption.debt.offender.person.fullname, @redemption.debt)
 - if @redemption.debt.offender.person.natural?
-  .attribute
-    .label= EgovUtils::NaturalPerson.human_attribute_name('birth_date')
-    .value= @redemption.debt.offender.person.natural_person.birth_date
+  = formatter.labeled_html_attribute_value(schema.attribute('debt-offender-person-natural_person-birth_date'), @redemption)
 .attribute
   .label= Payment.human_attribute_name('value')
-  .value= Money.from_amount(@redemption.payment.value, @redemption.payment.currency_code.upcase).format
-- formatter = attribute_formatter_for(schema = RedemptionSchema.new)
+  .value
+    = Money.from_amount(schema.attribute('payment-value').value(@redemption), @redemption.payment.currency_code.upcase).format
+    = ' ( z '
+    = Money.from_amount(schema.attribute('debt-value').value(@redemption), 'CZK').format
+    = ' )'
 = formatter.labeled_html_attribute_value(schema.attribute('payment-status'), @redemption)
 = formatter.labeled_html_attribute_value(schema.attribute('payment-paid_at'), @redemption)
 
