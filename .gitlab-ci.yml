@@ -7,6 +7,7 @@ variables:
 
 before_script:
   - export http_proxy=http://proxy.justice.cz:3128
+  - export https_proxy=http://proxy.justice.cz:3128
   - export no_proxy="git.servis.justice.cz"
   - export PATH="$PATH:$GEM_HOME/bin"
 
@@ -17,6 +18,7 @@ stages:
 test:2.3:
   before_script:
     - export http_proxy=http://proxy.justice.cz:3128
+    - export https_proxy=http://proxy.justice.cz:3128
     - export no_proxy="git.servis.justice.cz"
     - export LANG=en_US.UTF-8
     - export LANGUAGE=en_US.UTF-8
