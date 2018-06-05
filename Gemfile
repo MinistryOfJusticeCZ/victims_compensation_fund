@@ -75,7 +75,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'egov_utils', path: '../egov_utils'
-gem 'egov_utils', '~> 0.3.0' #, path: '../egov_utils'
+gem 'egov_utils', '~> 0.4.0' #, path: '../egov_utils'
 gem 'paranoia', '~> 2.4'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
@@ -92,8 +92,7 @@ gem 'signer', '~> 1.6'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
-gem 'bootstrap', '~> 4.0.0'
-gem 'font-awesome-sass'
-gem 'bootstrap_form'
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', github: 'ezrondre/bootstrap3-datetimepicker-rails' #, '~> 4.17.47'
+
+gem "bootstrap_form",
+    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
+    branch: "master"
