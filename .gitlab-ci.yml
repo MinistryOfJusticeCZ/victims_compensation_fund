@@ -6,8 +6,8 @@ variables:
   POSTGRES_PASSWORD: ""
 
 before_script:
-  - export http_proxy=http://proxy.justice.cz:3128
-  - export https_proxy=http://proxy.justice.cz:3128
+  - export http_proxy="http://proxy.justice.cz:3128/"
+  - export https_proxy="http://proxy.justice.cz:3128/"
   - export no_proxy="git.servis.justice.cz"
   - export PATH="$PATH:$GEM_HOME/bin"
 
@@ -52,7 +52,7 @@ test:2.3:
     - git clone $REPO_URL $REPO_DIR
     - "sed -i \"s|gem 'egov_utils', path: '.*'|gem 'egov_utils', path: '$REPO_DIR'|g\" Gemfile_devel"
     - git config --global http.proxy 194.213.41.2:8080
-    - http_proxy=http://proxy.justice.cz:3128 RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
+    - RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
     - cp config/database.yml.gitlabci config/database.yml
     - bundle exec rails db:migrate RAILS_ENV=test
     - bundle exec rspec
