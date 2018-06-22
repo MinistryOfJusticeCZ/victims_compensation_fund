@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
-  revision: c6a7366c44203618bf7c07fc9405c24fc3d33669
-  branch: master
-  specs:
-    bootstrap_form (4.0.0.dev)
-      rails (>= 5.0)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -71,9 +63,9 @@ GEM
     arel (9.0.0)
     audited (4.7.1)
       activerecord (>= 4.0, < 5.3)
-    autoprefixer-rails (8.6.1)
+    autoprefixer-rails (8.6.3)
       execjs
-    azahara_schema (0.3.7)
+    azahara_schema (0.3.9)
       rails (~> 5.1)
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -81,9 +73,11 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
-    bootstrap4-datetime-picker-rails (0.1.6)
+    bootstrap4-datetime-picker-rails (0.1.7)
       jquery-rails (~> 4.2, >= 4.2.0)
       momentjs-rails (~> 2.10, >= 2.10.5)
+    bootstrap_form (4.0.0.alpha1)
+      rails (>= 5.0)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
@@ -114,7 +108,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
-    cookies_eu (1.7.1)
+    cookies_eu (1.7.3)
       js_cookie_rails (~> 2.2.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -123,14 +117,14 @@ GEM
     diff-lcs (1.3)
     egon_gate (0.1.0)
       savon (~> 2.11.0)
-    egov_utils (0.4.3)
+    egov_utils (0.4.4)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.3)
       bcrypt (~> 3.1)
       bootstrap (~> 4.0)
       bootstrap4-datetime-picker-rails (~> 0.1)
-      bootstrap_form (~> 4.0.0.dev)
+      bootstrap_form (~> 4.0.0.alpha)
       cancancan (~> 2.0)
       clipboard-rails (~> 1.7)
       cookies_eu (~> 1.6)
@@ -141,7 +135,7 @@ GEM
       jquery-rails (~> 4.3)
       jquery-ui-rails (~> 6.0)
       modernizr-rails (~> 2.7)
-      momentjs-rails (~> 2.17)
+      momentjs-rails (~> 2.20)
       money (~> 6.11)
       net-ldap (~> 0.16)
       paranoia (~> 2.4)
@@ -176,7 +170,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n-debug (1.1.1)
       i18n (< 2)
-    i18n-js (3.0.8)
+    i18n-js (3.0.9)
       i18n (>= 0.6.6, < 2)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -216,9 +210,9 @@ GEM
     net-ldap (0.16.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (5.0.1)
+    net-ssh (5.0.2)
     nio4r (2.3.1)
-    nokogiri (1.8.2)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     nori (2.6.0)
     paranoia (2.4.1)
@@ -233,7 +227,7 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
-    rack-protection (2.0.2)
+    rack-protection (2.0.3)
       rack
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -329,7 +323,7 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -351,7 +345,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.11)
+    uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)
@@ -378,7 +372,6 @@ PLATFORMS
 
 DEPENDENCIES
   apipie-rails (~> 0.5)
-  bootstrap_form!
   byebug
   capistrano-rails
   capistrano-sidekiq

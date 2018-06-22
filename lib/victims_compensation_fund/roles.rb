@@ -69,5 +69,6 @@ class AccountantRole < EgovUtils::UserUtils::Role
     ability.can :read, Claim
     ability.can :read, Redemption
     ability.can :read, Payment
+    ability.can :read, EgovUtils::User
   end
 end

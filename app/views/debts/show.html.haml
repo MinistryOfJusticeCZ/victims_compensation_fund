@@ -9,6 +9,7 @@
 .attribute
   .label= formatter.attribute_html_label(schema.attribute('claim-file_uid'))
   .value= link_to(formatter.html_formatted_value(schema.attribute('claim-file_uid'), @debt), @debt.claim)
+= formatter.labeled_html_attribute_value(schema.attribute('claim-binding_effect'), @debt)
 .attribute
   .label= Offender.model_name.human
   .value= @debt.offender.person.fullname
