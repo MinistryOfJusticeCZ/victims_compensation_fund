@@ -51,6 +51,10 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    activity_notification (1.5.0)
+      i18n (>= 0.5.0)
+      jquery-rails (>= 3.1.1)
+      railties (>= 4.2.0, < 5.3)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     airbrussh (1.3.0)
@@ -58,14 +62,14 @@ GEM
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
-    apipie-rails (0.5.8)
+    apipie-rails (0.5.9)
       rails (>= 4.1)
     arel (9.0.0)
     audited (4.7.1)
       activerecord (>= 4.0, < 5.3)
-    autoprefixer-rails (8.6.3)
+    autoprefixer-rails (8.6.5)
       execjs
-    azahara_schema (0.3.9)
+    azahara_schema (0.3.10)
       rails (~> 5.1)
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -170,7 +174,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n-debug (1.1.1)
       i18n (< 2)
-    i18n-js (3.0.9)
+    i18n-js (3.0.11)
       i18n (>= 0.6.6, < 2)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -212,7 +216,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
     nio4r (2.3.1)
-    nokogiri (1.8.3)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     nori (2.6.0)
     paranoia (2.4.1)
@@ -330,7 +334,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.16.1)
+    sshkit (1.17.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.8.0)
@@ -345,7 +349,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.12)
+    uglifier (4.1.14)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)
@@ -371,6 +375,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activity_notification (~> 1.5)
   apipie-rails (~> 0.5)
   byebug
   capistrano-rails
@@ -410,4 +415,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

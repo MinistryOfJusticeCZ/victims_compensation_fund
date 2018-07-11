@@ -1,0 +1,7 @@
+- if can?(:manage, Redemption)
+  .form-group.row
+    .col.col-md-10.offset-md-2
+      .custom-control.custom-checkbox
+        = hidden_field_tag('default_scope', 'all', id: nil)
+        = check_box_tag('default_scope', 'unprocessed', schema.default_scope == 'unprocessed', class: 'custom-control-input')
+        = label_tag 'default_scope', t('label_show_only_unprocessed_redemptions'), class: 'custom-control-label'

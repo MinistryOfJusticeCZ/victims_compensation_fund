@@ -11,6 +11,14 @@ class Redemption < ApplicationRecord
 
   acts_as_paranoid
 
+  scope :unprocessed, ->(boundary=Date.today-60.days) {
+    joins(:claim).where(
+      Claim.arel_table[:binding_effect].lteq(boundary).or(
+        Claim.arel_table[:binding_effect].eq(nil).and(arel_table[:created_at].lteq(boundary))
+      )
+    )
+  }
+
   def file_uid
     claim.file_uid
   end

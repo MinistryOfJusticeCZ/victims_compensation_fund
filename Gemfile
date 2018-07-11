@@ -80,7 +80,10 @@ gem 'paranoia', '~> 2.4'
 
 # gem 'ruby-ares', path: '../../CommunityProjects/ruby-ares'
 
+gem 'activity_notification', '~> 1.5'
+
 gem 'sidekiq', '~> 5.0'
+# gem 'sidekiq-scheduler'
 
 gem 'apipie-rails', '~> 0.5'
 

@@ -4,7 +4,11 @@ class RedemptionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    azahara_schema_index
+    azahara_schema_index do |schema|
+      if current_user.has_role?('compensator')
+        schema.default_scope ||= 'unprocessed'
+      end
+    end
   end
 
   def show

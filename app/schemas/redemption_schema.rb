@@ -13,11 +13,13 @@ class RedemptionSchema < AzaharaSchema::ModelSchema
   end
 
   def enabled_filters
-    ['debt_id', 'debt-claim_id', 'payment-payment_uid', 'payment-status', 'debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
+    efs = ['debt_id', 'debt-claim_id', 'payment-payment_uid', 'payment-status', 'debt-claim-file_uid', 'debt-offender-person-fullname', 'victim-fullname']
+    efs << 'debt-claim-assigned_to_id'# if EgovUtils::User.current.has_role?('compensator')
+    efs
   end
 
   def always_visible_filters
-    ['debt-claim-file_uid', 'debt-offender-person-fullname', 'payment-payment_uid']
+    ['debt-claim-file_uid', 'debt-offender-person-fullname', 'payment-payment_uid', 'debt-claim-assigned_to_id']
   end
 
   def default_sort

@@ -6,17 +6,19 @@ class ClaimSchema < AzaharaSchema::ModelSchema
   filter_operators 'debts-offender-person-fullname', ['~']
 
   def self.attribute_type(model, name, col=nil)
-      if name == 'binding_effect'
-        'date'
-      else
-        super
-      end
+    if name == 'binding_effect'
+      'date'
+    else
+      super
     end
+  end
 
   def self.attribute(model, name, attr_type=nil)
     case name
     when 'court_uid'
       CourtUidAttribute.new(model, name)
+    when 'assigned_to_id'
+      AssigneeAttribute.new(model, name)
     else
       super
     end
