@@ -2,7 +2,7 @@
 .court-form
   .row
     .col-12.col-md-6= form.select2(:court_uid, court_uid_attribute.available_values, {}, {class: 'court-uid', id: "claim_court_uid-#{form.object.id}"})
-    .col-12.col-md-6= form.fileuid_field(:file_uid, agendas: ['T', 'Tm'], class: 'file-uid-field', id: "claim_file_uid-#{form.object.id}")
+    .col-12.col-md-6= form.fileuid_field(:file_uid, agendas: ['T', 'Tm', 'Nt'], class: 'file-uid-field', id: "claim_file_uid-#{form.object.id}")
     .col-12.merge_container{hidden: true}
       .message= t('notice_claim_merge')
       .btn-container
