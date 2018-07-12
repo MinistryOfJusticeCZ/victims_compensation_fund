@@ -24,3 +24,5 @@
 = formatter.labeled_html_attribute_value(schema.attribute('payment-status'), @redemption)
 = formatter.labeled_html_attribute_value(schema.attribute('payment-paid_at'), @redemption)
 
+- if @redemption.unprocessed?
+  SD

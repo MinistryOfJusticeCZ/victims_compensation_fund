@@ -19,6 +19,9 @@
 .attribute
   .label= Debt.human_attribute_name('value')
   .value= @debt.value.nil? ? unfilled_attribute_message : Money.from_amount(@debt.value, @debt.currency_code.upcase).format
+- pp @debt.value
+- pp schema.attribute('sum:redemptions-payment-value').value(@debt)
+= formatter.labeled_html_attribute_value(schema.attribute('sum:redemptions-payment-value'), @debt)
 
 .actions.text-center
   = link_to t('label_edit'), edit_debt_path(@debt), class: 'btn btn-secondary'
