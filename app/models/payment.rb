@@ -2,8 +2,10 @@ class Payment < ApplicationRecord
 
   has_one :satisfaction
   has_one :redemption
+  has_one :state_budget_item
   has_one :satisfaction_may_deleted, ->{with_deleted}, class_name: 'Satisfaction'
   has_one :redemption_may_deleted, ->{with_deleted}, class_name: 'Redemption'
+  has_one :budget_item_may_deleted, ->{with_deleted}, class_name: 'StateBudgetItem'
 
   enum currency_code: { czk: 1, eur: 2, usd: 3 }
   enum direction: { incoming: 1, outgoing: 16 }
@@ -87,14 +89,24 @@ class Payment < ApplicationRecord
     end
 
     def generate_uid
-      self.update_columns(payment_uid: "88#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}")
+      self.update_columns(payment_uid: "#{budget_category_prefix}#{(id-first_id_in_year+1).to_s.rjust(6, "0")}#{Time.now.strftime("%y")}")
     end
 
     def mark_for_ires_update
       self.status = 'updated'
     end
 
+    def budget_category_prefix
+      case direction
+      when 'incoming'
+        88
+      when 'outgoing'
+        80
+      end
+    end
+
     def send_to_ires
+      return unless claim
       SendPaymentJob.perform_later(claim.court_uid)
     end
 

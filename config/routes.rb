@@ -6,13 +6,16 @@ Rails.application.routes.draw do
   resources :appeals do
     resources :satisfactions
   end
-  resources :debts #, only: [:index, :new, :create]
+  resources :debts do #, only: [:index, :new, :create]
+    resources :state_budget_items
+  end
   resources :satisfactions, only: [:index, :new, :create]
   resources :claims do
     resources :redemptions, only: [:new, :create]
     resources :appeals, only: [:new, :create]
     resources :debts, only: [:new, :create]
   end
+  resources :state_budget_items, only: :index
 
   resources :victims, only: :index
   resources :offenders, only: :index
@@ -33,7 +36,7 @@ Rails.application.routes.draw do
 
 
   require 'sidekiq/api'
-  get "queue-status" => proc { [200, {"Content-Type" => "text/plain"}, [Sidekiq::Queue.new.size < 100 ? "OK" : "UHOH" ]] }
+  get "sidekiq-status" => proc { [200, {"Content-Type" => "text/plain"}, [Sidekiq::Queue.new.size < 50 ? "OK" : "UHOH" ]] }
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

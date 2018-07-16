@@ -116,6 +116,11 @@ cs:
     profile:
       too_many_authors: Příliš mnoho autorů
 
+  helpers:
+    submit:
+      state_budget_item:
+        create: Převést do státního rozpočtu
+
   activerecord:
     models:
       <<: *my_models

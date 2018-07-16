@@ -4,6 +4,7 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : t(:app_name)
     %meta{:name => "description", :content => content_for?(:description) ? yield(:description) : t(:app_description)}
+    %meta{name: 'theme-color', content: "#517493"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'modernizr', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
