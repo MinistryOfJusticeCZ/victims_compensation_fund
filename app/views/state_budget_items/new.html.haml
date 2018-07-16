@@ -1,0 +1,7 @@
+= egov_breadcrumbs do |breadcrumbs|
+  - breadcrumbs << link_to( @debt.claim.file_uid, @debt.claim )
+  - breadcrumbs << link_to( Debt.model_name.human(count: :other), @debt.claim )
+  - breadcrumbs << link_to( @debt.offender.person.fullname, @debt )
+  - breadcrumbs << link_to( StateBudgetItem.model_name.human(count: :other), @debt )
+  - breadcrumbs << t('label_new')
+  -# breadcrumbs << @state_budget_item.payment.payment_uid
