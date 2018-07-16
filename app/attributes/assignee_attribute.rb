@@ -9,7 +9,7 @@ class AssigneeAttribute < AzaharaSchema::Attribute
   end
 
   def available_values
-    @available_values ||= self.class.compensators.collect{|o| [o.fullname, o.key] }
+    @available_values ||= self.class.compensators.collect{|o| [o.fullname, o.id] }
   end
 
 end
