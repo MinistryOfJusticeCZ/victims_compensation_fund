@@ -15,6 +15,8 @@ class StateBudgetItemsController < ApplicationController
   end
 
   def create
+    @state_budget_item.debt ||= @debt
+    @state_budget_item.payment = Payment.new(value: @state_budget_item.value, direction: 'outgoing')
     respond_to do |format|
       if @state_budget_item.save
         format.html { redirect_to @debt, notice: t('common_labels.notice_saved', model: @state_budget_item.model_name.human) }
