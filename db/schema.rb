@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_13_134949) do
+ActiveRecord::Schema.define(version: 2018_05_29_154138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,21 +213,6 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
     t.index ["payment_id"], name: "index_satisfactions_on_payment_id"
   end
 
-  create_table "state_budget_items", force: :cascade do |t|
-    t.bigint "debt_id"
-    t.bigint "redemption_id"
-    t.bigint "payment_id"
-    t.date "due_at"
-    t.decimal "value", precision: 12, scale: 5
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["debt_id"], name: "index_state_budget_items_on_debt_id"
-    t.index ["deleted_at"], name: "index_state_budget_items_on_deleted_at"
-    t.index ["payment_id"], name: "index_state_budget_items_on_payment_id"
-    t.index ["redemption_id"], name: "index_state_budget_items_on_redemption_id"
-  end
-
   add_foreign_key "appeals", "claims"
   add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
@@ -248,7 +233,4 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
   add_foreign_key "satisfactions", "appeals"
   add_foreign_key "satisfactions", "egov_utils_users", column: "author_id"
   add_foreign_key "satisfactions", "payments"
-  add_foreign_key "state_budget_items", "debts"
-  add_foreign_key "state_budget_items", "payments"
-  add_foreign_key "state_budget_items", "redemptions"
 end

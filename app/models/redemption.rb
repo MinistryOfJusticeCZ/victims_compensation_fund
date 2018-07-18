@@ -7,6 +7,8 @@ class Redemption < ApplicationRecord
   accepts_nested_attributes_for :payment
   accepts_nested_attributes_for :debt
 
+  has_many :fund_transfers
+
   before_validation :set_payment_direction, if: :new_record?
 
   acts_as_paranoid

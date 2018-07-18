@@ -41,6 +41,9 @@ cs:
     satisfaction:
       one: Uspokojení
       other: Uspokojení
+    state_budget_item:
+      one: Položka státního rozpočtu
+      other: Položky státního rozpočtu
 
 
   model_attributes: &my_attributes
