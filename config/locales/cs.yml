@@ -117,6 +117,11 @@ cs:
       too_many_authors: Příliš mnoho autorů
 
   helpers:
+    action:
+      appeal:
+        new: Nová žádost
+      redemption:
+        new: Nová vybraná částka
     submit:
       state_budget_item:
         create: Převést do státního rozpočtu

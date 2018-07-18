@@ -1,7 +1,7 @@
 class StateBudgetItemsController < ApplicationController
 
   load_and_authorize_resource :debt
-  load_and_authorize_resource throug: :debt, except: :index
+  load_and_authorize_resource through: :debt, except: :index
   load_and_authorize_resource only: :index
 
   def index
