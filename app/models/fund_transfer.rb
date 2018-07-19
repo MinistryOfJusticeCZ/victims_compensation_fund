@@ -7,6 +7,8 @@ class FundTransfer < ApplicationRecord
 
   acts_as_paranoid
 
+  after_save :check_redemption_fully_processed
+
   def value
     super || redemption_payment_value
   end
@@ -14,4 +16,13 @@ class FundTransfer < ApplicationRecord
   def redemption_payment_value
     redemption.payment.value
   end
+
+  private
+    def check_redemption_fully_processed
+      if read_attribute(:value).nil? || redemption.fund_transfers.sum{|ft| ft.value} + 0.001 > redemption_payment_value
+        redemption.update(state: 'processed')
+      else
+        redemption.update(state: 0)
+      end
+    end
 end

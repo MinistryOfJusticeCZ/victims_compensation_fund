@@ -13,8 +13,10 @@ class Redemption < ApplicationRecord
 
   acts_as_paranoid
 
+  enum state: {waiting: 0, processed: 1}
+
   scope :unprocessed, ->(boundary=Date.today-boundary_days) {
-    joins(:claim).where(
+    where.not(state: 'processed').joins(:claim).where(
       Claim.arel_table[:binding_effect].lteq(boundary).or(
         Claim.arel_table[:binding_effect].eq(nil).and(arel_table[:created_at].lteq(boundary))
       )
@@ -25,6 +27,7 @@ class Redemption < ApplicationRecord
   self.boundary_days = 60.days
 
   def unprocessed?
+    return false if processed?
     if claim.binding_effect
       claim.binding_effect <= Date.today - self.class.boundary_days
     else
