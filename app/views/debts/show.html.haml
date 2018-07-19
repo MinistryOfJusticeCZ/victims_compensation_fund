@@ -28,7 +28,4 @@
 
 .redemptions
   %h4= Redemption.model_name.human(count: :other)
-  #redemptions_grid
-
-:javascript
-  #{raw render 'common/grid', grid_id: 'redemptions_grid', schema: @redemption_schema, create_attributes: {claim_id: @debt.claim.id, debt_id: @debt.id}, allow_delete: true}
+  = render @redemption_schema, filters: false, show_toolbar: true, create_attributes: {claim_id: @debt.claim.id, debt_id: @debt.id}, allow_delete: true
