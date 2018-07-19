@@ -14,7 +14,7 @@ gem 'pg', '~> 1.0'
 gem 'unicorn', '~> 5.4', group: :production
 gem 'puma', '~> 3.7', group: :development
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails', '~> 1.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -69,6 +69,8 @@ group :development do
 
 
   gem 'i18n-debug'
+
+  # gem 'speedup-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

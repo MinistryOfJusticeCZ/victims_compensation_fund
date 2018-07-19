@@ -38,28 +38,36 @@ class Payment < ApplicationRecord
     super || currency_value
   end
 
-  def file_uid
+  def paid_record
     case direction
     when 'outgoing'
-      satisfaction_may_deleted.file_uid
+      budget_item_may_deleted || satisfaction_may_deleted
     when 'incoming'
-      redemption_may_deleted.file_uid
+      redemption_may_deleted
     end
   end
 
-  def claim
+  def summary_record
     case direction
     when 'outgoing'
-      satisfaction_may_deleted.appeal.claim
+      budget_item_may_deleted && budget_item_may_deleted.debt || satisfaction_may_deleted.appeal
     when 'incoming'
-      redemption_may_deleted.debt.claim
+      redemption_may_deleted.debt
     end
+  end
+
+  def file_uid
+    paid_record.file_uid
+  end
+
+  def claim
+    summary_record.claim
   end
 
   def person
     case direction
     when 'outgoing'
-      satisfaction_may_deleted.appeal.victim
+      satisfaction_may_deleted && satisfaction_may_deleted.appeal.victim
     when 'incoming'
       redemption_may_deleted.debt.offender.person
     end

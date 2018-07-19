@@ -25,6 +25,7 @@
 = formatter.labeled_html_attribute_value(schema.attribute('payment-paid_at'), @redemption)
 
 - if @redemption.unprocessed?
-  = bootstrap_form_for([@redemption.debt, @redemption.debt.state_budget_items.build(redemption_id: @redemption.id)]) do |f|
-    = f.hidden_field(:redemption_id)
+  = bootstrap_form_for([@redemption.debt, @redemption.debt.state_budget_items.build(fund_transfers_attributes: {'0' => {redemption_id: @redemption.id}})]) do |f|
+    = f.fields_for(:fund_transfers) do |fields|
+      = fields.hidden_field(:redemption_id)
     = f.submit

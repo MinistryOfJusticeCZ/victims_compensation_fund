@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_154138) do
+ActiveRecord::Schema.define(version: 2018_07_18_175827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,20 @@ ActiveRecord::Schema.define(version: 2018_05_29_154138) do
     t.datetime "password_changed_at"
   end
 
+  create_table "fund_transfers", force: :cascade do |t|
+    t.bigint "redemption_id"
+    t.bigint "state_budget_item_id"
+    t.bigint "satisfaction_id"
+    t.decimal "value", precision: 12, scale: 5
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_fund_transfers_on_deleted_at"
+    t.index ["redemption_id"], name: "index_fund_transfers_on_redemption_id"
+    t.index ["satisfaction_id"], name: "index_fund_transfers_on_satisfaction_id"
+    t.index ["state_budget_item_id"], name: "index_fund_transfers_on_state_budget_item_id"
+  end
+
   create_table "offenders", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "claim_id"
@@ -213,6 +227,18 @@ ActiveRecord::Schema.define(version: 2018_05_29_154138) do
     t.index ["payment_id"], name: "index_satisfactions_on_payment_id"
   end
 
+  create_table "state_budget_items", force: :cascade do |t|
+    t.bigint "debt_id"
+    t.bigint "payment_id"
+    t.date "due_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["debt_id"], name: "index_state_budget_items_on_debt_id"
+    t.index ["deleted_at"], name: "index_state_budget_items_on_deleted_at"
+    t.index ["payment_id"], name: "index_state_budget_items_on_payment_id"
+  end
+
   add_foreign_key "appeals", "claims"
   add_foreign_key "appeals", "egov_utils_people", column: "victim_id"
   add_foreign_key "appeals", "egov_utils_users", column: "assigned_to_id"
@@ -225,6 +251,9 @@ ActiveRecord::Schema.define(version: 2018_05_29_154138) do
   add_foreign_key "egov_utils_legal_people", "egov_utils_people", column: "person_id"
   add_foreign_key "egov_utils_natural_people", "egov_utils_people", column: "person_id"
   add_foreign_key "egov_utils_people", "egov_utils_addresses", column: "residence_id"
+  add_foreign_key "fund_transfers", "redemptions"
+  add_foreign_key "fund_transfers", "satisfactions"
+  add_foreign_key "fund_transfers", "state_budget_items"
   add_foreign_key "offenders", "claims"
   add_foreign_key "offenders", "egov_utils_people", column: "person_id"
   add_foreign_key "redemptions", "debts"
@@ -233,4 +262,6 @@ ActiveRecord::Schema.define(version: 2018_05_29_154138) do
   add_foreign_key "satisfactions", "appeals"
   add_foreign_key "satisfactions", "egov_utils_users", column: "author_id"
   add_foreign_key "satisfactions", "payments"
+  add_foreign_key "state_budget_items", "debts"
+  add_foreign_key "state_budget_items", "payments"
 end
