@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui/widget
 //= require turbolinks
-//= require tether
 //= require azahara_schema/application
 //= require egov_utils/application
 //= require_tree .

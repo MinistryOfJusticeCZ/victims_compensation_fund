@@ -73,6 +73,15 @@ class Payment < ApplicationRecord
     end
   end
 
+    def budget_category_prefix
+      case direction
+      when 'incoming'
+        88
+      when 'outgoing'
+        80
+      end
+    end
+
   private
 
     def set_default_currency
@@ -102,15 +111,6 @@ class Payment < ApplicationRecord
 
     def mark_for_ires_update
       self.status = 'updated'
-    end
-
-    def budget_category_prefix
-      case direction
-      when 'incoming'
-        88
-      when 'outgoing'
-        80
-      end
     end
 
     def send_to_ires

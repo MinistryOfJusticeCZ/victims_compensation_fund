@@ -13,6 +13,14 @@ class FundTransfer < ApplicationRecord
     super || redemption_payment_value
   end
 
+  def budget_value
+    value - probation_value
+  end
+
+  def probation_value
+    ((value * 2) / 100).ceil
+  end
+
   def redemption_payment_value
     redemption.payment.value
   end
