@@ -22,9 +22,15 @@ class Redemption < ApplicationRecord
       )
     )
   }
+  scope :paid, -> { joins(:payment).where(Payment.arel_table[:status].eq('processed')) }
+  scope :unprocessed_paid, ->{ unprocessed.paid }
 
   cattr_accessor :boundary_days
   self.boundary_days = 60.days
+
+  def paid?
+    payment.processed?
+  end
 
   def unprocessed?
     return false if processed?

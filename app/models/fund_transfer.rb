@@ -30,7 +30,7 @@ class FundTransfer < ApplicationRecord
       if read_attribute(:value).nil? || redemption.fund_transfers.sum{|ft| ft.value} + 0.001 > redemption_payment_value
         redemption.update(state: 'processed')
       else
-        redemption.update(state: 0)
+        redemption.update(state: 'waiting')
       end
     end
 end

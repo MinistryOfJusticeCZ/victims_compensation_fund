@@ -1,10 +1,11 @@
 class Satisfaction < ApplicationRecord
   belongs_to :payment, dependent: :destroy
   belongs_to :appeal
+  has_many :fund_transfers, dependent: :destroy
 
-  accepts_nested_attributes_for :payment
+  before_validation :set_payment_direction, on: :create
 
-  before_validation :set_payment_direction, if: :new_record?
+  accepts_nested_attributes_for :fund_transfers
 
   acts_as_paranoid
 

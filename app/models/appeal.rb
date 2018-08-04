@@ -23,6 +23,10 @@ class Appeal < ApplicationRecord
     'czk'
   end
 
+  def unsatisfied_amount
+    @unsatisfied_amount ||= amount - satisfactions.joins(:payment).sum(Payment.arel_table[:value])
+  end
+
 
   private
 

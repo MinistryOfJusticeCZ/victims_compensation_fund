@@ -114,8 +114,8 @@ class Payment < ApplicationRecord
     end
 
     def send_to_ires
-      return unless claim
-      SendPaymentJob.perform_later(claim.court_uid)
+      return unless direction == 'incoming'
+      SendPaymentJob.perform_later(id)
     end
 
 end

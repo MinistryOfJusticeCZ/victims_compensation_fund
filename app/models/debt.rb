@@ -5,6 +5,8 @@ class Debt < ApplicationRecord
   has_many :redemptions, dependent: :destroy
   has_many :state_budget_items, dependent: :destroy
 
+  has_many :appeals, ->(debt){ where(offender_id: debt.offender_id) }, through: :claim, class_name: 'Appeal'
+
   accepts_nested_attributes_for :claim
   accepts_nested_attributes_for :offender
 

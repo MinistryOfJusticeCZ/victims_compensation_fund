@@ -12,6 +12,14 @@
   .attribute
     .label= EgovUtils::LegalPerson.human_attribute_name('ico')
     .value= @appeal.victim.legal_person.ico
+- if @appeal.offender
+  .attribute
+    .label= Offender.model_name.human
+    .value= @appeal.offender.person.fullname
+- if @appeal.offender && @appeal.offender.person.legal?
+  .attribute
+    .label= EgovUtils::LegalPerson.human_attribute_name('ico')
+    .value= @appeal.offender.person.legal_person.ico
 .attribute
   .label= Appeal.human_attribute_name('amount')
   .value= Money.from_amount(@appeal.amount.to_f, @appeal.currency_code.upcase).format
