@@ -96,7 +96,7 @@ deploy_staging:
   environment:
     name: staging
   only:
-    - master
+    - state_budget
 
 deploy_production:
   stage: deploy
