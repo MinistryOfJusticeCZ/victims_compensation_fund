@@ -14,11 +14,11 @@ gem 'pg', '~> 1.0'
 gem 'unicorn', '~> 5.4', group: :production
 gem 'puma', '~> 3.7', group: :development
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails', '~> 1.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', group: :test, platforms: :ruby
+gem 'mini_racer', group: :test, platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -69,6 +69,8 @@ group :development do
 
 
   gem 'i18n-debug'
+
+  # gem 'speedup-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -90,9 +92,3 @@ gem 'apipie-rails', '~> 0.5'
 # IRES
 gem 'savon', '~> 2.11'
 gem 'signer', '~> 1.6'
-
-#UI gems
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
-
