@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110003) do
     t.integer "status", default: 1
     t.datetime "deleted_at"
     t.bigint "assigned_to_id"
-    t.string "msp_file_id"
+    t.string "msp_file_uid"
     t.index ["assigned_to_id"], name: "index_claims_on_assigned_to_id"
     t.index ["deleted_at"], name: "index_claims_on_deleted_at"
   end

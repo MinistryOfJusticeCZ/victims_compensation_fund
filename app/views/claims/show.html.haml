@@ -9,12 +9,10 @@
             %i.fa.fa-pencil-alt
     .card-body
       = formatter.labeled_html_attribute_value(schema.attribute('court_uid'), @claim)
-      .attribute
-        .label= Claim.human_attribute_name('file_uid')
-        .value= @claim.file_uid
-      .attribute
-        .label= Claim.human_attribute_name('binding_effect')
-        .value= @claim.binding_effect ? l(@claim.binding_effect.to_date) : unfilled_attribute_message
+      = formatter.labeled_html_attribute_value(schema.attribute('file_uid'), @claim)
+      = formatter.labeled_html_attribute_value(schema.attribute('binding_effect'), @claim)
+      - if current_user.has_role?('compensator') || current_user.has_role?('admin')
+        = formatter.labeled_html_attribute_value(schema.attribute('msp_file_uid'), @claim)
   .card
     .card-header
       = Claim.human_attribute_name('assigned_to-fullname')
