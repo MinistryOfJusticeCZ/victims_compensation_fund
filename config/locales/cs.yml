@@ -62,6 +62,7 @@ cs:
       court_uid: Prvostupňový soud
       file_uid: Spisová značka případu
       binding_effect: Nabytí právní moci
+      msp_file_uid: Spisová značka MSP
       status: Stav
       statuses:
         empty: Prázdný případ
