@@ -18,8 +18,8 @@ module DocumentGenerator
     def context_data
       {
         "date"=>state_budget_item.created_at.iso8601,
-        "document_uid"=>"MSP-xxx/2018-ODSK-VTS/x",
-        "file_uid"=> state_budget_item.claim.file_uid,
+        "file_uid"=> state_budget_item.claim.msp_file_uid,
+        "court_file_uid"=> state_budget_item.claim.file_uid,
         "dokladova_rada"=> state_budget_item.payment.budget_category_prefix,
         "payment"=>{
           "payment_uid"=> state_budget_item.payment.payment_uid,
@@ -35,8 +35,8 @@ module DocumentGenerator
       }
     end
 
-    def approvement_paper
-      response = HTTParty.post(self.class.url(1), body: {context: context_data})
+    def approvement_paper(input)
+      response = HTTParty.post(self.class.url(1), body: {context: context_data, input: input})
       response.body
     end
 

@@ -12,7 +12,7 @@ class StateBudgetItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf {
-        send_data generate_approvement_paper(@state_budget_item), type: :pdf
+        send_data generate_approvement_paper(@state_budget_item, params[:input].permit!.to_h), type: :pdf, disposition: 'attachment', filename: "SD_#{@state_budget_item.claim.msp_file_uid}.pdf"
       }
     end
   end
@@ -70,10 +70,10 @@ class StateBudgetItemsController < ApplicationController
       params.require(:state_budget_item).permit(editable_attributes(StateBudgetItem, :update))
     end
 
-    def generate_approvement_paper(state_budget_item)
+    def generate_approvement_paper(state_budget_item, input)
       require_dependency 'document_generator/resources/document'
       doc = DocumentGenerator::Document.new(state_budget_item)
-      doc.approvement_paper
+      doc.approvement_paper(input)
     end
 
 end

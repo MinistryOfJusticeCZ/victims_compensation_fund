@@ -20,6 +20,26 @@
 = formatter.labeled_html_attribute_value(schema.attribute('payment-status'), @state_budget_item)
 = formatter.labeled_html_attribute_value(schema.attribute('payment-paid_at'), @state_budget_item)
 
-= link_to( state_budget_item_path(@state_budget_item, format: :pdf), class: 'btn btn-secondary' ) do
-  %i.far.fa-file-pdf
-  = t('label_approvement_paper')
+- if @state_budget_item.claim.msp_file_uid?
+  = link_to( 'javascript:void(0)', id: 'generate_state_budget', class: 'btn btn-secondary' ) do
+    %i.far.fa-file-pdf
+    = t('label_approvement_paper')
+  :javascript
+    document.getElementById('generate_state_budget').addEventListener('click', function(){
+      eGovUtilities.showModal("#{ j render 'documents/approvement_paper_form.html', state_budget_item: @state_budget_item }", {ajaxForm: false});
+    });
+
+- else
+  %em= t('text_missing_msp_file_uid')
+  = link_to(label_record_action(@state_budget_item.claim), edit_claim_path(@state_budget_item.claim, format: :js), remote: true, class: 'btn btn-secondary', data: {turbolinks: false})
+
+  :javascript
+    $(function(){
+      var after_modal_submit = (evt, data)->
+        Turbolinks.visit('#{request.path}');
+
+      $(document).on 'egov:submitted', '#modal', after_modal_submit
+      document.addEventListener("turbolinks:before-cache", function() {
+        $(document).off 'egov:submitted', after_modal_submit
+      });
+    });

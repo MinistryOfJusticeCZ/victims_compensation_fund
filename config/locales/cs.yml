@@ -18,6 +18,7 @@ cs:
   label_approvement_paper: Schvalovací doložka
   label_transfer_to_victim: Převést oběti %{victim}
   notice_claim_merge: Případ tohoto prvostupňového soudu s touto spisovou značkou již existuje. Chcete záznam přiřadit tomuto případu?
+  text_missing_msp_file_uid: Chybí spisová značka případu, prosím zadejte ji.
 
   models: &my_models
     appeal:
@@ -113,6 +114,10 @@ cs:
     satisfaction:
       created_at: Vytvořeno
 
+  helper_labels: &my_labels
+    input:
+      document_number: Pořadové číslo písemnosti
+
   model_help_messages: &my_help_messages
     claim:
       file_uid: S.Z. případu prvostupňového soudu, ze kterého vznikl nárok
@@ -128,6 +133,8 @@ cs:
         new: Nová žádost
       redemption:
         new: Nová vybraná částka
+    label:
+      <<: *my_labels
     submit:
       state_budget_item:
         create: Převést do státního rozpočtu
