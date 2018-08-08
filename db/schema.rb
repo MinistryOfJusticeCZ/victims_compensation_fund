@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_13_134949) do
+ActiveRecord::Schema.define(version: 2018_08_08_110003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
     t.integer "status", default: 1
     t.datetime "deleted_at"
     t.bigint "assigned_to_id"
+    t.string "msp_file_id"
     t.index ["assigned_to_id"], name: "index_claims_on_assigned_to_id"
     t.index ["deleted_at"], name: "index_claims_on_deleted_at"
   end
@@ -163,6 +164,20 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
     t.datetime "password_changed_at"
   end
 
+  create_table "fund_transfers", force: :cascade do |t|
+    t.bigint "redemption_id"
+    t.bigint "state_budget_item_id"
+    t.bigint "satisfaction_id"
+    t.decimal "value", precision: 12, scale: 5
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_fund_transfers_on_deleted_at"
+    t.index ["redemption_id"], name: "index_fund_transfers_on_redemption_id"
+    t.index ["satisfaction_id"], name: "index_fund_transfers_on_satisfaction_id"
+    t.index ["state_budget_item_id"], name: "index_fund_transfers_on_state_budget_item_id"
+  end
+
   create_table "offenders", force: :cascade do |t|
     t.bigint "person_id"
     t.bigint "claim_id"
@@ -194,6 +209,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer "state", default: 0, null: false
     t.index ["author_id"], name: "index_redemptions_on_author_id"
     t.index ["debt_id"], name: "index_redemptions_on_debt_id"
     t.index ["deleted_at"], name: "index_redemptions_on_deleted_at"
@@ -215,17 +231,14 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
 
   create_table "state_budget_items", force: :cascade do |t|
     t.bigint "debt_id"
-    t.bigint "redemption_id"
     t.bigint "payment_id"
     t.date "due_at"
-    t.decimal "value", precision: 12, scale: 5
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["debt_id"], name: "index_state_budget_items_on_debt_id"
     t.index ["deleted_at"], name: "index_state_budget_items_on_deleted_at"
     t.index ["payment_id"], name: "index_state_budget_items_on_payment_id"
-    t.index ["redemption_id"], name: "index_state_budget_items_on_redemption_id"
   end
 
   add_foreign_key "appeals", "claims"
@@ -240,6 +253,9 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
   add_foreign_key "egov_utils_legal_people", "egov_utils_people", column: "person_id"
   add_foreign_key "egov_utils_natural_people", "egov_utils_people", column: "person_id"
   add_foreign_key "egov_utils_people", "egov_utils_addresses", column: "residence_id"
+  add_foreign_key "fund_transfers", "redemptions"
+  add_foreign_key "fund_transfers", "satisfactions"
+  add_foreign_key "fund_transfers", "state_budget_items"
   add_foreign_key "offenders", "claims"
   add_foreign_key "offenders", "egov_utils_people", column: "person_id"
   add_foreign_key "redemptions", "debts"
@@ -250,5 +266,4 @@ ActiveRecord::Schema.define(version: 2018_07_13_134949) do
   add_foreign_key "satisfactions", "payments"
   add_foreign_key "state_budget_items", "debts"
   add_foreign_key "state_budget_items", "payments"
-  add_foreign_key "state_budget_items", "redemptions"
 end
