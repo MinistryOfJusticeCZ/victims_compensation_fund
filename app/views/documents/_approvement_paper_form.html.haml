@@ -1,0 +1,3 @@
+= bootstrap_form_for(:input, url: state_budget_item_path(@state_budget_item, format: :pdf), method: :get) do |f|
+  = f.text_field(:document_number)
+  = f.submit
