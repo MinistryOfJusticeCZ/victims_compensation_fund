@@ -23,7 +23,7 @@ set :deploy_to, "/srv/#{fetch(:application)}"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml", "config/unicorn.rb", "config/config.yml"
+append :linked_files, "config/database.yml", "config/secrets.yml", "config/unicorn.rb", "config/config.yml", "config/sidekiq_queues.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -45,4 +45,4 @@ set :bundle_env_variables, {
   'https_proxy' => 'http://proxy.justice.cz:3128/'
 }
 
-set :sidekiq_options, "-q default -q mailers"
+set :sidekiq_options, "-C #{fetch(:release_path)}config/sidekiq_queues.yml"
