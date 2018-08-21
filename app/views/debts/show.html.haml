@@ -19,8 +19,6 @@
 .attribute
   .label= Debt.human_attribute_name('value')
   .value= @debt.value.nil? ? unfilled_attribute_message : Money.from_amount(@debt.value, @debt.currency_code.upcase).format
-- pp @debt.value
-- pp schema.attribute('sum:redemptions-payment-value').value(@debt)
 = formatter.labeled_html_attribute_value(schema.attribute('sum:redemptions-payment-value'), @debt)
 
 .actions.text-center
@@ -29,3 +27,7 @@
 .redemptions
   %h4= Redemption.model_name.human(count: :other)
   = render @redemption_schema, filters: false, show_toolbar: true, create_attributes: {claim_id: @debt.claim.id, debt_id: @debt.id}, allow_delete: true
+
+.state-budget-items
+  %h4= StateBudgetItem.model_name.human(count: :other)
+  = render @budget_schema, filters: false

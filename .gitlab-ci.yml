@@ -71,7 +71,7 @@ deploy_lab:
     - gem install capistrano-rails
     - gem install capistrano3-unicorn
     - gem install capistrano-sidekiq
-    - cap lab deploy
+    - cap lab deploy REVISION="$CI_COMMIT_SHA"
   environment:
     name: lab
   only:
@@ -92,11 +92,11 @@ deploy_staging:
     - gem install capistrano-rails
     - gem install capistrano3-unicorn
     - gem install capistrano-sidekiq
-    - cap staging deploy
+    - cap staging deploy REVISION="$CI_COMMIT_SHA"
   environment:
     name: staging
   only:
-    - master
+    - state_budget
 
 deploy_production:
   stage: deploy
@@ -113,7 +113,7 @@ deploy_production:
     - gem install capistrano-rails
     - gem install capistrano3-unicorn
     - gem install capistrano-sidekiq
-    - cap production deploy
+    - cap production deploy REVISION="$CI_COMMIT_SHA"
   environment:
     name: production
   only:

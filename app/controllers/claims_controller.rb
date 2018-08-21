@@ -51,11 +51,11 @@ class ClaimsController < ApplicationController
   private
 
     def create_params
-      params.require(:claim).permit(:court_uid, :file_uid, :binding_effect)
+      params.require(:claim).permit(:court_uid, :file_uid, :binding_effect, :msp_file_uid)
     end
 
     def update_params
-      params.require(:claim).permit(:court_uid, :file_uid, :binding_effect, :assigned_to_id)
+      params.require(:claim).permit(:court_uid, :file_uid, :binding_effect, :msp_file_uid, :assigned_to_id)
     end
 
 end

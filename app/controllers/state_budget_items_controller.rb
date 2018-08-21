@@ -1,14 +1,20 @@
 class StateBudgetItemsController < ApplicationController
 
   load_and_authorize_resource :debt
-  load_and_authorize_resource throug: :debt, except: :index
-  load_and_authorize_resource only: :index
+  load_and_authorize_resource through: :debt, except: [:index, :show]
+  load_and_authorize_resource only: [:index, :show]
 
   def index
     azahara_schema_index
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.pdf {
+        send_data generate_approvement_paper(@state_budget_item, params[:input].permit!.to_h), type: :pdf, disposition: 'attachment', filename: "SD_#{@state_budget_item.claim.msp_file_uid}.pdf"
+      }
+    end
   end
 
   def new
@@ -16,6 +22,7 @@ class StateBudgetItemsController < ApplicationController
 
   def create
     respond_to do |format|
+      @state_budget_item.build_payment(value: @state_budget_item.fund_transfers.sum{|ft| ft.budget_value}, direction: 'outgoing')
       if @state_budget_item.save
         format.html { redirect_to @debt, notice: t('common_labels.notice_saved', model: @state_budget_item.model_name.human) }
         format.json { render json: @state_budget_item.reload.as_json(include: :payment), status: :created }
@@ -61,6 +68,12 @@ class StateBudgetItemsController < ApplicationController
 
     def update_params
       params.require(:state_budget_item).permit(editable_attributes(StateBudgetItem, :update))
+    end
+
+    def generate_approvement_paper(state_budget_item, input)
+      require_dependency 'document_generator/resources/document'
+      doc = DocumentGenerator::Document.new(state_budget_item)
+      doc.approvement_paper(input)
     end
 
 end

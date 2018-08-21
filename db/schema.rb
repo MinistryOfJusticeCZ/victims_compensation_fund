@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110003) do
 
   create_table "debts", force: :cascade do |t|
     t.bigint "claim_id"
-    t.decimal "value"
+    t.decimal "value", precision: 15, scale: 3
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "offender_id"
@@ -107,8 +107,6 @@ ActiveRecord::Schema.define(version: 2018_08_08_110003) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "external_uid"
-    t.string "organization_key"
-    t.index ["organization_key"], name: "index_egov_utils_groups_on_organization_key"
   end
 
   create_table "egov_utils_groups_users", force: :cascade do |t|
@@ -134,10 +132,12 @@ ActiveRecord::Schema.define(version: 2018_08_08_110003) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "birth_place"
+    t.bigint "residence_id"
     t.bigint "person_id"
     t.string "title"
     t.string "higher_title"
     t.index ["person_id"], name: "index_egov_utils_natural_people_on_person_id"
+    t.index ["residence_id"], name: "index_egov_utils_natural_people_on_residence_id"
   end
 
   create_table "egov_utils_people", force: :cascade do |t|
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110003) do
     t.string "payment_uid"
     t.decimal "value", precision: 15, scale: 3
     t.integer "direction"
-    t.integer "currency_code"
+    t.integer "currency_code", default: 1
     t.decimal "currency_value", precision: 15, scale: 3
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110003) do
   add_foreign_key "egov_utils_groups_users", "egov_utils_groups", column: "group_id"
   add_foreign_key "egov_utils_groups_users", "egov_utils_users", column: "user_id"
   add_foreign_key "egov_utils_legal_people", "egov_utils_people", column: "person_id"
+  add_foreign_key "egov_utils_natural_people", "egov_utils_addresses", column: "residence_id"
   add_foreign_key "egov_utils_natural_people", "egov_utils_people", column: "person_id"
   add_foreign_key "egov_utils_people", "egov_utils_addresses", column: "residence_id"
   add_foreign_key "fund_transfers", "redemptions"

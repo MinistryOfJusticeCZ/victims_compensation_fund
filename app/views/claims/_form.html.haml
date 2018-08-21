@@ -8,4 +8,4 @@
       .btn-container
     .col-12= form.date_field(:binding_effect)
     - if current_user.has_role?('compensator') || current_user.has_role?('admin')
-      .col-12.col-md-12= form.text_field(:msp_file_id)
+      .col-12.col-md-12= form.text_field(:msp_file_uid)

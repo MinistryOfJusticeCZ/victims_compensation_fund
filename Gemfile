@@ -92,3 +92,5 @@ gem 'apipie-rails', '~> 0.5'
 # IRES
 gem 'savon', '~> 2.11'
 gem 'signer', '~> 1.6'
+
+gem 'httparty', '~> 0.16'

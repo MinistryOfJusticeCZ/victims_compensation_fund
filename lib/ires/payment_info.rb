@@ -23,7 +23,7 @@ module Ires
     end
 
     def paid?
-      infos.all?{|info| %w{D E}.include?(info['stav_dokladu']) && info['castka_zbyva'].to_f < 0.001 }
+      infos.all?{|info| %w{D E}.include?(info['stav_dokladu']) && info['castka_zbyva'].to_f < 0.0001 }
     end
 
     def paid_at

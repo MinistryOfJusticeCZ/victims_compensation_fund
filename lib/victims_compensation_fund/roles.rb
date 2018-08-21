@@ -52,6 +52,8 @@ class CompensationDepartmentRole < EgovUtils::UserUtils::Role
     ability.can :manage, Claim
     ability.can :manage, Offender
     ability.can :manage, Satisfaction
+    ability.can :manage, StateBudgetItem
+    ability.can :manage, FundTransfer
     ability.can :manage, Victim
     ability.can :manage, Redemption
     ability.can :manage, EgovUtils::Person

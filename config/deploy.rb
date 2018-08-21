@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock "~> 3.10"
 
+set :branch, ENV.fetch('REVISION', 'master')
+
 set :application, "victims_compensation_fund"
 set :repo_url, "git@git.servis.justice.cz:internal_apps/victims_compensation_fund.git"
 

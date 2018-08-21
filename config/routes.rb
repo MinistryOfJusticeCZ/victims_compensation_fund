@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :appeals, only: [:new, :create]
     resources :debts, only: [:new, :create]
   end
-  resources :state_budget_items, only: :index
+  resources :state_budget_items, only: [:index, :show, :edit, :update]
 
   resources :victims, only: :index
   resources :offenders, only: :index

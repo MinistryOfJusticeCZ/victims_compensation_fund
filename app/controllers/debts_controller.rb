@@ -10,6 +10,8 @@ class DebtsController < ApplicationController
   def show
     @redemption_schema = RedemptionSchema.new(columns: ['payment-value', 'payment-payment_uid', 'payment-status', 'created_at'], outputs: ['grid'])
     @redemption_schema.add_filter('debt_id', '=', @debt.id)
+    @budget_schema = StateBudgetItemSchema.new(columns: ['payment-payment_uid', 'payment-value'], outputs: ['grid'])
+    @budget_schema.add_filter('debt_id', '=', @debt.id)
   end
 
   def new

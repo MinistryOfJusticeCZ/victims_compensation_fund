@@ -165,6 +165,18 @@ module Ires
       message.ires_requests.all? {|req| req.after_sent }
     end
 
+    def send_payment_prescription!(payment, job_id)
+      message = Message.new(payment.claim.court_uid, job_id, [Ires::Requests::Request.for_payment(payment)])
+
+      signed_message = signed_message(message.to_xml)
+      validate_prescription(signed_message)
+
+      base64_message = Base64.encode64(signed_message).gsub("\n", '')
+
+      response = client.call(:prijmi_predpis, message: {'tns:xmlData' => base64_message })
+      Rails.logger.info response.body
+      message.ires_requests.all? {|req| req.after_sent }
+    end
 
   end
 end
