@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: 'claims#index'
 
+  mount MagicLamp::Genie, at: "/magic_lamp" if defined?(MagicLamp)
+
   resources :redemptions
   resources :appeals do
     resources :satisfactions

@@ -51,6 +51,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem "factory_bot_rails", '~> 4.0'
   gem 'pry-rails'
+
+  gem "teaspoon-mocha"
+  gem "magic_lamp"
 end
 
 group :test do
