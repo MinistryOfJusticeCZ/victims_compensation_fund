@@ -3,8 +3,10 @@ require 'ires/ires'
 class SendPaymentJob < ApplicationJob
   queue_as :default
 
-  def perform(payment_id, organization_code)
+  def perform(payment_id, organization_code=nil)
     sender = Ires::Sender.new
-    sender.send_payment_prescription!(Payment.with_deleted.find(payment_id), organization_code, job_id)
+    payment = Payment.with_deleted.find(payment_id)
+    organization_code ||= payment.claim.cournt_uid
+    sender.send_payment_prescription!(payment, organization_code, job_id)
   end
 end

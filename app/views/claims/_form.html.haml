@@ -9,3 +9,38 @@
     .col-12= form.date_field(:binding_effect)
     - if current_user.has_role?('compensator') || current_user.has_role?('admin')
       .col-12.col-md-12= form.text_field(:msp_file_uid)
+
+- if claim.new_record?
+  :javascript
+    $(function(){
+      var court_id = "#claim_court_uid-#{form.object.id}",
+          file_uid = "#claim_file_uid-#{form.object.id}";
+
+      function show_merge_option($form, $container) {
+        var court_val = $(court_id).val(),
+            fileu_val = $(file_uid).val();
+
+        $container.hide();
+        $container.attr('hidden', false)
+
+        $.ajax('#{claims_path(format: :json)}', {method: "GET", data: {
+          f: { court_uid: court_val, file_uid: '=|'+fileu_val }
+        }}).done(function(data, status, xhr){
+          if ( data.count > 0 ) {
+            $merge_id = $('<input name="claim_id" type="hidden" value="'+data.entities[0].id+'" class="claim_merge_id">');
+            $form.append($merge_id);
+            $btn = $('<a></a>', {href: window.location.href+ '?' + $form.serialize(), class: 'btn btn-secondary', 'data-method': '#{request.request_method}'}).text("#{j t('label_confirm')}");
+            $container.find('.btn-container').html('').append($btn);
+            $container.show();
+            $merge_id.remove();
+          }
+        });
+      }
+      $(court_id +', '+ file_uid).on('change', function(evt) {
+        var $field = $(this),
+            $form = $field.closest('form'),
+            $court_form = $field.closest('.court-form');
+        show_merge_option($form, $court_form.find('.merge_container'))
+      });
+      show_merge_option( $(court_id).closest('form'), $(court_id).closest('.court-form').find('.merge_container') );
+    });
