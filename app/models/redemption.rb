@@ -27,6 +27,7 @@ class Redemption < ApplicationRecord
 
   cattr_accessor :boundary_days
   self.boundary_days = 65.days
+  cattr_accessor :transfer_due
   self.transfer_due  = 75.days
 
   def paid?
