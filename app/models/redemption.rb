@@ -26,7 +26,8 @@ class Redemption < ApplicationRecord
   scope :unprocessed_paid, ->{ unprocessed.paid }
 
   cattr_accessor :boundary_days
-  self.boundary_days = 60.days
+  self.boundary_days = 65.days
+  self.transfer_due  = 75.days
 
   def paid?
     payment.processed?

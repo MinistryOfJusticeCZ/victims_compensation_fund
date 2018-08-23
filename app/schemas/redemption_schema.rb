@@ -23,7 +23,7 @@ class RedemptionSchema < AzaharaSchema::ModelSchema
   end
 
   def default_sort
-    {'updated_at' => 'desc'}
+    {'created_at' => 'desc'}
   end
 
 end

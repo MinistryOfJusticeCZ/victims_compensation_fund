@@ -23,7 +23,7 @@ module DocumentGenerator
         "dokladova_rada"=> state_budget_item.payment.budget_category_prefix,
         "payment"=>{
           "payment_uid"=> state_budget_item.payment.payment_uid,
-          "due_at"=> [state_budget_item.claim.binding_effect.try(:+, Redemption.boundary_days), Date.today + 5.days].compact.max,
+          "due_at"=> [state_budget_item.claim.binding_effect.try(:+, Redemption.transfer_due), Date.today + 5.days].compact.max,
           "amount"=> state_budget_item.payment.value,
           "receiving_subject" => {
             "name"=> "Ministerstvo spravedlnosti ČR",
