@@ -42,10 +42,10 @@ module Ires
       '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
     end
     def inner_response_hash
-      { 'statusOperace' => {'vysledek' => true} }
+      { 'urn2:statusOperace' => {'urn2:vysledek' => true} }
     end
     def response_hash
-      {'urn2:prijmiInformaceOZaplaceniXmlResponse' => inner_response_hash.merge('@xmlns:urn2' => ois_namespace, '@xmlns'=>common_namespace)}
+      {'prijmiInformaceOZaplaceniXmlResponse' => inner_response_hash.merge('@xmlns' => ois_namespace, '@xmlns:urn2'=>common_namespace)}
     end
 
     def response
@@ -53,7 +53,7 @@ module Ires
     end
 
     def signed_response(sender=self.sender)
-      res = sender.signed_message(response)
+      res = sender.signed_message(response, inclusive_namespaces: ['urn2'])
       sender.validate_response(res)
       res
     end

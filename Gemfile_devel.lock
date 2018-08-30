@@ -34,6 +34,7 @@ PATH
       request_store_rails (~> 1.0)
       sassc-rails (~> 1.3)
       settingslogic (~> 2.0)
+      simple-navigation (~> 4.0)
       vuejs-rails (~> 2.5)
 
 GEM
@@ -160,7 +161,7 @@ GEM
       factory_bot (~> 4.11.0)
       railties (>= 3.0.0)
     ffi (1.9.25)
-    font-awesome-sass (5.2.0)
+    font-awesome-sass (5.3.1)
       sassc (>= 1.11)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -233,7 +234,7 @@ GEM
     nori (2.6.0)
     paranoia (2.4.1)
       activerecord (>= 4.0, < 5.3)
-    pg (1.0.0)
+    pg (1.1.2)
     popper_js (1.14.3)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -334,6 +335,8 @@ GEM
       redis (>= 3.3.5, < 5)
     signer (1.6.0)
       nokogiri (>= 1.5.1)
+    simple-navigation (4.0.5)
+      activesupport (>= 2.3.2)
     socksify (1.7.1)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -384,6 +387,8 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    xmldsig (0.6.6)
+      nokogiri (>= 1.6.8, < 2.0.0)
 
 PLATFORMS
   ruby
@@ -429,6 +434,7 @@ DEPENDENCIES
   unicorn (~> 5.4)
   web-console (>= 3.3.0)
   webmock
+  xmldsig (~> 0.6)
 
 BUNDLED WITH
    1.16.3
