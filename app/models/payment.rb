@@ -50,9 +50,9 @@ class Payment < ApplicationRecord
   def summary_record
     case direction
     when 'outgoing'
-      budget_item_may_deleted && budget_item_may_deleted.debt || satisfaction_may_deleted.appeal
+      budget_item_may_deleted && Debt.with_deleted.find(budget_item_may_deleted.debt_id) || Appeal.with_deleted.find(satisfaction_may_deleted.appeal_id)
     when 'incoming'
-      redemption_may_deleted.debt
+      Debt.with_deleted.find(redemption_may_deleted.debt_id)
     end
   end
 
