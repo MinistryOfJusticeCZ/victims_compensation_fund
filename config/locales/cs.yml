@@ -14,6 +14,7 @@ cs:
   label_change_password: Změnit heslo
   label_send: Odeslat
   label_informations: Informace
+  label_list_unprocessed: Nezpracované
   label_show_only_unprocessed_redemptions: Zobrazit pouze nezpracované
   label_approvement_paper: Schvalovací doložka
   label_transfer_to_victim: Převést oběti %{victim}

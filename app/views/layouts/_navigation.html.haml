@@ -20,6 +20,8 @@
                 = link_to t('label_new'), main_app.new_redemption_path, class: 'dropdown-item'
               - if can? :read, Redemption
                 = link_to t('label_list'), main_app.redemptions_path, class: 'dropdown-item'
+              - if current_user.has_role?('compensator')
+                = link_to t('label_list_unprocessed'), main_app.redemptions_path(default_scope: 'unprocessed'), class: 'dropdown-item'
         - if can?(:create, Appeal) || can?(:read, Appeal)
           %li.nav-item.dropdown
             = link_to 'javascript:void(0)', id: 'navbarAppealDropdownLink', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'} do
