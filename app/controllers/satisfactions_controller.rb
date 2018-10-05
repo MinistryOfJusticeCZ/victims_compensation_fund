@@ -13,7 +13,6 @@ class SatisfactionsController < ApplicationController
 
   def create
     respond_to do |format|
-      @satisfaction.build_payment(value: @satisfaction.fund_transfers.sum{|ft| ft.value}, direction: 'outgoing')
       if @satisfaction.save
         format.html { redirect_to @satisfaction.appeal }
         format.json { render json: @satisfaction, status: :created }

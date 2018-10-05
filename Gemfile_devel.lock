@@ -1,13 +1,13 @@
 PATH
   remote: ../azahara_schema
   specs:
-    azahara_schema (0.3.17)
+    azahara_schema (0.3.18)
       rails (~> 5.1)
 
 PATH
   remote: ../egov_utils
   specs:
-    egov_utils (0.4.14)
+    egov_utils (0.4.15)
       activeresource (~> 5.0)
       audited (~> 4.4)
       azahara_schema (~> 0.3)
@@ -116,7 +116,7 @@ GEM
       rails (>= 5.0)
     builder (3.2.3)
     byebug (10.0.2)
-    cancancan (2.2.0)
+    cancancan (2.3.0)
     capistrano (3.11.0)
       airbrussh (>= 1.0.0)
       i18n

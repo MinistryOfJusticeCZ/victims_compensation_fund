@@ -22,7 +22,6 @@ class StateBudgetItemsController < ApplicationController
 
   def create
     respond_to do |format|
-      @state_budget_item.build_payment(value: @state_budget_item.fund_transfers.sum{|ft| ft.budget_value}, direction: 'outgoing')
       if @state_budget_item.save
         format.html { redirect_to @debt, notice: t('common_labels.notice_saved', model: @state_budget_item.model_name.human) }
         format.json { render json: @state_budget_item.reload.as_json(include: :payment), status: :created }

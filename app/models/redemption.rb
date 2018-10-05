@@ -11,6 +11,8 @@ class Redemption < ApplicationRecord
 
   before_validation :set_payment_direction, if: :new_record?
 
+  after_update :update_fund_transfers
+
   acts_as_paranoid
 
   enum state: {waiting: 0, processed: 1}
@@ -48,6 +50,17 @@ class Redemption < ApplicationRecord
   end
 
   private
+
+    def update_fund_transfers
+      return true if !payment.value_previously_changed? || !fund_transfers.exists?
+      if fund_transfers.size > 1
+        # ?
+      else
+        transfered_to = fund_transfers.first.transfered_to
+        transfered_to.set_payment_value
+        transfered_to.save
+      end
+    end
 
     def set_payment_direction
       self.payment.direction = 'incoming'
