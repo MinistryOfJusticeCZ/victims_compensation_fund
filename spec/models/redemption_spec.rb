@@ -20,6 +20,7 @@ RSpec.describe Redemption, type: :model do
       it 'calls set_payment_value' do
         # should be called once, but redemption is updated twice by the definition of payment - redemption
         expect(state_budget_item_double).to receive(:set_payment_value).at_least(:once)
+        expect(state_budget_item_double).to receive(:save).at_least(:once)
         redemption.update(payment_attributes: { value: 300 })
       end
 
