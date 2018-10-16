@@ -67,7 +67,11 @@ class Payment < ApplicationRecord
   def person
     case direction
     when 'outgoing'
-      satisfaction_may_deleted && satisfaction_may_deleted.appeal.victim
+      if satisfaction_may_deleted
+        satisfaction_may_deleted.appeal.victim
+      else
+        Person.new(legal_person_attributes: {name: 'Ministerstvo spravedlnosti ČR', ico: '00025429'})
+      end
     when 'incoming'
       redemption_may_deleted.debt.offender.person
     end
@@ -114,7 +118,6 @@ class Payment < ApplicationRecord
     end
 
     def send_to_ires
-      return unless direction == 'incoming'
       SendPaymentJob.perform_later(id)
     end
 
