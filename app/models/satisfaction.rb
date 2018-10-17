@@ -1,5 +1,5 @@
 class Satisfaction < ApplicationRecord
-  belongs_to :payment, dependent: :destroy
+  belongs_to :payment, autosave: true, dependent: :destroy
   belongs_to :appeal
   has_many :fund_transfers, dependent: :destroy
 

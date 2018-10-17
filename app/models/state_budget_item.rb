@@ -1,5 +1,5 @@
 class StateBudgetItem < ApplicationRecord
-  belongs_to :payment
+  belongs_to :payment, autosave: true, dependent: :destroy
   belongs_to :debt
   has_one :claim, through: :debt
 
