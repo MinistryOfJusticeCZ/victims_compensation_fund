@@ -15,6 +15,10 @@ class FundTransfer < ApplicationRecord
     super || redemption_payment_value
   end
 
+  def satisfaction_value
+    value
+  end
+
   def budget_value
     value - probation_value
   end

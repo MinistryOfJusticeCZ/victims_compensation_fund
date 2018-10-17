@@ -1,11 +1,12 @@
 FactoryBot.define do
   factory :appeal do
-    victim { nil }
+    claim
+    offender
+    victim
     status { 1 }
     assigned_to { nil }
     file_uid { "MyString" }
-    bank_account { "MyString" }
+    bank_account { "000000000000/0300" }
     payment_type { 1 }
-    bank_account { "MyString" }
   end
 end

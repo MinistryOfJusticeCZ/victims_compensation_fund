@@ -3,7 +3,6 @@ class Satisfaction < ApplicationRecord
   belongs_to :appeal
   has_many :fund_transfers, dependent: :destroy
 
-  before_validation :set_payment_direction, on: :create
   before_validation :set_payment_value, on: :create
 
   accepts_nested_attributes_for :fund_transfers
@@ -12,11 +11,12 @@ class Satisfaction < ApplicationRecord
 
 
   def transfered_total
-    fund_transfers.sum{|ft| ft.budget_value}
+    fund_transfers.sum{|ft| ft.satisfaction_value}
   end
 
   def set_payment_value
     p = self.payment || build_payment(direction: 'outgoing')
+    p.direction ||= 'outgoing'
     p.value = transfered_total
   end
 
@@ -24,9 +24,4 @@ class Satisfaction < ApplicationRecord
     appeal.file_uid
   end
 
-  private
-
-    def set_payment_direction
-      self.payment.direction = 'outgoing'
-    end
 end
