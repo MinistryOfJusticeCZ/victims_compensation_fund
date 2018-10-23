@@ -52,7 +52,7 @@ cs:
 
   model_attributes: &my_attributes
     appeal:
-      file_uid: Spisová značka
+      file_uid: Spisová značka ODSK
       payment_type: Platba
       bank_account: Číslo účtu
       amount: Požadovaná (přiřknutá) částka

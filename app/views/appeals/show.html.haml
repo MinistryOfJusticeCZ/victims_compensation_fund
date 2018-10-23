@@ -2,6 +2,9 @@
   .label= Claim.model_name.human
   .value= link_to(@appeal.claim.file_uid, @appeal.claim)
 .attribute
+  .label= Appeal.human_attribute_name('file_uid')
+  .value= @appeal.file_uid
+.attribute
   .label= Victim.model_name.human
   .value= @appeal.victim.fullname
 - if @appeal.victim.natural?

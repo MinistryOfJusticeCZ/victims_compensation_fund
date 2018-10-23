@@ -20,4 +20,8 @@ class StateBudgetItem < ApplicationRecord
     p = self.payment || build_payment(direction: 'outgoing')
     p.value = transfered_total
   end
+
+  def file_uid
+    claim.file_uid
+  end
 end
