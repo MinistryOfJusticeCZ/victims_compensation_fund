@@ -31,7 +31,7 @@ class Debt < ApplicationRecord
   end
 
   def unsatisfied_appeals
-    @redemption.debt.appeals.to_a.select{|a| !a.satisfied?}
+    appeals.to_a.select{|a| !a.satisfied?}
   end
 
   private
