@@ -64,13 +64,14 @@ class Payment < ApplicationRecord
     summary_record.claim
   end
 
+  # Person witch is the payment issued to.
   def person
     case direction
     when 'outgoing'
       if satisfaction_may_deleted
         satisfaction_may_deleted.appeal.victim
       else
-        Person.new(legal_person_attributes: {name: 'Ministerstvo spravedlnosti ČR', ico: '00025429'})
+        EgovUtils::Person.new(legal_person_attributes: {name: 'Ministerstvo spravedlnosti ČR', ico: '00025429'})
       end
     when 'incoming'
       redemption_may_deleted.debt.offender.person
