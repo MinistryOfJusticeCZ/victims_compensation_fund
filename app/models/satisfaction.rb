@@ -34,7 +34,7 @@ class Satisfaction < ApplicationRecord
   end
 
   def file_uid
-    appeal.file_uid
+    appeal.claim.file_uid
   end
 
 end
