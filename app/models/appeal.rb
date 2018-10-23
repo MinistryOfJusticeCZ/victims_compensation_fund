@@ -9,6 +9,17 @@ class Appeal < ApplicationRecord
   accepts_nested_attributes_for :claim
   accepts_nested_attributes_for :victim, :offender
 
+  # scope :unsatisfied, ->{
+  #   left_outer_joins(satisfactions: :payment).where(
+  #     arel_table[:amount].gt(
+  #       Arel::Nodes::Addition.new(
+  #         Payment.arel_table[:value].sum,
+  #         Arel::Nodes::SqlLiteral.new('0.0001')
+  #       )
+  #     )
+  #   )
+  # }
+
   enum payment_type: { account: 1, foldout: 2 }
 
   validates :amount, numericality: true, allow_nil: true
@@ -21,6 +32,10 @@ class Appeal < ApplicationRecord
 
   def currency_code
     'czk'
+  end
+
+  def satisfied?
+    unsatisfied_amount < 0.0001
   end
 
   def unsatisfied_amount

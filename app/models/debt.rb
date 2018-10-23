@@ -30,6 +30,10 @@ class Debt < ApplicationRecord
     'czk'
   end
 
+  def unsatisfied_appeals
+    @redemption.debt.appeals.to_a.select{|a| !a.satisfied?}
+  end
+
   private
 
     def set_offenders_claim

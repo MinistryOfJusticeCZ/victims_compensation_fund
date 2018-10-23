@@ -6,6 +6,7 @@ class FundTransfer < ApplicationRecord
   belongs_to :satisfaction, optional: true
 
   validates :value, numericality: {less_than_or_equal_to: :redemption_payment_value}
+  validate :redemption_not_transfered_over_its_value
 
   acts_as_paranoid
 
@@ -36,11 +37,20 @@ class FundTransfer < ApplicationRecord
   end
 
   private
+    def redemption_not_transfered_over_its_value
+      others = redemption.fund_transfers
+      others = others.where(self.class.arel_table[:id].not_eq(id)) if persisted?
+      others = others.sum{|ft| ft.value}
+      if (others + value - 0.0001) > redemption_payment_value
+        errors.add(:value, :over_redemption_value)
+      end
+    end
+
     def check_redemption_fully_processed
-      if read_attribute(:value).nil? || ((redemption.fund_transfers.sum{|ft| ft.value} + 0.001) > redemption_payment_value)
-        redemption.update(state: 'processed')
+      if read_attribute(:value).nil? || ((redemption.fund_transfers.sum{|ft| ft.value} + 0.0001) > redemption_payment_value)
+        redemption.update_columns(state: 'processed')
       else
-        redemption.update(state: 'waiting')
+        redemption.update_columns(state: 'waiting')
       end
     end
 end

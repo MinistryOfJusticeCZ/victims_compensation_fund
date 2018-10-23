@@ -3,6 +3,7 @@ FactoryBot.define do
     claim
     offender
     victim
+    amount { 1000.0 }
     status { 1 }
     assigned_to { nil }
     file_uid { "MyString" }

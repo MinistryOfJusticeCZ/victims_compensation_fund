@@ -5,10 +5,23 @@ class Satisfaction < ApplicationRecord
 
   before_validation :set_payment_value, on: :create
 
-  accepts_nested_attributes_for :fund_transfers
+  accepts_nested_attributes_for :fund_transfers, reject_if: :transfers_over_appeal_amount
 
   acts_as_paranoid
 
+  # Deside if the attributes of this transfer won't go over appeal resting amount.
+  #
+  # In case it does, throws the transfer away.
+  def transfers_over_appeal_amount(attributes)
+    resting_amount = appeal.unsatisfied_amount - transfered_total
+    return true if resting_amount < 0.0001
+    transfered_value   = attributes['value']
+    transfered_value ||= Redemption.find(attributes['redemption_id']).payment.value
+    if appeal.unsatisfied_amount < transfered_value
+      attributes['value'] = resting_amount
+    end
+    false
+  end
 
   def transfered_total
     fund_transfers.sum{|ft| ft.satisfaction_value}

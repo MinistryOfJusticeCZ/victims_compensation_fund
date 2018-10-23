@@ -125,8 +125,8 @@ cs:
 
 
   models_errors: &my_model_errors
-    profile:
-      too_many_authors: Příliš mnoho autorů
+    redemption:
+      over_redemption_value: Odvod této částky by přesáhl vybranou částku
 
   helpers:
     action:

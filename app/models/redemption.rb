@@ -36,6 +36,10 @@ class Redemption < ApplicationRecord
     payment.processed?
   end
 
+  def unprocessed_amount
+    payment.value - fund_transfers.sum{|ft| ft.value } unless fund_transfers.empty?
+  end
+
   def unprocessed?
     return false if processed?
     if claim.binding_effect
