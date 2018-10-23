@@ -71,7 +71,7 @@ class Payment < ApplicationRecord
       if satisfaction_may_deleted
         satisfaction_may_deleted.appeal.victim
       else
-        EgovUtils::Person.new(legal_person_attributes: {name: 'Ministerstvo spravedlnosti ČR', ico: '00025429'})
+        EgovUtils::Person.new(person_type: 'legal', legal_person_attributes: {name: 'Ministerstvo spravedlnosti ČR', ico: '00025429'})
       end
     when 'incoming'
       redemption_may_deleted.debt.offender.person
