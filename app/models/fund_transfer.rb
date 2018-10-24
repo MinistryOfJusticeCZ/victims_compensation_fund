@@ -21,11 +21,12 @@ class FundTransfer < ApplicationRecord
   end
 
   def budget_value
-    value - probation_value
+    [value - probation_value, 0.0].max
   end
 
+  # If value is under 1,- it is all a probation value
   def probation_value
-    ((value * 2) / 100).ceil
+    [((value * 2.0) / 100).ceil, value].min
   end
 
   def redemption_payment_value

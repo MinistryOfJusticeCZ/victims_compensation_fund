@@ -11,4 +11,25 @@ RSpec.describe FundTransfer, type: :model do
     end
 
   end
+
+  describe '#probation_value' do
+    subject{ FundTransfer.new }
+
+    it 'gives 2 percent of payment value' do
+      allow(subject).to receive(:value).and_return(100.0)
+      expect(subject.probation_value).to eq(2.0)
+      expect(subject.budget_value).to eq(98.0)
+    end
+    it 'gives all value if its under 1 kronen' do
+      allow(subject).to receive(:value).and_return(0.13)
+      expect(subject.probation_value).to eq(0.13)
+      expect(subject.budget_value).to eq(0.0)
+    end
+
+    it 'gives 1 kronen if it is bit over 1 kronen' do
+      allow(subject).to receive(:value).and_return(1.13)
+      expect(subject.probation_value).to eq(1.0)
+      expect(subject.budget_value.round(2)).to eq(0.13)
+    end
+  end
 end
