@@ -9,7 +9,13 @@ module Api::V1
 
       batch.payment_infos.each do |pi|
         payment = Payment.find_by(uuid: pi.payment_uuid)
-        payment.update_columns(status: pi.prescription_status, paid_at: pi.paid_at) if payment
+        if payment
+          payment.update_columns(status: pi.prescription_status, paid_at: pi.paid_at)
+          if pi.paid? && payment.value < pi.total_paid_amount
+            payment.audit_message = "Zaplacena jiná částka, než která byla oznámena."
+            payment.update(value: total_paid_amount)
+          end
+        end
       end
 
       render json: { return: batch.encoded_signed_response }

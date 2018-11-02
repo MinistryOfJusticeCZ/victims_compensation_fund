@@ -26,6 +26,10 @@ module Ires
       infos.all?{|info| %w{D E}.include?(info['stav_dokladu']) && info['castka_zbyva'].to_f < 0.0001 }
     end
 
+    def total_paid_amount
+      infos.sum{|info| Array.wrap(info['uhrada']).sum{|u| u['castka_uhrazeno'].to_f } }
+    end
+
     def paid_at
       infos.collect{|i| Array.wrap(i['uhrada']).collect{|u| u['datum_uhrady']}.max }.max if paid?
     end
