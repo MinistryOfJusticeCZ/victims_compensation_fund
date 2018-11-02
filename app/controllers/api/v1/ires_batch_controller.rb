@@ -12,8 +12,8 @@ module Api::V1
         if payment
           payment.update_columns(status: pi.prescription_status, paid_at: pi.paid_at)
           if pi.paid? && payment.value < pi.total_paid_amount
-            payment.audit_message = "Zaplacena jiná částka, než která byla oznámena."
-            payment.update(value: total_paid_amount)
+            payment.audit_comment = "Zaplacena jiná částka, než která byla oznámena."
+            payment.update(value: pi.total_paid_amount)
           end
         end
       end
