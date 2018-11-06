@@ -33,4 +33,5 @@
     = bootstrap_form_for([@redemption.debt, @redemption.debt.state_budget_items.build(fund_transfers_attributes: {'0' => {redemption_id: @redemption.id, value: @redemption.unprocessed_amount}})]) do |f|
       = f.fields_for(:fund_transfers) do |fields|
         = fields.hidden_field(:redemption_id)
+        = fields.hidden_field(:value)
       = f.submit
