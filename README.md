@@ -1,24 +1,12 @@
-# README
+# Victims compensation fund
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repository represents current state of running code for Victims Compensations Fund application.
+This is Ruby on Rails application.
 
-Things you may want to cover:
+The document generator prototype is needed to generate some documents.
 
-* Ruby version
+No more documentation is provided, as long as it is still in beta.
+There is remake for this application planned and with that should be presented more documentation.
+The existing one is only for internal purposes and not in really usable state.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+We are sorry for any inconvenience, but you can reach with us for further information.
