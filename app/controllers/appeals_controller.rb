@@ -39,6 +39,14 @@ class AppealsController < ApplicationController
     end
   end
 
+  def destroy
+    @appeal.destroy
+    respond_to do |format|
+      format.html { redirect_to @appeal.claim, notice: t('common_labels.notice_destroyed', model: @appeal.model_name.human) }
+      format.json { render json: @appeal }
+    end
+  end
+
   private
 
     def new_params
