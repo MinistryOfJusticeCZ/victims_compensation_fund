@@ -25,5 +25,11 @@ RSpec.describe Redemption, type: :model do
       end
 
     end
+
+    describe '#unprocessed_amount' do
+      it 'is full payment amount without funds' do
+        expect(redemption.unprocessed_amount).to eq(redemption.payment.value)
+      end
+    end
   end
 end
