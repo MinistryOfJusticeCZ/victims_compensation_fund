@@ -28,7 +28,7 @@
   - if @redemption.debt.unsatisfied_appeals.any?
     - @redemption.debt.appeals.preload(:victim).each do |appeal|
       - next if appeal.satisfied?
-      = button_to( t('label_transfer_to_victim', victim: appeal.victim.fullname), satisfaction_transfer_redemption_path(appeal, @redemption), class: 'btn btn-secondary')
+      = buton_to_satisfaction_transfer_redemption(appeal, @redemption)
   - else
     = bootstrap_form_for([@redemption.debt, @redemption.debt.state_budget_items.build(fund_transfers_attributes: {'0' => {redemption_id: @redemption.id, value: @redemption.unprocessed_amount}})]) do |f|
       = f.fields_for(:fund_transfers) do |fields|

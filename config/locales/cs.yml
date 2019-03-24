@@ -18,6 +18,7 @@ cs:
   label_show_only_unprocessed_redemptions: Zobrazit pouze nezpracované
   label_approvement_paper: Schvalovací doložka
   label_transfer_to_victim: Převést oběti %{victim}
+  label_transfer_amount_to_victim: Převést oběti %{victim} částku %{amount}Kč
   notice_claim_merge: Případ tohoto prvostupňového soudu s touto spisovou značkou již existuje. Chcete záznam přiřadit tomuto případu?
   text_missing_msp_file_uid: Chybí spisová značka případu, prosím zadejte ji.
 
