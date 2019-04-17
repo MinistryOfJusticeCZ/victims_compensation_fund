@@ -77,6 +77,9 @@ RSpec.configure do |config|
   config.before(logged: :admin) do
     sign_in admin_user
   end
+  config.before do
+    allow_any_instance_of(EgovUtils::User).to receive(:organization_with_suborganizations_keys).and_return(EgovUtils::Organization.all.collect(&:key))
+  end
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
