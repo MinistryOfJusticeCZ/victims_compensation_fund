@@ -5,6 +5,13 @@ RSpec.describe FundTransfer, type: :model do
     let(:redemption) { FactoryBot.create(:redemption, payment_value: 10000.0) }
     let(:transfer1) { FactoryBot.create(:fund_transfer, redemption: redemption, value: 5000.0) }
 
+    it 'allows exact amount even == is not working and nullify the value' do
+      r = FactoryBot.create(:redemption, payment_value: 9871.79)
+      ft = FundTransfer.new(redemption: r, value: '9871.79')
+      expect { ft.save }.to change(FundTransfer, :count).by(1)
+      expect(ft.read_attribute(:value)).to eq(nil)
+    end
+
     it 'dont allow transfers over redemption value' do
       transfer1; redemption.reload
       expect { FundTransfer.create(redemption: redemption) }.to_not change(FundTransfer, :count)

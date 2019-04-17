@@ -74,6 +74,7 @@ deploy_lab:
     - cap lab deploy REVISION="$CI_COMMIT_SHA"
   environment:
     name: lab
+  allow_failure: true
   only:
     - master
 
