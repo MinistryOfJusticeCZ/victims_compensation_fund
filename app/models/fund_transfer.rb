@@ -60,7 +60,7 @@ class FundTransfer < ApplicationRecord
     end
 
     def check_redemption_fully_processed
-      if read_attribute(:value).nil? || ((redemption.fund_transfers.sum{|ft| ft.value} + 0.0001) > redemption_payment_value)
+      if read_attribute(:value).nil? || (redemption.unprocessed_amount < EPSILON)
         redemption.update_columns(state: 'processed')
       else
         redemption.update_columns(state: 'waiting')
