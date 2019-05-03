@@ -7,8 +7,14 @@ class RedemptionSchema < AzaharaSchema::ModelSchema
   end
 
   def default_columns
-    cols = ['debt-claim-file_uid', 'debt-offender-person-fullname', 'payment-value', 'payment-payment_uid', 'payment-status']
-    cols << 'author-fullname' if EgovUtils::User.current.has_role?('compensator') || EgovUtils::User.current.has_role?('accountant')
+    cols = ['debt-claim-file_uid', 'debt-offender-person-fullname', 'payment-value', 'payment-payment_uid']
+    if EgovUtils::User.current.has_role?('accountant')
+      cols.concat(['payment-status', 'author-fullname'])
+    elsif EgovUtils::User.current.has_role?('compensator')
+      cols.concat(['payment-paid_at', 'author-fullname'])
+    else
+      cols << 'payment-status'
+    end
     cols
   end
 
