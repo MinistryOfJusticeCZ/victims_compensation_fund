@@ -15,8 +15,8 @@ You can help with finishing it at <a href='https://code.gov.cz/msp/victims_compe
 <div class="mermaid">
 classDiagram
     Claim "1" <-- "1..*" Debt
-    Claim "1" <-- "1..*" Appeal
-    Appeal "0..*" --> "1..*" Victim
+    Claim "1" <-- "0..*" Appeal
+    Appeal "0..*" --> "1" Victim
     Appeal --> Offender
     Debt "0..*" --> "1" Offender
     Claim : file_uid
