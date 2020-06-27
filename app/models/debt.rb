@@ -26,6 +26,10 @@ class Debt < ApplicationRecord
   before_validation :set_offenders_claim, if: :new_record?
   after_save :set_claim_status
 
+  def claim_may_deleted
+    Claim.with_deleted.find_by(claim_id)
+  end
+
   def currency_code
     'czk'
   end

@@ -60,8 +60,8 @@ class Payment < ApplicationRecord
     paid_record.file_uid
   end
 
-  def claim
-    summary_record.claim
+  def claim_may_deleted
+    summary_record.claim_may_deleted
   end
 
   # Person witch is the payment issued to.
