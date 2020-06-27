@@ -4,6 +4,7 @@ variables:
   POSTGRES_DB: test_db
   POSTGRES_USER: runner
   POSTGRES_PASSWORD: ""
+  POSTGRES_HOST_AUTH_METHOD: trust
 
 before_script:
   - export http_proxy="http://proxy.justice.cz:3128/"
