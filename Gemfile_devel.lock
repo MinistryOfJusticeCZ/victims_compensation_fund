@@ -354,7 +354,7 @@ GEM
     sshkit (1.21.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    teaspoon (1.2.0)
+    teaspoon (1.1.5)
       railties (>= 3.2.5)
     teaspoon-mocha (2.3.3)
       teaspoon (>= 1.0.0)
