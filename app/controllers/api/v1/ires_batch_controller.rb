@@ -11,8 +11,8 @@ module Api::V1
         payment = Payment.find_by(uuid: pi.payment_uuid)
         if payment
           payment.update_columns(status: pi.prescription_status, paid_at: pi.paid_at)
-          if pi.paid? && payment.value < pi.total_paid_amount
-            payment.audit_comment = "Zaplacena jiná částka, než která byla oznámena."
+          if pi.paid? && (payment.value - pi.total_paid_amount).abs > 0.0001
+            payment.audit_comment = "IRES: Zaplacena jiná částka, než která byla oznámena."
             payment.update(value: pi.total_paid_amount)
           end
         end

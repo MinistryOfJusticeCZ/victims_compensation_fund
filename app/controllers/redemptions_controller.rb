@@ -8,6 +8,7 @@ class RedemptionsController < ApplicationController
   end
 
   def show
+    @audit_schema = AuditSchema.new(@redemption.payment.audits, columns: ['created_at', 'user', 'changes'], outputs: ['grid'])
   end
 
   def new
