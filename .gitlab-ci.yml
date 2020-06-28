@@ -52,7 +52,7 @@ test:2.3:
     - rm -fr $REPO_DIR
     - git clone $REPO_URL $REPO_DIR
     - "sed -i \"s|gem 'egov_utils', path: '.*'|gem 'egov_utils', path: '$REPO_DIR'|g\" Gemfile_devel"
-    - RAILS_ENV=test bundle install --path=cache/bundler --without production --jobs $(nproc)  "${FLAGS[@]}"
+    - RAILS_ENV=test bundle install --path=cache/bundler --without production development --jobs $(nproc)  "${FLAGS[@]}"
     - cp config/database.yml.gitlabci config/database.yml
     - bundle exec rails db:migrate RAILS_ENV=test
     - bundle exec rspec
