@@ -31,7 +31,7 @@ class Appeal < ApplicationRecord
   after_save :set_claim_status
 
   def claim_may_deleted
-    Claim.with_deleted.find_by(claim_id)
+    Claim.with_deleted.find_by(id: claim_id)
   end
 
   def currency_code
