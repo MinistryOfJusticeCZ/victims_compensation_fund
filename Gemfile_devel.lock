@@ -437,6 +437,3 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webmock
   xmldsig (~> 0.6)
-
-BUNDLED WITH
-   2.1.4
