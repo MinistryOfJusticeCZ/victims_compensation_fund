@@ -36,3 +36,30 @@
         = fields.hidden_field(:redemption_id)
         = fields.hidden_field(:value)
       = f.submit
+
+.audits{ style: 'font-size: 85%;' }
+  - audit_formatter = attribute_formatter_for(@audit_schema)
+  - payment_formatter = attribute_formatter_for(payment_schema = PaymentSchema.new)
+  %h5= Audited::Audit.model_name.human(count: :other)
+  %table.table
+    %thead
+      %th= Audited::Audit.human_attribute_name('created_at')
+      %th= Audited::Audit.human_attribute_name('audited_changes')
+      %th= Audited::Audit.human_attribute_name('comment')
+    %tbody
+      - @audit_schema.entities.reorder(version: :desc).each do |audit|
+        - changes = audit.audited_changes.select { |n, ch| !ch.nil? && !%w(direction currency_code).include?(n) }
+        - next unless changes.any?
+        %tr
+          %td= audit_formatter.html_formatted_value(@audit_schema.attribute('created_at'), audit)
+          %td
+            - changes.each do |name, change|
+              .change
+                %b= payment_formatter.attribute_html_label(payment_schema.attribute(name)) + ': '
+                - if audit.action == 'create'
+                  = payment_formatter.human_value(payment_schema.attribute(name), change)
+                - elsif audit.action == 'update'
+                  = payment_formatter.human_value(payment_schema.attribute(name), change.first)
+                  = ' -> '
+                  = payment_formatter.human_value(payment_schema.attribute(name), change.second)
+          %td= audit_formatter.html_formatted_value(@audit_schema.attribute('comment'), audit)
