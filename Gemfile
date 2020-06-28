@@ -20,6 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'mini_racer', group: :test, platforms: :ruby
 
+# We deploy on ruby 2.3, pin sprockets
+gem 'sprockets', '~> 3.7'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
