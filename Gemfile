@@ -99,4 +99,4 @@ gem 'savon', '~> 2.11'
 gem 'signer', '~> 1.6'
 gem 'xmldsig', '~> 0.6'
 
-gem 'httparty', '~> 0.16'
+gem 'httparty', '~> 0.21'
